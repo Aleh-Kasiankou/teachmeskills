@@ -5,32 +5,31 @@ namespace CalculatorApp
 {
     public static class Calculator
     {
-        private static bool IsContinue = false; //flag to control loop
+        private static bool _isContinue = false; //flag to control loop
         
         public static void Run()
         {
             do
             {
-                TerminalHandler ui = new TerminalHandler(); //initializing UI
+                UserInterface ui = new UserInterface(); //initializing UI
                 ui.SetOperands();
                 ui.SetOperation();
-                //selecting operation
+                
                 OperationManager operationHandler = new OperationManager(ui.Operand1, ui.Operand2, ui.Operation);
                 try
                 {
-                    Console.WriteLine($"\n{ui.Operand1.ToString()} {ui.Operation} {ui.Operand2.ToString()} = " +
-                                      $"{operationHandler.Operation.Execute().ToString()}");
+                    var result = operationHandler.Operation.Execute();
+                    ui.DisplayResult(result, ref ui);
                 }
-
                 catch (Exception e)
                 {
-                    Console.WriteLine($"Sorry, the operation is forbidden: {e.Message}");
+                    ui.DisplayException(e);
                 }
-
-                ui.PromptContinue(ref IsContinue);
+                
+                ui.PromptContinue(ref _isContinue);
                 
 
-            } while (IsContinue);
+            } while (_isContinue);
         }
     }
 }

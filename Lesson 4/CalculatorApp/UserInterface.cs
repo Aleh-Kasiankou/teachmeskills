@@ -2,7 +2,7 @@
 
 namespace CalculatorApp
 {
-    public class TerminalHandler
+    public class UserInterface
     {
         internal double Operand1;
         internal double Operand2;
@@ -59,5 +59,17 @@ namespace CalculatorApp
             Console.WriteLine("Conduct another operation?");
             isContinue = Console.ReadLine().ToLower() == "yes";
         }
+
+        public void DisplayResult(double result, ref UserInterface ui)
+        {
+            Console.WriteLine($"\n{ui.Operand1.ToString()} {ui.Operation} {ui.Operand2.ToString()} = " +
+                              $"{result.ToString()}");
+        }
+
+        public void DisplayException(Exception e)
+        {
+            Console.WriteLine($"Sorry, the operation is forbidden: {e.Message}");
+        }
+
     }
 }
