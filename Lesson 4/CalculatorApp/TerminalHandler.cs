@@ -14,7 +14,9 @@ namespace CalculatorApp
         private string OperandToSet => (!Operand1Assigned) ? "first" : "second";
 
         private string _operandPrompt => $"Please, type your {OperandToSet} operand";
-        private string _operationPrompt = "Please, type your operation";
+
+        private string _operationPrompt = "Please, type your operation. Currently available operations:\n" +
+                                          "+, -,*, /, mod, pow, %, root";
 
 
         public void SetOperands()

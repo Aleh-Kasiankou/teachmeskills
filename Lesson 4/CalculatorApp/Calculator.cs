@@ -18,7 +18,7 @@ namespace CalculatorApp
                 OperationManager operationHandler = new OperationManager(ui.Operand1, ui.Operand2, ui.Operation);
                 try
                 {
-                    Console.WriteLine($"\n{ui.Operand1.ToString()} {ui.Operation} {ui.Operand2.ToString()} == " +
+                    Console.WriteLine($"\n{ui.Operand1.ToString()} {ui.Operation} {ui.Operand2.ToString()} = " +
                                       $"{operationHandler.Operation.Execute().ToString()}");
                 }
 
@@ -29,7 +29,6 @@ namespace CalculatorApp
 
                 ui.PromptContinue(ref IsContinue);
                 
-
 
             } while (IsContinue);
         }
