@@ -2,6 +2,6 @@
 {
     public interface IOperation
     {
-        public decimal Execute();
+        public double Execute();
     }
 }

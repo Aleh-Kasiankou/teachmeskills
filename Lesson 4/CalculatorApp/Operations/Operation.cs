@@ -2,8 +2,9 @@
 {
     public abstract class Operation: IOperation
     {
-        public abstract decimal Operand1 { get; }
-        public abstract decimal Operand2 { get; }
-        public abstract decimal Execute();
+        public abstract double Operand1 { get; }
+        public abstract double Operand2 { get; }
+        public abstract double Execute();
+        
     }
 }

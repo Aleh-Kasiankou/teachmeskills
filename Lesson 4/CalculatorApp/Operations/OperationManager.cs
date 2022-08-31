@@ -6,14 +6,15 @@ namespace CalculatorApp.Operations
     {
         public IOperation Operation { get; set; }
 
-        public OperationManager(decimal operand1, decimal operand2, string operationString)
+        public OperationManager(double operand1, double operand2, string operationString)
         {
             Operation = ResolveOperation(operand1, operand2, operationString);
         }
 
-        private IOperation ResolveOperation(decimal operand1, decimal operand2, string sign)
+        private IOperation ResolveOperation(double operand1, double operand2, string sign) //possible to loose coupling?
         {
-            IOperation operation;
+            IOperation operation = null;
+            
             switch (sign)
             {
                 case "+":
@@ -23,12 +24,39 @@ namespace CalculatorApp.Operations
                 case "-":
                     operation = new Subtraction(operand1, operand2);
                     break;
+                
+                case "/":
+                    operation = new Division(operand1, operand2);
+                    break;
+                
+                case "*":
+                    operation = new Multiplication(operand1, operand2);
+                    break;
+                
+                case "mod":
+                    operation = new Modulo(operand1, operand2);
+                    break;
+                
+                case "pow":
+                    operation = new Power(operand1, operand2);
+                    break;
+                
+                case "%":
+                    operation = new Percentage(operand1, operand2);
+                    break;
+                
+                case "root":
+                    operation = new Root(operand1, operand2);
+                    break;
+
                 default:
                     //create special exceptions for the calculator app
-                    throw new Exception(message: $"Sorry, It seems the \"{sign}\" operation is not supported");
+                    var exception = new Exception(message: $"Sorry, It seems the operation \"{sign}\" is not supported");
+                    Console.WriteLine(exception.Message);
+                    break;
             }
-
-            return operation;
+        
+        return operation;
         }
     }
     

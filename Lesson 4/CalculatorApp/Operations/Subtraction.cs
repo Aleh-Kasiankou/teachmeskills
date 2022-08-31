@@ -2,12 +2,12 @@
 {
     public class Subtraction : Operation
     {
-        public override decimal Operand1 { get; }
-        public override decimal Operand2 { get; }
+        public override double Operand1 { get; }
+        public override double Operand2 { get; }
         
-        public override decimal Execute() => Operand1 - Operand2;
+        public override double Execute() => Operand1 - Operand2;
 
-        public Subtraction(decimal operand1, decimal operand2)
+        public Subtraction(double operand1, double operand2)
         {
             Operand1 = operand1;
             Operand2 = operand2;
