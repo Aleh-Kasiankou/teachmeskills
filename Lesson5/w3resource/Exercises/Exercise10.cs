@@ -2,11 +2,10 @@
 
 namespace w3resource.Exercises
 {
-    public class Exercise2 : Exercise
+    public class Exercise10 : Exercise
     {
         public override string Description =>
-            "Write a C# Sharp program to get the absolute difference between n" +
-            " and 51. If n is greater than 51 return triple the absolute difference.";
+            "Write a C# Sharp program to check if a given positive number is a multiple of 3 or a multiple of 7";
 
 
         public override void Run()
@@ -14,13 +13,11 @@ namespace w3resource.Exercises
             DisplayDescription();
             List<int> operands = TerminalManager.GetIntOperands(1);
             DisplayResult(Solve(operands[0]));
-
         }
 
-        public int Solve(int operand1)
+        public bool Solve(int operand)
         {
-            var result = operand1 > 51 ? (operand1 - 51) * 3 : 51 - operand1;
-            return result;
+            return operand % 7 == 0 || operand % 3 == 0;
         }
     }
 }

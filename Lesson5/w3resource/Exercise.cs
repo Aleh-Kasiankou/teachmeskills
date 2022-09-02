@@ -11,7 +11,7 @@ namespace w3resource
         
         public void DisplayDescription()
         {
-            Console.WriteLine($"Task: {Description}");
+            Console.WriteLine($"\nTask: {Description}");
         }
 
         public void DisplayResult(int result)

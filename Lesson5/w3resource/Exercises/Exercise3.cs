@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace w3resource
+namespace w3resource.Exercises
 {
     public class Exercise3 : Exercise
     {
