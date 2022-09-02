@@ -25,7 +25,7 @@ namespace ClassWork
 
         public static void AskIsContinue(ref bool isContinue)
         {
-            Console.WriteLine("Conduct another operation?");
+            Console.WriteLine("Conduct another operation? Type Yes to continue");
             string answer = Console.ReadLine();
             if (answer.ToLower() == "yes" || answer.ToLower() == "y")
             {
