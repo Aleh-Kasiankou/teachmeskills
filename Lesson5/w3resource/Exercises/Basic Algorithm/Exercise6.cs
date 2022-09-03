@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace w3resource.Exercises
+namespace w3resource.Exercises.Basic_Algorithm
 {
     public class Exercise6 : Exercise
     {

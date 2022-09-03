@@ -1,4 +1,5 @@
 ﻿using w3resource.Exercises;
+using w3resource.Exercises.Basic_Algorithm;
 
 namespace w3resource
 {

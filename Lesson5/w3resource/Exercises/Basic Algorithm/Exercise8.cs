@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace w3resource.Exercises
+namespace w3resource.Exercises.Basic_Algorithm
 {
     public class Exercise8 : Exercise
     {
@@ -25,7 +24,7 @@ namespace w3resource.Exercises
             if (userString.Length > 1)
             {
                 var firstTwoLetters = userString.Substring(0, 2);
-                returnString = String.Concat(Enumerable.Repeat(firstTwoLetters, 4));
+                returnString = System.String.Concat(Enumerable.Repeat(firstTwoLetters, 4));
             }
 
             return returnString;
