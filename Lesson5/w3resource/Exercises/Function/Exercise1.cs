@@ -2,11 +2,14 @@
 {
     public class Exercise1: Exercise
     {
-        public override string Description { get; }
+        public override string Description { get; } = "Write a program in C# Sharp to create a user define function.";
 
         public override void Run()
         {
-            throw new System.NotImplementedException();
+            DisplayDescription();
+            DisplayResult(Solve());
         }
+
+        public string Solve() => "I am dummy function!";
     }
 }
