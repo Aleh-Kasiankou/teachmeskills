@@ -7,6 +7,7 @@ namespace w3resource
     public static class TerminalManager 
         //TODO
         //check whether reflection could be used instead of creating a few methods
+        //add labels to terminal to give a hind what data is prompted
     {
         public static List<int> GetIntOperands(int numberOfOperands)
         {
