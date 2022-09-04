@@ -1,5 +1,5 @@
-﻿using w3resource.Exercises;
-using w3resource.Exercises.Basic_Algorithm;
+﻿using System;
+using System.Linq;
 
 namespace w3resource
 {
@@ -7,16 +7,11 @@ namespace w3resource
     {
         static void Main(string[] args)
         {
-            new Exercise1().Run();
-            new Exercise2().Run();
-            new Exercise3().Run();
-            new Exercise4().Run();
-            new Exercise5().Run();
-            new Exercise6().Run();
-            new Exercise7().Run();
-            new Exercise8().Run();
-            new Exercise9().Run();
-            new Exercise10().Run();
+            foreach (var Exercise in Exercise.GetAllExercises())
+            {
+                string nameSpace = Exercise.Namespace.Split(".").Last();
+                Console.WriteLine(nameSpace + "/" + Exercise.Name);
+            }
         }
     }
 }

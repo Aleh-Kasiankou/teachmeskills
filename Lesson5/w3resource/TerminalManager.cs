@@ -4,7 +4,9 @@ using System.Linq;
 
 namespace w3resource
 {
-    public static class TerminalManager
+    public static class TerminalManager 
+        //TODO
+        //check whether reflection could be used instead of creating a few methods
     {
         public static List<int> GetIntOperands(int numberOfOperands)
         {
@@ -15,6 +17,26 @@ namespace w3resource
                 {
                     Console.WriteLine("Please type your integer number");
                     returnArray.Add(Int32.Parse(Console.ReadLine()));
+                }
+
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            return returnArray;
+        }
+        
+        public static List<double> GetDoubleOperands(int numberOfOperands)
+        {
+            List<double> returnArray = new List<double>();
+            while (returnArray.Count() < numberOfOperands)
+            {
+                try
+                {
+                    Console.WriteLine("Please type your integer number");
+                    returnArray.Add(Double.Parse(Console.ReadLine()));
                 }
 
                 catch (Exception e)

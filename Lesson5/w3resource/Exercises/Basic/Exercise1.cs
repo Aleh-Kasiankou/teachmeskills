@@ -2,11 +2,15 @@
 {
     public class Exercise1: Exercise
     {
-        public override string Description { get; }
+        public override string Description { get; } = "Write a C# Sharp program to print Hello and your name" +
+                                                      " in a separate line.";
 
         public override void Run()
         {
-            throw new System.NotImplementedException();
+            DisplayDescription();
+            DisplayResult(Solve());
         }
+
+        public string Solve() => $"Hello\nAleh Kasiankou";
     }
 }

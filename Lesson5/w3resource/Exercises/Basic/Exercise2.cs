@@ -2,11 +2,14 @@
 {
     public class Exercise2: Exercise
     {
-        public override string Description { get; }
+        public override string Description { get; } = "Write a C# Sharp program to print the sum of two numbers.";
 
         public override void Run()
         {
-            throw new System.NotImplementedException();
+            DisplayDescription();
+            DisplayResult(Solve());
         }
+
+        public string Solve() => $"2 + 5 = {(2+5).ToString()}";
     }
 }
