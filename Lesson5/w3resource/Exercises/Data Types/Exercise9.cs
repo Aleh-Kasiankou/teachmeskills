@@ -19,7 +19,7 @@ namespace w3resource.Exercises.Data_Types
 
         public string Solve(char userChar)
         {
-            char[] vowels = new char[] { 'a', 'e','o', 'i','u'};
+            char[] vowels = new char[] { 'a','e','o', 'i','u'};
             char[] digits = new[] { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
             
             if (vowels.Contains(char.ToLower(userChar)))
