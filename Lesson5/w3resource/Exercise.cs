@@ -20,7 +20,7 @@ namespace w3resource
                 .SelectMany(domainAssembly => domainAssembly.GetTypes())
                 .Where(type => type.IsSubclassOf(typeof(Exercise))
                 ).ToList();
-
+            listOfExecises.Reverse();
             return listOfExecises;
         }
 

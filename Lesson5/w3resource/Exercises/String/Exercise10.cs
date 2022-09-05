@@ -25,11 +25,11 @@ namespace w3resource.Exercises.String
                 }
             }
             
-            var mostFreequentChar = (from entry 
+            var mostFrequentChar = (from entry 
                 in Freequency orderby entry.Value ascending select entry).First();
 
-            return $"Most Freequent Char with {mostFreequentChar.Value.ToString()} " +
-                   $"occurencies is {mostFreequentChar.Key.ToString()}";
+            return $"Most Frequent Char with {mostFrequentChar.Value.ToString()} " +
+                   $"occurrences is {mostFrequentChar.Key.ToString()}";
         }
     }
 }
