@@ -16,7 +16,7 @@ namespace w3resource
 
         private static Dictionary<int, string> Chapters { get; } = InitializeChapters();
 
-        public static void HandleNavigation()
+        public static void HandleNavigation() // Add exit point
         {
             while (true)
             {
@@ -38,7 +38,7 @@ namespace w3resource
             else
             {
                 
-                foreach (var exercise in GetChapterExercises(CurrentChapter))
+                foreach (var exercise in GetChapterExercises(CurrentChapter)) 
                 {
                     Console.WriteLine($"{exercise.Key.ToString()}) {exercise.Value.Name}");
                 }
@@ -50,12 +50,15 @@ namespace w3resource
             var exercisesDict = new Dictionary<int, Type>();
             var exerciseId = 1;
 
-            foreach (var ExerciseType in Exercise.GetAllExercises())
+            var sortedExercises = Exercise.GetAllExercises().OrderBy(exerc => exerc.Name.Length)
+                .ThenBy(exerc => exerc.Name);
+
+            foreach (var exerciseType in sortedExercises) 
             {
-                string nameSpace = ExerciseType.Namespace.Split(".").Last();
+                string nameSpace = exerciseType.Namespace.Split(".").Last();
                 if (nameSpace == chapter)
                 {
-                    exercisesDict.Add(exerciseId, ExerciseType);
+                    exercisesDict.Add(exerciseId, exerciseType);
                     exerciseId++;
                 }
             }
@@ -87,9 +90,9 @@ namespace w3resource
             var chaptersDict = new Dictionary<int, string>();
             var chapterId = 1;
 
-            foreach (var Exercise in Exercise.GetAllExercises())
+            foreach (var exercise in Exercise.GetAllExercises())
             {
-                string nameSpace = Exercise.Namespace.Split(".").Last();
+                string nameSpace = exercise.Namespace.Split(".").Last();
                 if (!chaptersDict.ContainsValue(nameSpace))
                 {
                     chaptersDict.Add(chapterId, nameSpace);
