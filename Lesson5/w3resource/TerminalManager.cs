@@ -50,17 +50,15 @@ namespace w3resource
             var exercisesDict = new Dictionary<int, Type>();
             var exerciseId = 1;
 
-            var sortedExercises = Exercise.GetAllExercises().OrderBy(exerc => exerc.Name.Length)
+            var sortedExercises = Exercise.GetAllExercises().Where(exerc => exerc.Namespace.Split(".").Last() == CurrentChapter).OrderBy(exerc => exerc.Name.Length)
                 .ThenBy(exerc => exerc.Name);
 
             foreach (var exerciseType in sortedExercises) 
             {
                 string nameSpace = exerciseType.Namespace.Split(".").Last();
-                if (nameSpace == chapter)
-                {
+                
                     exercisesDict.Add(exerciseId, exerciseType);
                     exerciseId++;
-                }
             }
 
             return exercisesDict;
