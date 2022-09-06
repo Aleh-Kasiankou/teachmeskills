@@ -33,17 +33,17 @@ namespace w3resource
         //How to handle Run method if it returns objs of different types? 
         public void DisplayResult(int result)
         {
-            Console.WriteLine($"Output: {result.ToString()}");
+            Console.WriteLine($"Output:\n {result.ToString()}");
         }
         
         public void DisplayResult(string result)
         {
-            Console.WriteLine($"Output: {result}");
+            Console.WriteLine($"Output:\n {result}");
         }
         
         public void DisplayResult(bool result)
         {
-            Console.WriteLine($"Output: {result.ToString()}");
+            Console.WriteLine($"Output:\n {result.ToString()}");
         }
         
         public void DisplayResult(double result)
