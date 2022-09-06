@@ -10,6 +10,6 @@
                         DisplayResult(Solve());
         }
 
-        public string Solve() => $"2 - 5 = {(2-5).ToString()}";
+        public string Solve() => $"2 / 5 = {(2d/5d).ToString()}";
     }
 }
