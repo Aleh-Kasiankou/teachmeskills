@@ -26,7 +26,7 @@ namespace w3resource.Exercises.String
             }
             
             var mostFrequentChar = (from entry 
-                in Freequency orderby entry.Value ascending select entry).First();
+                in Freequency orderby entry.Value ascending select entry).Last();
 
             return $"Most Frequent Char with {mostFrequentChar.Value.ToString()} " +
                    $"occurrences is {mostFrequentChar.Key.ToString()}";
