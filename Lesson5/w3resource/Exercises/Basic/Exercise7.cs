@@ -23,7 +23,7 @@
                             $"\nsubtracting: {(operand1 - operand2).ToString()}" +
                             $"\nmultiplying: {(operand1 * operand2).ToString()}" +
                              "\ndividing: " +
-                            $"{((operand1 != 0) ? (operand1 / operand2).ToString() : divisionByZeroMsg)}";
+                            $"{((operand2 != 0) ? (operand1 / operand2).ToString() : divisionByZeroMsg)}";
 
             return output;
         }
