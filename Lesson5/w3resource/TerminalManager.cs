@@ -135,7 +135,7 @@ namespace w3resource
             {
                 try
                 {
-                    Console.WriteLine("Please type your integer number");
+                    Console.WriteLine("Please type your number");
                     returnArray.Add(Double.Parse(Console.ReadLine()));
                 }
 
