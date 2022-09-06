@@ -76,9 +76,7 @@ namespace w3resource
             {
                 isStopProgram = true;
 
-            }
-
-            if (id == 0)
+            } else if (id == 0)
             {
                 CurrentChapter = "";
             }

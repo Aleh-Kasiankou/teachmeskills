@@ -26,7 +26,6 @@ namespace w3resource
                         TerminalManager.HandleNavigation();
                     }
                 } while (isContinue);
-                TerminalManager.HandleNavigation();
             }
 
             private static void SetCurrentExercise(Type exerciseType)
