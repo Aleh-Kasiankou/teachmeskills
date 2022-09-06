@@ -28,7 +28,9 @@ namespace w3resource
         {
             Console.WriteLine($"\nTask: {Description}");
         }
-
+        
+        //Move to TerminalManager
+        //How to handle Run method if it returns objs of different types? 
         public void DisplayResult(int result)
         {
             Console.WriteLine($"Output: {result.ToString()}");

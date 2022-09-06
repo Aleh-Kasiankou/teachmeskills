@@ -11,6 +11,6 @@
             DisplayResult(Solve(operands[0]));
         }
 
-        public string Solve(int age) => age > 18 ? "Eligible" : "Too young";
+        public string Solve(int age) => age >= 18 ? "Eligible" : "Too young";
     }
 }
