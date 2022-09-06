@@ -8,7 +8,6 @@
 
         public override void Run()
         {
-            DisplayDescription();
             var operandsList = TerminalManager.GetDoubleOperands(2);
             var operation = TerminalManager.GetChars(1);
             DisplayResult(Solve(operandsList[0], operandsList[1], operation[0]));

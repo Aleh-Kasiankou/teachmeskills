@@ -10,7 +10,6 @@ namespace w3resource.Exercises.Data_Types
 
         public override void Run()
         {
-            DisplayDescription();
             var operandsList = TerminalManager.GetDoubleOperands(1);
             DisplayResult(Solve(operandsList[0]));
         }

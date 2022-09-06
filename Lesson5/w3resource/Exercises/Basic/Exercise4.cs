@@ -11,8 +11,7 @@
 
         public override void Run()
         {
-            DisplayDescription();
-            DisplayResult(Solve());
+                        DisplayResult(Solve());
         }
 
         public string Solve()

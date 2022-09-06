@@ -6,8 +6,7 @@
 
         public override void Run()
         {
-            DisplayDescription();
-            DisplayResult(Solve(23, 18));
+                        DisplayResult(Solve(23, 18));
         }
 
         public string Solve(double x, double y)

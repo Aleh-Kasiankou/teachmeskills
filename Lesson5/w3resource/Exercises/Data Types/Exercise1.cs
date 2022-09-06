@@ -9,7 +9,6 @@ namespace w3resource.Exercises.Data_Types
 
         public override void Run()
         {
-            DisplayDescription();
             var charsList = TerminalManager.GetChars(3);
             DisplayResult(Solve(charsList));
         }

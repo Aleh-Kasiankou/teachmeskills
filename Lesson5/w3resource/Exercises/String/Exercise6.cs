@@ -7,7 +7,6 @@
 
         public override void Run()
         {
-            DisplayDescription();
             var userString = TerminalManager.GetStrings(2);
             DisplayResult(Solve(userString[0].ToLower().Trim(), userString[1].ToLower().Trim()));
         }

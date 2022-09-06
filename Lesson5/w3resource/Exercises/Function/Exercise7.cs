@@ -9,7 +9,6 @@ namespace w3resource.Exercises.Function
 
         public override void Run()
         {
-            DisplayDescription();
             var userOperands = TerminalManager.GetIntOperands(2);
             DisplayResult(Solve(userOperands[0], userOperands[1]));
         }

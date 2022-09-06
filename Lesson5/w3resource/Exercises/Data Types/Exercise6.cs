@@ -8,7 +8,6 @@
 
         public override void Run()
         {
-            DisplayDescription();
             DisplayResult(Solve());
         }
 

@@ -7,7 +7,6 @@
 
         public override void Run()
         {
-            DisplayDescription();
             var userInput = TerminalManager.GetIntOperands(1);
             DisplayResult(Solve(userInput[0].ToString(), userInput[1]));
         }

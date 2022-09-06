@@ -12,7 +12,6 @@
 
         public override void Run()
         {
-            DisplayDescription();
             var operands = TerminalManager.GetDoubleOperands(3);
             DisplayResult(Solve(operands[0], operands[1], operands[2]));
         }

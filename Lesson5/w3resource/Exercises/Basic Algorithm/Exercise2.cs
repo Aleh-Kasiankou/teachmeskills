@@ -11,7 +11,6 @@ namespace w3resource.Exercises.Basic_Algorithm
 
         public override void Run()
         {
-            DisplayDescription();
             List<int> operands = TerminalManager.GetIntOperands(1);
             DisplayResult(Solve(operands[0]));
 

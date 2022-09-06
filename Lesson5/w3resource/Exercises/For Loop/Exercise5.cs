@@ -9,7 +9,6 @@ namespace w3resource.Exercises.For_Loop
 
         public override void Run()
         {
-            DisplayDescription();
             var userNumber = TerminalManager.GetIntOperands(1)[0];
             DisplayResult(Solve(userNumber));
         }

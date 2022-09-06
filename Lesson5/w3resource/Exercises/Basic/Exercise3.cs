@@ -7,8 +7,7 @@
 
         public override void Run()
         {
-            DisplayDescription();
-            DisplayResult(Solve());
+                        DisplayResult(Solve());
         }
 
         public string Solve() => $"2 - 5 = {(2-5).ToString()}";

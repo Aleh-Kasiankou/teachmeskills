@@ -7,7 +7,6 @@
             "Write a program in C# Sharp to display the pattern like right angle triangle using an asterisk.";
         public override void Run()
         {
-            DisplayDescription();
             var rows = TerminalManager.GetIntOperands(1)[0];
             DisplayResult(Solve("*", rows));
         }

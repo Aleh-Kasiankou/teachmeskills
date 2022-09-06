@@ -9,7 +9,6 @@ namespace w3resource.Exercises.Conditional_Statements
 
         public override void Run()
         {
-            DisplayDescription();
             var operands = TerminalManager.GetDoubleOperands(3);
             DisplayResult(Solve(operands));
         }

@@ -12,7 +12,6 @@ namespace w3resource.Exercises.Basic_Algorithm
 
         public override void Run()
         {
-            DisplayDescription();
             List<string> inputStrings = TerminalManager.GetStrings(1);
             DisplayResult(Solve(inputStrings[0]));
 

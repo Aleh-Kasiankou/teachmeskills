@@ -6,7 +6,6 @@
 
         public override void Run()
         {
-            DisplayDescription();
             var userString = TerminalManager.GetStrings(1)[0];
             DisplayResult(Solve(userString));
         }

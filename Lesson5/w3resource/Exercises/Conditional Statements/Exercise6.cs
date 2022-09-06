@@ -10,7 +10,6 @@
 
         public override void Run()
         {
-            DisplayDescription();
             var operands = TerminalManager.GetIntOperands(1);
             DisplayResult(Solve(operands[0]));
         }

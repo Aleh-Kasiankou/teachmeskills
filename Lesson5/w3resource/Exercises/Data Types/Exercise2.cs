@@ -10,7 +10,6 @@ namespace w3resource.Exercises.Data_Types
 
         public override void Run()
         {
-            DisplayDescription();
             var userInput = TerminalManager.GetIntOperands(2);
             DisplayResult(Solve(userInput[0].ToString(), userInput[1]));
         }

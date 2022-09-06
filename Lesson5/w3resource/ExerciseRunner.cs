@@ -15,6 +15,7 @@ namespace w3resource
                     try
                     {
                         SetCurrentExercise(exerciseType);
+                        _currentExercise.DisplayDescription();
                         _currentExercise.Run();
                         isContinue = TerminalManager.PromptIsContinue();
 

@@ -12,7 +12,6 @@ namespace w3resource.Exercises.Data_Types
 
         public override void Run()
         {
-            DisplayDescription();
             var userChar = TerminalManager.GetChars(1);
             DisplayResult(Solve(userChar[0]));
         }

@@ -9,7 +9,6 @@ namespace w3resource.Exercises.Function
 
         public override void Run()
         {
-            DisplayDescription();
             var fibonacciPosition = TerminalManager.GetIntOperands(1)[0];
             DisplayResult(Solve(fibonacciPosition));
         }
