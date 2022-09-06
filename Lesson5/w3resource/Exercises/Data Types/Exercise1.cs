@@ -15,6 +15,7 @@ namespace w3resource.Exercises.Data_Types
 
         public string Solve(List<char> charsList)
         {
+            charsList.Reverse();
             var reversedChars = System.String.Concat(charsList);
             return reversedChars;
         }
