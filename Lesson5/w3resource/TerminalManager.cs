@@ -18,10 +18,11 @@ namespace w3resource
 
         public static void HandleNavigation() // Add exit point
         {
-            while (true)
+            bool isStopProgram = false;
+            while (!isStopProgram)
             {
                 RenderMenu();
-                ProcessMenuNavigation();
+                ProcessMenuNavigation(ref isStopProgram);
             }
         }
 
@@ -50,7 +51,9 @@ namespace w3resource
             var exercisesDict = new Dictionary<int, Type>();
             var exerciseId = 1;
 
-            var sortedExercises = Exercise.GetAllExercises().Where(exerc => exerc.Namespace.Split(".").Last() == CurrentChapter).OrderBy(exerc => exerc.Name.Length)
+            var sortedExercises = Exercise.GetAllExercises().
+                Where(exerc => exerc.Namespace.Split(".").Last() == CurrentChapter)
+                .OrderBy(exerc => exerc.Name.Length)
                 .ThenBy(exerc => exerc.Name);
 
             foreach (var exerciseType in sortedExercises) 
@@ -64,10 +67,16 @@ namespace w3resource
             return exercisesDict;
         }
 
-        private static void ProcessMenuNavigation()
+        private static void ProcessMenuNavigation(ref bool isStopProgram)
         {
-            Console.WriteLine("\nTo select menu item, please type its id. Type 0 to get to the main menu");
+            Console.WriteLine("\nTo select menu item, please type its id.\n(Type 0 to get to the main menu or -1 to finish program)");
             int id = GetIntOperands(1)[0];
+
+            if (id == -1)
+            {
+                isStopProgram = true;
+
+            }
 
             if (id == 0)
             {
