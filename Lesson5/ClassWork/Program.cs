@@ -6,27 +6,23 @@ namespace ClassWork
     {
         static void Main(string[] args)
         {
-            bool IsContinue = false;
+            bool IsContinue = true;
             do
             {
                 try
                 {
-                    IsContinue = false;
-                    double operand1 = TerminalManager.GetOperand();
-                    string operation = TerminalManager.GetOperation();
-                    double operand2 = TerminalManager.GetOperand();
-                    Calculator calculator = new Calculator(operand1, operand2, operation);
-                    TerminalManager.DisplayResult(calculator.Execute());
+                    var rawExpression = TerminalManager.GetExpression();
+                    var validNotChunkedExpression = ExpressionParser.ValidateExpression(rawExpression);
+                    var total = Calculator.Calculate(validNotChunkedExpression);
+                    Console.WriteLine(rawExpression + " = " + total.ToString());
                 }
                 catch (Exception e)
                 {
-                    TerminalManager.DisplayException(e);
+                    Console.WriteLine(e.Message);
                 }
-                
-                TerminalManager.AskIsContinue(ref IsContinue);
+                // finally{TerminalManager.AskIsContinue(ref IsContinue);}
 
             } while (IsContinue);
-
         }
     }
 }

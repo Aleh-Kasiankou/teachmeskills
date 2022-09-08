@@ -4,18 +4,11 @@ namespace ClassWork
 {
     public static class TerminalManager
     {
-        public static double GetOperand()
+        public static string GetExpression()
         {
-            Console.WriteLine("Please, type your operand!");
-            var operand = Double.Parse(Console.ReadLine());
-            return operand;
-        }
-
-        public static string GetOperation()
-        {
-            Console.WriteLine("Please, select your operation!");
-            var sign = Console.ReadLine();
-            return sign;
+            Console.WriteLine("Please, type your expression!");
+            var expression = Console.ReadLine();
+            return expression;
         }
 
         public static void DisplayException(Exception e)
