@@ -14,31 +14,39 @@ namespace ClassWork
         public static readonly List<string> AvailableOperationSymbols = GetAvailableOperationSymbols();
 
         private static double CalculateExpression(string simpleExpression)
+            //TODO ADJUST FOR 1 OPERAND (AND OPTIONAL SIGN)
+            //TODO VALIDATE EACH ITERATION FOR SYMBOL COMBINATIONS
         {
             var expressionMembers = ExpressionParser.ParseSimpleExpression(simpleExpression);
-            var operand1 = double.Parse(expressionMembers["operand1"]);
-            var operand2 = double.Parse(expressionMembers["operand2"]);
-            var operationSymbol = expressionMembers["operation"];
-            var operation = ResolveOperation(operand1, operand2, operationSymbol);
-            return operation.Execute();
+            if (expressionMembers.Keys.Count == 3)
+            {
+                var operand1 = double.Parse(expressionMembers["operand1"]);
+                var operand2 = double.Parse(expressionMembers["operand2"]);
+                var operationSymbol = expressionMembers["operation"];
+                var operation = ResolveOperation(operand1, operand2, operationSymbol);
+                return operation.Execute();
+            }
+            else
+            {
+                return Double.Parse(expressionMembers["operand1"]);
+            }
         }
 
         public static double Calculate(string expression)
         {
-            while (ExpressionParser.CheckExpressionIsCompound(expression))
+            do
             {
                 Dictionary<string, int> Location = new Dictionary<string, int>() { { "index", 0 }, { "length", 0 } };
                 var subexpression = ExpressionParser.GetExpressionWithMaxPriority(expression, ref Location);
                 var subexpressionResult = CalculateExpression(subexpression);
                 //TODO Move to a separate ExpressionParser method
-                
+
                 expression = expression.Remove(Location["index"], Location["length"])
                     .Insert(Location["index"], subexpressionResult.ToString());
-            }
+            } while (ExpressionParser.CheckExpressionIsCompound(expression));
 
             var expressionTotal = CalculateExpression(expression);
             return expressionTotal;
-
         }
 
         private static IOperation ResolveOperation(double operand1, double operand2, string symbol)

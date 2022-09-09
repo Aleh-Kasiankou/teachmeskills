@@ -15,7 +15,7 @@ namespace ClassWork
                 .Replace(" ", "")
                 .Replace("=", "");
 
-            
+
             expression = ResolveSymbolCombinations(expression);
             UserExpression = expression;
 
@@ -64,16 +64,16 @@ namespace ClassWork
 
         public static string GetExpressionWithMaxPriority(string expression, ref Dictionary<string, int> location)
         {
-            while (CheckExpressionIsCompound(expression))
+            do
             {
                 if (expression.Contains("(") && expression.Contains(")"))
                 {
                     expression = GetExpressionInBrackets(expression, ref location); //11+7/-5-7
                     continue;
                 }
-                
+
                 expression = GetFirstPriorityExpression(expression, ref location); // 7/-5
-            }
+            } while (CheckExpressionIsCompound(expression));
 
             return expression;
         }
@@ -81,13 +81,13 @@ namespace ClassWork
         // Root / pow
         // * / % mod
 
-        internal static bool CheckExpressionIsCompound(string expression)
+        internal static bool CheckExpressionIsCompound(string expression) //positive and negative numbers check
         {
-            string symbolsOrPattern = GetRegexOrOperations();
+            // Regex pattern = new Regex(@"(?<operationsymbols>(?:\d|\))+?(?:" + symbolsOrPattern + "))");
+            Regex pattern = new Regex(@"(?<operand>(?:\d+\.*\d*)+)");
 
-            Regex pattern = new Regex(@"(?<operationsymbols>(?:\d|\))+?(?:" + symbolsOrPattern + "))");
-
-            return pattern.Matches(expression).Count > 1; //([0-9]+?[\+|/|mod|\*|x|%|pow|\^|root|-])
+            bool isHasMultipleOperations = pattern.Matches(expression).Count > 1;
+            return pattern.Matches(expression).Count > 2; //([0-9]+?[\+|/|mod|\*|x|%|pow|\^|root|-])
         }
 
         private static string GetRegexOrOperations() //TODO use parameters to limit operations
@@ -111,9 +111,9 @@ namespace ClassWork
             if (matches.Count > 0)
             {
                 GroupCollection groups = matches[0].Groups;
-                location["index"] += groups["bracketsExpression"].Index-1;
-                location["length"] = groups["bracketsExpression"].Length+2;
-                
+                location["index"] += groups["bracketsExpression"].Index - 1;
+                location["length"] = groups["bracketsExpression"].Length + 2;
+
                 expression = GetExpressionInBrackets(groups["bracketsExpression"].Value, ref location);
             }
 
@@ -122,8 +122,10 @@ namespace ClassWork
 
         private static string GetFirstPriorityExpression(string expression, ref Dictionary<string, int> location)
         {
-            Regex powerAndRootPattern = new Regex(@"(?<FirstPriority>-*?[0-9]+?(?:pow|root|^)+?-*?[0-9]+?)");
+            Regex powerAndRootPattern =
+                new Regex(@"(?<FirstPriority>(?:\d\.*\d*)+?(?:pow|root|\^)+?-*?(?:\d\.*\d*)+?)");
             //TODO Fetch symbols for power/root
+            //TODO improve work with negative numbers
 
             MatchCollection matches = powerAndRootPattern.Matches(expression);
             if (matches.Count > 0)
@@ -136,7 +138,7 @@ namespace ClassWork
             else if (matches.Count == 0)
             {
                 Regex multiplicationDivisionPattern =
-                    new Regex(@"(?<FirstPriority>-*?[0-9]+?(?:\*|\/|\%|mod){1}-*?[0-9]+?)");
+                    new Regex(@"(?<FirstPriority>(?:\d\.*\d*)+?(?:\*|\/|\%|mod){1}-*?(?:\d\.*\d*)+?)");
                 //TODO Fetch symbols for multiplication division percentage modulo
 
                 matches = multiplicationDivisionPattern.Matches(expression);
@@ -148,10 +150,11 @@ namespace ClassWork
                     expression = groups["FirstPriority"].Value;
                 }
             }
+
             if (matches.Count == 0)
             {
                 Regex lastPriorityPattern =
-                    new Regex(@"(?<FirstPriority>-*?[0-9]+?(?:\+|-){1}-*?[0-9]+?)");
+                    new Regex(@"(?<FirstPriority>-*?(?:\d\.*\d*)+?(?:\+|-){1}-*?(?:\d\.*\d*)+?)");
                 //TODO Fetch symbols for multiplication division percentage modulo
 
                 matches = lastPriorityPattern.Matches(expression);
@@ -170,25 +173,38 @@ namespace ClassWork
         internal static Dictionary<string, string> ParseSimpleExpression(string simpleExpression)
         {
             var expressionMembers = new Dictionary<string, string>() { };
-            
-            Regex lastPriorityPattern =
-                new Regex(@"(?<operand1>-*?[0-9]+)(?<operation>.+?)(?<operand2>-*?[0-9]+)");
+
+            Regex twoOperandsAndOperation =
+                new Regex(@"(?<operand1>-*?(?:\d+\.*\d*)+)(?<operation>(?:" + GetRegexOrOperations() +
+                          @")+?)(?<operand2>-*?(?:\d+\.*\d*)+)");
             //TODO Fetch symbols for multiplication division percentage modulo
 
-            var matches = lastPriorityPattern.Matches(simpleExpression);
+            var matches = twoOperandsAndOperation.Matches(simpleExpression);
             if (matches.Count > 0)
             {
                 GroupCollection groups = matches[0].Groups;
                 expressionMembers["operand1"] = groups["operand1"].Value;
                 expressionMembers["operand2"] = groups["operand2"].Value;
                 expressionMembers["operation"] = groups["operation"].Value;
+                return expressionMembers;
             }
             else
             {
-                throw new Exception(message: $"Invalid Expression: {simpleExpression}");
-            }
+                Regex operandAndOptionalSign =
+                    new Regex(@"(?<operand>-*?(?:\d+\.*\d*)+)");
 
-            return expressionMembers;
+                matches = operandAndOptionalSign.Matches(simpleExpression);
+                if (matches.Count == 1)
+                {
+                    GroupCollection groups = matches[0].Groups;
+                    expressionMembers["operand1"] = groups["operand"].Value;
+                    return expressionMembers;
+                }
+                else
+                {
+                    throw new Exception(message: $"Invalid Expression: {simpleExpression}");
+                }
+            }
         }
     }
 }
