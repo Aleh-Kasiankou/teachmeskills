@@ -14,8 +14,6 @@ namespace ClassWork
         public static readonly List<string> AvailableOperationSymbols = GetAvailableOperationSymbols();
 
         private static double CalculateExpression(string simpleExpression)
-            //TODO ADJUST FOR 1 OPERAND (AND OPTIONAL SIGN)
-            //TODO VALIDATE EACH ITERATION FOR SYMBOL COMBINATIONS
         {
             var expressionMembers = ExpressionParser.ParseSimpleExpression(simpleExpression);
             if (expressionMembers.Keys.Count == 3)
@@ -41,8 +39,14 @@ namespace ClassWork
                 var subexpressionResult = CalculateExpression(subexpression);
                 //TODO Move to a separate ExpressionParser method
 
+                if (Location["length"] == 0 && Location["index"] == 0)
+                {
+                    Location["length"] = expression.Length;
+                }
+
                 expression = expression.Remove(Location["index"], Location["length"])
                     .Insert(Location["index"], subexpressionResult.ToString());
+                expression = ExpressionParser.ResolveSymbolCombinations(expression);
             } while (ExpressionParser.CheckExpressionIsCompound(expression));
 
             var expressionTotal = CalculateExpression(expression);

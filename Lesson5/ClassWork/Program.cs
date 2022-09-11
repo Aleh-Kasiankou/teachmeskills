@@ -6,22 +6,34 @@ namespace ClassWork
     {
         static void Main(string[] args)
         {
-            bool IsContinue = true;
+            bool IsContinue = true; //false
             do
             {
                 try
                 {
-                    var rawExpression = TerminalManager.GetExpression();
-                    var validNotChunkedExpression = ExpressionParser.ValidateExpression(rawExpression);
+                    bool isComplete = false;
+                    string validNotChunkedExpression = "";
+                    var rawExpression = "";
+                    var expressionBase = "";
+                    
+                    while (!isComplete)
+                    {
+                        rawExpression = TerminalManager.GetExpression();
+                        string newExpressionBase;
+                        validNotChunkedExpression =
+                            ExpressionParser.ValidateExpression(rawExpression, out newExpressionBase, ref isComplete, expressionBase);
+                        expressionBase = String.IsNullOrEmpty(newExpressionBase) ? "" : newExpressionBase;
+
+                    }
+
                     var total = Calculator.Calculate(validNotChunkedExpression);
-                    Console.WriteLine(rawExpression + " = " + total.ToString());
+                    Console.WriteLine(validNotChunkedExpression + " = " + total);
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
                 // finally{TerminalManager.AskIsContinue(ref IsContinue);}
-
             } while (IsContinue);
         }
     }

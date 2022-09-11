@@ -1,28 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ClassWork
 {
     public static class ExpressionParser
     {
-        public static string UserExpression { get; set; }
+        private static string UserExpression { get; set; }
 
-        public static string ValidateExpression(string rawExpression)
+        internal static string ValidateExpression(string rawExpression, out string newExpressionBase, ref bool isComplete, string expressionBase)
         {
-            var expression = rawExpression
-                .Replace(" ", "")
-                .Replace("=", "");
+            var validationStringBuilder =
+                new StringBuilder(String.IsNullOrWhiteSpace(expressionBase) ? "" : expressionBase);
 
+            if (rawExpression.Count(x => x == '=') > 1)
+            {
+                throw new Exception(message: "Sorry, there should be only one equal sign");
+            }
 
+            isComplete = rawExpression.Trim()[^1] == '=';
+
+            foreach (char expressionChar in rawExpression)
+            {
+                if (expressionChar == ' ' || expressionChar == '=')
+                {
+                    //DoNothing
+                }
+
+                else if (expressionChar == '.')
+                {
+                    if (Char.IsDigit(validationStringBuilder[^1]))
+                    {
+                        validationStringBuilder.Append(expressionChar);
+                    }
+
+                    else
+                    {
+                        throw new Exception(message: "Dots are only available as separators for fractions");
+                    }
+                }
+                
+                else
+                {
+                    validationStringBuilder.Append(expressionChar);
+                }
+            }
+
+            var expression = validationStringBuilder.ToString();
+            
+            if (isComplete && expression.Count(x => x == '(') != expression.Count(x => x == ')'))
+            {
+                throw new Exception(message: "Sorry, you should check the number of brackets");
+            }
+            
             expression = ResolveSymbolCombinations(expression);
-            UserExpression = expression;
+            if (isComplete)
+            {
+                UserExpression = expression;
+                newExpressionBase = String.Empty;
+            }
 
+            else
+            {
+                newExpressionBase = expression;
+            }
+            
             return expression;
         }
 
-        private static string ResolveSymbolCombinations(string rawExpression)
+        internal static string ResolveSymbolCombinations(string rawExpression)
         {
             string symbolsOrPattern = GetRegexOrOperations();
             string expression = rawExpression;
@@ -74,7 +122,7 @@ namespace ClassWork
 
                 expression = GetFirstPriorityExpression(expression, ref location); // 7/-5
             } while (CheckExpressionIsCompound(expression));
-
+            
             return expression;
         }
         // ()
