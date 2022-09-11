@@ -135,7 +135,7 @@ namespace ClassWork
             Regex pattern = new Regex(@"(?<operand>(?:\d+\.*\d*)+)");
 
             bool isHasMultipleOperations = pattern.Matches(expression).Count > 1;
-            return pattern.Matches(expression).Count > 2; //([0-9]+?[\+|/|mod|\*|x|%|pow|\^|root|-])
+            return pattern.Matches(expression).Count > 2; //([0-9]+?(?:\+|/|mod|\*|x|%|pow|\^|root|-))
         }
 
         private static string GetRegexOrOperations() //TODO use parameters to limit operations
@@ -152,7 +152,7 @@ namespace ClassWork
 
         private static string GetExpressionInBrackets(string expression, ref Dictionary<string, int> location)
         {
-            Regex pattern = new Regex(@"\((?<bracketsExpression>.*)\)");
+            Regex pattern = new Regex(@"\((?<bracketsExpression>-*?(?:\d\.*\d*)(?:\+|\/|mod|\*|x|%|pow|\^|root|-)*(?:-*?(?:\d\.*\d*)*)*)\)"); //\((?<bracketsExpression>(?!\().*?)\)
 
             MatchCollection matches = pattern.Matches(expression);
 
@@ -163,6 +163,11 @@ namespace ClassWork
                 location["length"] = groups["bracketsExpression"].Length + 2;
 
                 expression = GetExpressionInBrackets(groups["bracketsExpression"].Value, ref location);
+            }
+
+            else if(matches.Count == 0 && expression.Contains('('))
+            {
+                throw new Exception(message: "Expression in brackets is not valid");
             }
 
             return expression;
