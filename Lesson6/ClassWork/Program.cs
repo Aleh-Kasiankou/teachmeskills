@@ -1,10 +1,12 @@
-﻿namespace w3resource
+﻿using System;
+
+namespace ClassWork
 {
     class Program
     {
         static void Main(string[] args)
         {
-            TerminalManager.HandleNavigation();
+            Console.WriteLine("Hello World!");
         }
     }
 }

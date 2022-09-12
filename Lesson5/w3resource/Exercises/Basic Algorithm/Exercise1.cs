@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace w3resource.Exercises
+namespace w3resource.Exercises.Basic_Algorithm
 {
     public class Exercise1 : Exercise
     {
@@ -12,8 +12,7 @@ namespace w3resource.Exercises
 
         public override void Run()
         {
-            DisplayDescription();
-            List<int> operands = TerminalManager.GetIntOperands(2);
+                        List<int> operands = TerminalManager.GetIntOperands(2);
             DisplayResult(Solve(operands[0], operands[1]));
         }
 
