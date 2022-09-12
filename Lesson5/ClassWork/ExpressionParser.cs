@@ -15,20 +15,42 @@ namespace ClassWork
             var validationStringBuilder =
                 new StringBuilder(String.IsNullOrWhiteSpace(expressionBase) ? "" : expressionBase);
 
-            if (rawExpression.Count(x => x == '=') > 1)
+            if (rawExpression.Count(x => x == '=') > 0 && !rawExpression.Trim().EndsWith('=') )
             {
-                throw new Exception(message: "Sorry, there should be only one equal sign");
+                throw new Exception(message: "Sorry, there should be only one equal sign in the last position");
             }
 
             isComplete = rawExpression.Trim()[^1] == '=';
+            var insertedOperator = new List<char>();
 
             foreach (char expressionChar in rawExpression)
             {
+                var tempOperator = String.Join("", insertedOperator);
+                if (insertedOperator.Count > 0 && (Char.IsDigit(expressionChar)||expressionChar=='.'))
+                {
+                    if (Calculator.AvailableOperationSymbols.Any(x => x == tempOperator))
+                    {
+                        validationStringBuilder.Append(tempOperator);
+                        insertedOperator.Clear();
+                    }
+
+                    else
+                    {
+                        throw new Exception(message: $"Unsupported operator {tempOperator}");
+                    }
+
+                }
+
                 if (expressionChar == ' ' || expressionChar == '=')
                 {
                     //DoNothing
                 }
 
+                else if(char.IsDigit(expressionChar) || expressionChar == '(' ||expressionChar == ')')
+                {
+                    validationStringBuilder.Append(expressionChar);
+                }
+                
                 else if (expressionChar == '.')
                 {
                     if (Char.IsDigit(validationStringBuilder[^1]))
@@ -42,10 +64,18 @@ namespace ClassWork
                     }
                 }
                 
-                else
+                else if (!Char.IsDigit(expressionChar)) //check for allowed operators
                 {
-                    validationStringBuilder.Append(expressionChar);
+                    if (Calculator.AvailableOperationSymbols.Any(x => x.Contains(tempOperator + expressionChar)))
+                    {
+                        insertedOperator.Add(expressionChar);
+                    }
+                    else
+                    {
+                        throw new Exception(message: $"Unsupported operator {String.Join("", insertedOperator) + expressionChar}");
+                    }
                 }
+                
             }
 
             var expression = validationStringBuilder.ToString();

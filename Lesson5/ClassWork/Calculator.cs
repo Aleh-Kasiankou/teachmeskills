@@ -7,7 +7,7 @@ namespace ClassWork
 {
     public static class Calculator
     {
-        public static readonly string[] Memory;
+        public static List<List<string>> Memory = new List<List<string>>();
         public static double CurrentResult = 0;
 
         private static readonly Dictionary<Type, string[]> AvailableOperations = GetAvailableOperations();
@@ -102,6 +102,29 @@ namespace ClassWork
             }
 
             return availableOperationSymbols;
+        }
+
+        public static void MemorizeOperation(string expression, double total, int id = -1)
+        {
+            if (Memory.Count == 5 && id != -1)
+            {
+                Memory.RemoveAt(0);
+            }
+
+            if (id == -1)
+            {
+                Memory.Add(new List<string>() { $"{expression}", $"{total.ToString()}" });
+            }
+
+            else if (id >= 0 && id < Memory.Count)
+            {
+                Memory[id] = new List<string>() { $"{expression}", $"{total.ToString()}" };
+            }
+
+            else
+            {
+                throw new Exception(message: "There is no such object in memory");
+            }
         }
     }
 }

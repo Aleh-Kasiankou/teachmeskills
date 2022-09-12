@@ -6,34 +6,39 @@ namespace ClassWork
     {
         static void Main(string[] args)
         {
-            bool IsContinue = true; //false
+            bool IsContinue = false;
+            bool isWorkWithMemory = false;
+            
             do
             {
                 try
                 {
-                    bool isComplete = false;
-                    string validNotChunkedExpression = "";
-                    var rawExpression = "";
-                    var expressionBase = "";
-                    
-                    while (!isComplete)
+                    if (!isWorkWithMemory)
                     {
-                        rawExpression = TerminalManager.GetExpression();
-                        string newExpressionBase;
-                        validNotChunkedExpression =
-                            ExpressionParser.ValidateExpression(rawExpression, out newExpressionBase, ref isComplete, expressionBase);
-                        expressionBase = String.IsNullOrEmpty(newExpressionBase) ? "" : newExpressionBase;
-
+                        var expression = TerminalManager.GetExpression();
+                        var total = Calculator.Calculate(expression);
+                        Calculator.MemorizeOperation(expression.Trim('='), total);
+                        Console.WriteLine(expression + " = " + total);
                     }
 
-                    var total = Calculator.Calculate(validNotChunkedExpression);
-                    Console.WriteLine(validNotChunkedExpression + " = " + total);
+                    else
+                    {
+                        var expression = TerminalManager.UpdateExpressionFromMemory(out var id);
+                        if (string.IsNullOrWhiteSpace(expression))
+                        {
+                            continue;
+                        }
+
+                        var total = Calculator.Calculate(expression);
+                        Calculator.MemorizeOperation(expression.Trim('='), total, id);
+                        Console.WriteLine(expression + " = " + total);
+                    }
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    TerminalManager.DisplayException(e);
                 }
-                // finally{TerminalManager.AskIsContinue(ref IsContinue);}
+                finally{TerminalManager.AskIsContinue(ref IsContinue, ref isWorkWithMemory);}
             } while (IsContinue);
         }
     }
