@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ClassWork
+namespace Calculator
 {
     public static class TerminalManager
     {

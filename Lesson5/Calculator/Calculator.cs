@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CalculatorApp.Operations;
+using Calculator.Operations;
 
-namespace ClassWork
+namespace Calculator
 {
     public static class Calculator
     {
@@ -53,7 +53,7 @@ namespace ClassWork
             return expressionTotal;
         }
 
-        private static IOperation ResolveOperation(double operand1, double operand2, string symbol)
+        private static Operation ResolveOperation(double operand1, double operand2, string symbol)
         {
             if (!GetAvailableOperationSymbols().Contains(symbol))
             {
