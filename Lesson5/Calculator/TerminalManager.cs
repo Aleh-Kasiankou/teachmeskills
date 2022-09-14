@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ClassWork
+namespace Calculator
 {
     public static class TerminalManager
     {
@@ -27,9 +27,8 @@ namespace ClassWork
                     rawExpression = GetUserInput(String.Empty);
                 }
 
-                string newExpressionBase;
                 validNotChunkedExpression =
-                    ExpressionParser.ValidateExpression(rawExpression, out newExpressionBase, ref isComplete,
+                    Validator.ValidateExpression(rawExpression, out var newExpressionBase, ref isComplete,
                         expressionBase);
                 expressionBase = String.IsNullOrEmpty(newExpressionBase) ? "" : newExpressionBase;
             }
@@ -73,9 +72,9 @@ namespace ClassWork
             }
         }
 
-        public static void DisplayResult(double result)
+        public static void DisplayResult(string expression, double total)
         {
-            Console.WriteLine($"The result of your operation is {result.ToString()}");
+            Console.WriteLine(expression + " = " + total);
         }
 
         public static string UpdateExpressionFromMemory(out int memoryId)
@@ -83,7 +82,7 @@ namespace ClassWork
             Console.WriteLine("The following expressions are available for editing/replacement:");
             for (int i = 1; i <= Calculator.Memory.Count; i++)
             {
-                Console.WriteLine($"{i} {Calculator.Memory[i -1][0]} = {Calculator.Memory[i-1][1]} ");
+                Console.WriteLine($"{i} {Calculator.Memory[i - 1][0]} = {Calculator.Memory[i - 1][1]} ");
             }
 
             int id = -1;
@@ -121,18 +120,18 @@ namespace ClassWork
                 }
             }
 
-            memoryId = id-1;
+            memoryId = id - 1;
 
             if (!string.IsNullOrWhiteSpace(expression))
             {
                 string userInput = "";
-                while (userInput.Trim().ToLower() != "e" && userInput.Trim().ToLower() != "r")
+                while (userInput.Trim().ToLower() != "a" && userInput.Trim().ToLower() != "r")
                 {
-                    Console.WriteLine("Would you like to Edit the expression or Replace it? Please type 'e' or 'r'");
+                    Console.WriteLine("Would you like to Append the expression or Replace it? Please type 'a' or 'r'");
                     userInput = GetUserInput("choice");
                 }
 
-                if (userInput.Trim().ToLower() == "e")
+                if (userInput.Trim().ToLower() == "a")
                 {
                     return GetExpression(expression);
                 }
@@ -141,7 +140,6 @@ namespace ClassWork
                 {
                     return GetExpression();
                 }
-                
             }
 
             return string.Empty;
