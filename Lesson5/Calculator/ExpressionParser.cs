@@ -15,11 +15,11 @@ namespace Calculator
             {
                 if (expression.Contains("(") && expression.Contains(")"))
                 {
-                    expression = GetExpressionInBrackets(expression, ref location); //11+7/-5-7
+                    expression = GetExpressionInBrackets(expression, ref location);
                     continue;
                 }
 
-                expression = GetFirstPriorityExpression(expression, ref location); // 7/-5
+                expression = GetFirstPriorityExpression(expression, ref location);
             } while (CheckExpressionIsCompound(expression));
 
             return expression;
@@ -126,7 +126,6 @@ namespace Calculator
             Regex twoOperandsAndOperation =
                 new Regex(@"(?<operand1>-*?(?:\d+\.*\d*)+)(?<operation>(?:" + GetRegexOrOperations() +
                           @")+?)(?<operand2>-*?(?:\d+\.*\d*)+)");
-            //TODO Fetch symbols for multiplication division percentage modulo
 
             var twoOperandsAndOperationFound = twoOperandsAndOperation.Match(simpleExpression);
             if (twoOperandsAndOperationFound.Success)

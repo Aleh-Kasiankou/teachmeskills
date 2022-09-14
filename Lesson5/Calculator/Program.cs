@@ -8,37 +8,35 @@ namespace Calculator
         {
             bool IsContinue = false;
             bool isWorkWithMemory = false;
-            
+
             do
             {
                 try
                 {
-                    if (!isWorkWithMemory)
+                    string expression;
+                    int id = -1;
+
+                    expression = isWorkWithMemory
+                        ? TerminalManager.UpdateExpressionFromMemory(out id)
+                        : TerminalManager.GetExpression();
+
+                    if (string.IsNullOrWhiteSpace(expression) && isWorkWithMemory)
                     {
-                        var expression = TerminalManager.GetExpression();
-                        var total = Calculator.Calculate(expression);
-                        Calculator.MemorizeOperation(expression.Trim('='), total);
-                        Console.WriteLine(expression + " = " + total);
+                        continue;
                     }
 
-                    else
-                    {
-                        var expression = TerminalManager.UpdateExpressionFromMemory(out var id);
-                        if (string.IsNullOrWhiteSpace(expression))
-                        {
-                            continue;
-                        }
-
-                        var total = Calculator.Calculate(expression);
-                        Calculator.MemorizeOperation(expression.Trim('='), total, id);
-                        Console.WriteLine(expression + " = " + total);
-                    }
+                    var total = Calculator.Calculate(expression);
+                    Calculator.MemorizeOperation(expression.Trim('='), total, id);
+                    TerminalManager.DisplayResult(expression, total);
                 }
                 catch (Exception e)
                 {
                     TerminalManager.DisplayException(e);
                 }
-                finally{TerminalManager.AskIsContinue(ref IsContinue, ref isWorkWithMemory);}
+                finally
+                {
+                    TerminalManager.AskIsContinue(ref IsContinue, ref isWorkWithMemory);
+                }
             } while (IsContinue);
         }
     }

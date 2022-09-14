@@ -8,10 +8,38 @@ namespace Calculator
     public static class Calculator
     {
         public static List<List<string>> Memory = new List<List<string>>();
-        public static double CurrentResult = 0;
 
         private static readonly Dictionary<Type, string[]> AvailableOperations = GetAvailableOperations();
         public static readonly List<string> AvailableOperationSymbols = GetAvailableOperationSymbols();
+
+        public static double Calculate(string expression)
+        {
+            do
+            {
+                expression = SimplifyExpression(expression);
+                expression = Validator.ResolveSymbolCombinations(expression);
+            } while (ExpressionParser.CheckExpressionIsCompound(expression));
+
+            var expressionTotal = CalculateExpression(expression);
+            return expressionTotal;
+        }
+
+        private static string SimplifyExpression(string expression)
+        {
+            Dictionary<string, int> location = new Dictionary<string, int>() { { "index", 0 }, { "length", 0 } };
+            var subexpression = ExpressionParser.GetExpressionWithMaxPriority(expression, ref location);
+            var subexpressionResult = CalculateExpression(subexpression);
+
+            if (location["length"] == 0 && location["index"] == 0)
+            {
+                location["length"] = expression.Length;
+            }
+
+            expression = expression.Remove(location["index"], location["length"])
+                .Insert(location["index"], subexpressionResult.ToString());
+
+            return expression;
+        }
 
         private static double CalculateExpression(string simpleExpression)
         {
@@ -28,29 +56,6 @@ namespace Calculator
             {
                 return Double.Parse(expressionMembers["operand1"]);
             }
-        }
-
-        public static double Calculate(string expression)
-        {
-            do
-            {
-                Dictionary<string, int> Location = new Dictionary<string, int>() { { "index", 0 }, { "length", 0 } };
-                var subexpression = ExpressionParser.GetExpressionWithMaxPriority(expression, ref Location);
-                var subexpressionResult = CalculateExpression(subexpression);
-                //TODO Move to a separate ExpressionParser method
-
-                if (Location["length"] == 0 && Location["index"] == 0)
-                {
-                    Location["length"] = expression.Length;
-                }
-
-                expression = expression.Remove(Location["index"], Location["length"])
-                    .Insert(Location["index"], subexpressionResult.ToString());
-                expression = Validator.ResolveSymbolCombinations(expression);
-            } while (ExpressionParser.CheckExpressionIsCompound(expression));
-
-            var expressionTotal = CalculateExpression(expression);
-            return expressionTotal;
         }
 
         private static Operation ResolveOperation(double operand1, double operand2, string symbol)
