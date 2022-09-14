@@ -8,6 +8,7 @@ namespace Calculator
     public static class ExpressionParser
     {
         public static string UserExpression { get; set; }
+
         public static string GetExpressionWithMaxPriority(string expression, ref Dictionary<string, int> location)
         {
             do
@@ -20,20 +21,17 @@ namespace Calculator
 
                 expression = GetFirstPriorityExpression(expression, ref location); // 7/-5
             } while (CheckExpressionIsCompound(expression));
-            
+
             return expression;
         }
-        // ()
-        // Root / pow
-        // * / % mod
 
-        internal static bool CheckExpressionIsCompound(string expression) //positive and negative numbers check
+        internal static bool CheckExpressionIsCompound(string expression)
         {
-            // Regex pattern = new Regex(@"(?<operationsymbols>(?:\d|\))+?(?:" + symbolsOrPattern + "))");
             Regex pattern = new Regex(@"(?<operand>(?:\d+\.*\d*)+)");
 
-            bool isHasMultipleOperations = pattern.Matches(expression).Count > 1;
-            return pattern.Matches(expression).Count > 2; //([0-9]+?(?:\+|/|mod|\*|x|%|pow|\^|root|-))
+            var qtyOperatorsFound = pattern.Matches(expression).Count;
+
+            return qtyOperatorsFound > 2;
         }
 
         public static string GetRegexOrOperations() //TODO use parameters to limit operations
@@ -50,20 +48,22 @@ namespace Calculator
 
         private static string GetExpressionInBrackets(string expression, ref Dictionary<string, int> location)
         {
-            Regex pattern = new Regex(@"\((?<bracketsExpression>-*?(?:\d\.*\d*)(?:\+|\/|mod|\*|x|%|pow|\^|root|-)*(?:-*?(?:\d\.*\d*)*)*)\)"); //\((?<bracketsExpression>(?!\().*?)\)
+            Regex pattern =
+                new Regex(
+                    @"\((?<bracketsExpression>-*?(?:\d\.*\d*)(?:\+|\/|mod|\*|x|%|pow|\^|root|-)*(?:-*?(?:\d\.*\d*)*)*)\)"); //\((?<bracketsExpression>(?!\().*?)\)
 
-            MatchCollection matches = pattern.Matches(expression);
+            Match expressionInBracketsFound = pattern.Match(expression);
 
-            if (matches.Count > 0)
+            if (expressionInBracketsFound.Success)
             {
-                GroupCollection groups = matches[0].Groups;
+                GroupCollection groups = expressionInBracketsFound.Groups;
                 location["index"] += groups["bracketsExpression"].Index - 1;
                 location["length"] = groups["bracketsExpression"].Length + 2;
 
                 expression = GetExpressionInBrackets(groups["bracketsExpression"].Value, ref location);
             }
 
-            else if(matches.Count == 0 && expression.Contains('('))
+            else if (!(expressionInBracketsFound.Success) && expression.Contains('('))
             {
                 throw new Exception(message: "Expression in brackets is not valid");
             }
@@ -76,42 +76,40 @@ namespace Calculator
             Regex powerAndRootPattern =
                 new Regex(@"(?<FirstPriority>(?:\d\.*\d*)+?(?:pow|root|\^)+?-*?(?:\d\.*\d*)+?)");
             //TODO Fetch symbols for power/root
-            //TODO improve work with negative numbers
 
-            MatchCollection matches = powerAndRootPattern.Matches(expression);
-            if (matches.Count > 0)
+            var powerOrRootFound = powerAndRootPattern.Match(expression);
+            if (powerOrRootFound.Success)
             {
-                GroupCollection groups = matches[0].Groups;
+                GroupCollection groups = powerOrRootFound.Groups;
                 location["index"] += groups["FirstPriority"].Index;
                 location["length"] = groups["FirstPriority"].Length;
                 expression = groups["FirstPriority"].Value;
             }
-            else if (matches.Count == 0)
+            else if (!powerOrRootFound.Success)
             {
                 Regex multiplicationDivisionPattern =
                     new Regex(@"(?<FirstPriority>(?:\d\.*\d*)+?(?:\*|\/|\%|mod){1}-*?(?:\d\.*\d*)+?)");
                 //TODO Fetch symbols for multiplication division percentage modulo
 
-                matches = multiplicationDivisionPattern.Matches(expression);
-                if (matches.Count > 0)
+                var multiplicationOrDivisionFound = multiplicationDivisionPattern.Match(expression);
+                if (multiplicationOrDivisionFound.Success)
                 {
-                    GroupCollection groups = matches[0].Groups;
+                    GroupCollection groups = multiplicationOrDivisionFound.Groups;
                     location["index"] += groups["FirstPriority"].Index;
                     location["length"] = groups["FirstPriority"].Length;
                     expression = groups["FirstPriority"].Value;
                 }
             }
 
-            if (matches.Count == 0)
+            else
             {
                 Regex lastPriorityPattern =
                     new Regex(@"(?<FirstPriority>-*?(?:\d\.*\d*)+?(?:\+|-){1}-*?(?:\d\.*\d*)+?)");
-                //TODO Fetch symbols for multiplication division percentage modulo
 
-                matches = lastPriorityPattern.Matches(expression);
-                if (matches.Count > 0)
+                var lowPriorityOperationFound = lastPriorityPattern.Match(expression);
+                if (lowPriorityOperationFound.Success)
                 {
-                    GroupCollection groups = matches[0].Groups;
+                    GroupCollection groups = lowPriorityOperationFound.Groups;
                     location["index"] += groups["FirstPriority"].Index;
                     location["length"] = groups["FirstPriority"].Length;
                     expression = groups["FirstPriority"].Value;
@@ -130,10 +128,10 @@ namespace Calculator
                           @")+?)(?<operand2>-*?(?:\d+\.*\d*)+)");
             //TODO Fetch symbols for multiplication division percentage modulo
 
-            var matches = twoOperandsAndOperation.Matches(simpleExpression);
-            if (matches.Count > 0)
+            var twoOperandsAndOperationFound = twoOperandsAndOperation.Match(simpleExpression);
+            if (twoOperandsAndOperationFound.Success)
             {
-                GroupCollection groups = matches[0].Groups;
+                GroupCollection groups = twoOperandsAndOperationFound.Groups;
                 expressionMembers["operand1"] = groups["operand1"].Value;
                 expressionMembers["operand2"] = groups["operand2"].Value;
                 expressionMembers["operation"] = groups["operation"].Value;
@@ -141,13 +139,13 @@ namespace Calculator
             }
             else
             {
-                Regex operandAndOptionalSign =
+                Regex oneOperandAndOptionalSign =
                     new Regex(@"(?<operand>-*?(?:\d+\.*\d*)+)");
 
-                matches = operandAndOptionalSign.Matches(simpleExpression);
-                if (matches.Count == 1)
+                var oneOperandFound = oneOperandAndOptionalSign.Match(simpleExpression);
+                if (oneOperandFound.Success)
                 {
-                    GroupCollection groups = matches[0].Groups;
+                    GroupCollection groups = oneOperandFound.Groups;
                     expressionMembers["operand1"] = groups["operand"].Value;
                     return expressionMembers;
                 }
