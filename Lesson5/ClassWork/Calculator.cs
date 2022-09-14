@@ -46,7 +46,7 @@ namespace ClassWork
 
                 expression = expression.Remove(Location["index"], Location["length"])
                     .Insert(Location["index"], subexpressionResult.ToString());
-                expression = ExpressionParser.ResolveSymbolCombinations(expression);
+                expression = Validator.ResolveSymbolCombinations(expression);
             } while (ExpressionParser.CheckExpressionIsCompound(expression));
 
             var expressionTotal = CalculateExpression(expression);

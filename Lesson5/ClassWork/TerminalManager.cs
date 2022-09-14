@@ -29,7 +29,7 @@ namespace ClassWork
 
                 string newExpressionBase;
                 validNotChunkedExpression =
-                    ExpressionParser.ValidateExpression(rawExpression, out newExpressionBase, ref isComplete,
+                    Validator.ValidateExpression(rawExpression, out newExpressionBase, ref isComplete,
                         expressionBase);
                 expressionBase = String.IsNullOrEmpty(newExpressionBase) ? "" : newExpressionBase;
             }
