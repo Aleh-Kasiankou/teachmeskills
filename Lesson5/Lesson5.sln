@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassWork", "ClassWork\ClassWork.csproj", "{EA8F23CE-BDC2-4343-9905-AE7D8EB40A93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{EA8F23CE-BDC2-4343-9905-AE7D8EB40A93}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "w3resource", "w3resource\w3resource.csproj", "{1F5CE8D2-ADD6-4920-A910-C0D2DADC81BC}"
 EndProject
