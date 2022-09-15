@@ -22,7 +22,7 @@
                 naturalNumbersSum += i;
             }
 
-            return $"First {n.ToString()} numbers: {naturalNumbersString}\n Their Sum: {naturalNumbersSum.ToString()}";
+            return $"First {n.ToString()} numbers: {naturalNumbersString}\nTheir Sum: {naturalNumbersSum.ToString()}";
         }
     }
 }

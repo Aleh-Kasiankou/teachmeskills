@@ -31,7 +31,7 @@ namespace w3resource.Exercises.Data_Types
                 return "digit";
             }
 
-            return "Now a vowel or a digit";
+            return "Not a vowel or a digit";
         }
     }
 }
