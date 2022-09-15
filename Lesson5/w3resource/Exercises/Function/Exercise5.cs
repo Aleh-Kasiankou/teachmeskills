@@ -14,6 +14,6 @@ namespace w3resource.Exercises.Function
             DisplayResult(Solve(userInts));
         }
 
-        public string Solve(List<int> userInts) => $"AVG = {userInts.Average().ToString()}";
+        public string Solve(List<int> userInts) => $"Sum = {userInts.Sum().ToString()}";
     }
 }

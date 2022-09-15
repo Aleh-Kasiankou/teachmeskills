@@ -16,8 +16,8 @@ namespace w3resource.Exercises.Function
 
         public string Solve(int userOperand)
         {
-            var digits = userOperand.ToString().Split();
-            var digitsInt = digits.Select(x => Int32.Parse(x));
+            var digits = userOperand.ToString().Select(x => x);
+            var digitsInt = digits.Select(x => Int32.Parse(x.ToString()));
             return $"Sum is {digitsInt.Sum().ToString()}";
         }
     }
