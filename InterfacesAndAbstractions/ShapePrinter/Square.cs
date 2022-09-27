@@ -1,37 +1,40 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ShapePrinter
 {
     public class Square : Shape
     {
-        private string getHorizontalBorder()
+        public Square(int size) : base(size)
         {
-            string border = "";
-            for (int length = 0; length < Size; length++)
-            {
-                border += Delimiter;
-            }
-
-            return border;
         }
-
-        public override string GetStringRepresentation()
+        
+        public override List<ValueTuple<int, int, char>> GetPrintingScheme()
         {
-            var shapeHeight = Size / 2;
-            string representation = "";
-
-            representation += getHorizontalBorder();
-
-            for (int height = 0; height < shapeHeight; height++)
+            var printingPoints = new List<(int x, int y, char Delimiter)>();
+            var halfSize = Size / 2;
+            var x = - halfSize;
+            var y = -halfSize;
+            while (y <= halfSize)
             {
-                representation += $"\n{Delimiter}{string.Concat(Enumerable.Repeat(" ", Size - 2))}{Delimiter}";
+                bool isRow = Math.Abs(y) == Math.Abs(halfSize);
+                bool isColumn = Math.Abs(x) == Math.Abs(halfSize) ;
+                if (isRow || isColumn)
+                {
+                    printingPoints.Add(new ValueTuple<int, int, char>(x, y, Delimiter));
+                }
+
+                if (x > 0 && isColumn)
+                {
+                    y++;
+                    x = - halfSize;
+                    continue;
+                }
+
+                x ++;
             }
 
-            representation += "\n";
-
-            representation += getHorizontalBorder();
-
-            return representation;
+            return printingPoints;
         }
     }
 }

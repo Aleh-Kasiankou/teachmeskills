@@ -1,12 +1,11 @@
-﻿using System;
-
-namespace ShapePrinter
+﻿namespace ShapePrinter
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Printer.Print(new Square(), (5,3));
+            UiHandler.Run();
         }
+        
     }
 }
