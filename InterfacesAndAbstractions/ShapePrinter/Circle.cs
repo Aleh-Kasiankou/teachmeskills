@@ -5,7 +5,7 @@ namespace ShapePrinter
 {
     public class Circle : Shape
     {
-        public Circle(int size) : base(size)
+        public Circle(int size, char printingChar) : base(size, printingChar)
         {
         }
 

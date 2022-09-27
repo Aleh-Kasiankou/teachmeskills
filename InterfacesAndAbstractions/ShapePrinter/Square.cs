@@ -5,7 +5,7 @@ namespace ShapePrinter
 {
     public class Square : Shape
     {
-        public Square(int size) : base(size)
+        public Square(int size, char printingChar) : base(size, printingChar)
         {
         }
         

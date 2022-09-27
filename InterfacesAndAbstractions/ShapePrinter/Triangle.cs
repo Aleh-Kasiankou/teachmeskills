@@ -5,7 +5,7 @@ namespace ShapePrinter
 {
     public class Triangle : Shape
     {
-        public Triangle(int size) : base(size)
+        public Triangle(int size, char printingChar) : base(size, printingChar)
         {
         }
 

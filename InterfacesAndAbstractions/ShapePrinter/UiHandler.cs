@@ -26,12 +26,15 @@ namespace ShapePrinter
                     if (printableType == typeof(PrintableText))
                     {
                         var text = GetText();
-                        objToPrint = (IPrintable)Activator.CreateInstance(printableType, new object[] { text });
+                        objToPrint =
+                            (IPrintable)Activator.CreateInstance(printableType, new object[] { text});
                     }
                     else
                     {
+                        var printableChar = GetPrintingChar();
                         var size = GetSize();
-                        objToPrint = (IPrintable)Activator.CreateInstance(printableType, new object[] { size });
+                        objToPrint =
+                            (IPrintable)Activator.CreateInstance(printableType, new object[] { size, printableChar });
                     }
 
                     var scheme = objToPrint.GetPrintingScheme();
@@ -57,6 +60,28 @@ namespace ShapePrinter
                 isContinue = AskIsContinue();
                 Printer.ClearQueue();
             }
+        }
+
+        private static char GetPrintingChar()
+        {
+            Console.WriteLine("Please specify the char used for the figure");
+            bool isValid = false;
+            char printingChar = '*';
+
+            while (!isValid)
+            {
+                var text = Console.ReadLine().ToCharArray();
+
+                isValid = text.Length == 1;
+                printingChar = text[0];
+
+                if (!isValid)
+                {
+                    Console.WriteLine("Please type 1 character");
+                }
+            }
+
+            return printingChar;
         }
 
         private static int GetFigureId()
