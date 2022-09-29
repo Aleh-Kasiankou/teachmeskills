@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ShapePrinter
 {
@@ -105,6 +106,19 @@ namespace ShapePrinter
                         }
                     }
                 }
+            }
+
+            return drawingScheme;
+        }
+
+        public static List<CoordinatesPoint> SetColor(List<CoordinatesPoint> drawingScheme, Type type)
+        {
+            ColorAttribute color =
+                (ColorAttribute) Attribute.GetCustomAttribute(type, typeof (ColorAttribute));
+            
+            foreach (var point in drawingScheme)
+            {
+                if (color != null) point.Color = color.Color;
             }
 
             return drawingScheme;

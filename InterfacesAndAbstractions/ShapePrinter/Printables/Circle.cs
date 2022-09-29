@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace ShapePrinter
 {
+    [Color(ConsoleColor.Yellow)]
     public class Circle : Shape
     {
         public Circle(int size, char printingChar) : base(size, printingChar)

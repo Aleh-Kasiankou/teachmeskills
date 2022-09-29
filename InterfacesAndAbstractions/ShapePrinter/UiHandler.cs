@@ -23,7 +23,7 @@ namespace ShapePrinter
                     var printingScheme = objToPrint.GetPrintingScheme();
                     printingScheme = PrintHelper.ConvertToPositiveCoordinates(printingScheme);
                     printingScheme = PrintHelper.MoveStartingPoint(printingScheme);
-
+                    printingScheme = PrintHelper.SetColor(printingScheme, objToPrint.GetType());
                     Printer.AddToQueue(printingScheme);
 
                     Console.WriteLine("Continue? Press 'd' to draw the picture");

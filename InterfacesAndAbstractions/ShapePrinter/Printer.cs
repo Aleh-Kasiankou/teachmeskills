@@ -65,8 +65,10 @@ namespace ShapePrinter
                     margin += String.Concat(Enumerable.Repeat(" ", spacesNeeded));
                 }
 
+                Console.ForegroundColor = point.Color;
                 Console.Write(margin + point.Symbol);
                 lastPointY = point.Y;
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
     }

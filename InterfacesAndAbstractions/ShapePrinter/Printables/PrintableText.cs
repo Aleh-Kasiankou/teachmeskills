@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace ShapePrinter
 {
+    [Color(ConsoleColor.DarkRed)]
     public class PrintableText : IPrintable
     {
         private string Body { get; set; }

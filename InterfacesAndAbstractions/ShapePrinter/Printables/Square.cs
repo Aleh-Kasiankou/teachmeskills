@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ShapePrinter
 {
+    [Color(ConsoleColor.DarkCyan)]
     public class Square : Shape
     {
         public Square(int size, char printingChar) : base(size, printingChar)
