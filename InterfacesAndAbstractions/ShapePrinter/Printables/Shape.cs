@@ -18,6 +18,6 @@ namespace ShapePrinter
             Delimiter = delimiter;
         }
 
-        public abstract List<ValueTuple<int, int, char>> GetPrintingScheme();
+        public abstract List<CoordinatesPoint> GetPrintingScheme();
     }
 }

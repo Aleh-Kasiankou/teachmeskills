@@ -6,11 +6,7 @@ namespace ShapePrinter
 {
     public static class UiHandler
     {
-        private static Type _type = typeof(IPrintable);
-
-        private static List<Type> _types = AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(s => s.GetTypes())
-            .Where(p => _type.IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract).ToList();
+        private static readonly List<Type> PrintableTypes = AssemblyLoader.GetAssemblyTypes();
 
         public static void Run()
         {
@@ -18,38 +14,17 @@ namespace ShapePrinter
             while (isContinue)
             {
                 bool isInputFinished = false;
-                IPrintable objToPrint;
 
                 while (!isInputFinished)
                 {
-                    var printableType = _types[GetFigureId()];
-                    if (printableType == typeof(PrintableText))
-                    {
-                        var text = GetText();
-                        objToPrint =
-                            (IPrintable)Activator.CreateInstance(printableType, new object[] { text});
-                    }
-                    else
-                    {
-                        var printableChar = GetPrintingChar();
-                        var size = GetSize();
-                        objToPrint =
-                            (IPrintable)Activator.CreateInstance(printableType, new object[] { size, printableChar });
-                    }
+                    var printableType = PrintableTypes[GetPrintableObjId()];
+                    var objToPrint = PrintableFactory.CreatePrintableObject(printableType);
 
-                    var scheme = objToPrint.GetPrintingScheme();
-                    scheme = Printer.AdaptForPrinting(scheme);
+                    var printingScheme = objToPrint.GetPrintingScheme();
+                    printingScheme = PrintHelper.ConvertToPositiveCoordinates(printingScheme);
+                    printingScheme = PrintHelper.MoveStartingPoint(printingScheme);
 
-                    var startingPoint = GetStartingPoint();
-                    for (int i = 0; i < scheme.Count; i++)
-                    {
-                        var x = scheme[i].Item1 + startingPoint.Item1;
-                        var y = scheme[i].Item2 + startingPoint.Item2;
-                        var character = scheme[i].Item3;
-                        scheme[i] = (x, y, character);
-                    }
-
-                    Printer.AddToQueue(scheme);
+                    Printer.AddToQueue(printingScheme);
 
                     Console.WriteLine("Continue? Press 'd' to draw the picture");
                     var key = Console.ReadKey().Key;
@@ -58,11 +33,10 @@ namespace ShapePrinter
 
                 Printer.Print();
                 isContinue = AskIsContinue();
-                Printer.ClearQueue();
             }
         }
 
-        private static char GetPrintingChar()
+        internal static char GetPrintingChar()
         {
             Console.WriteLine("Please specify the char used for the figure");
             bool isValid = false;
@@ -84,12 +58,12 @@ namespace ShapePrinter
             return printingChar;
         }
 
-        private static int GetFigureId()
+        private static int GetPrintableObjId()
         {
             Console.Clear();
-            for (int i = 1; i <= _types.Count(); i++)
+            for (int i = 1; i <= PrintableTypes.Count(); i++)
             {
-                Console.WriteLine($"{i} {_types[i - 1].Name}");
+                Console.WriteLine($"{i} {PrintableTypes[i - 1].Name}");
             }
 
             bool isValid = false;
@@ -99,7 +73,7 @@ namespace ShapePrinter
             while (!isValid)
             {
                 isValid = Int32.TryParse(Console.ReadLine(), out var number);
-                if (isValid && number >= 1 && number <= _types.Count)
+                if (isValid && number >= 1 && number <= PrintableTypes.Count)
                 {
                     index = number - 1;
                 }
@@ -114,7 +88,7 @@ namespace ShapePrinter
             return index;
         }
 
-        private static string GetText()
+        internal static string GetText()
         {
             Console.WriteLine("Please specify the text");
             bool isValid = false;
@@ -134,7 +108,7 @@ namespace ShapePrinter
             return text;
         }
 
-        private static int GetSize()
+        internal static int GetSize()
         {
             bool isValid = false;
             Console.WriteLine("Please, select size");
@@ -153,7 +127,7 @@ namespace ShapePrinter
         }
 
 
-        private static (int, int) GetStartingPoint()
+        internal static CoordinatesPoint GetStartingPoint()
         {
             bool isValid = false;
             Console.WriteLine("Please, select starting point in format 'x , y'");
@@ -179,7 +153,7 @@ namespace ShapePrinter
                 Console.WriteLine("The incorrect input");
             }
 
-            return (x - 1, y - 1);
+            return new CoordinatesPoint(x - 1, y - 1);
         }
 
         private static bool AskIsContinue()
