@@ -66,10 +66,8 @@ namespace ShapePrinter
             var startingPoint = UiHandler.GetStartingPoint();
             for (int i = 0; i < printingScheme.Count; i++)
             {
-                var x = printingScheme[i].X + startingPoint.X;
-                var y = printingScheme[i].Y + startingPoint.Y;
-                var character = printingScheme[i].Symbol;
-                printingScheme[i] = new CoordinatesPoint(x, y, character);
+                printingScheme[i].X += startingPoint.X;
+                printingScheme[i].Y += startingPoint.Y;
             }
 
             return printingScheme;
