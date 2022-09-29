@@ -9,9 +9,9 @@ namespace ShapePrinter
         {
         }
 
-        public override List<(int, int, char)> GetPrintingScheme()
+        public override List<CoordinatesPoint> GetPrintingScheme()
         {
-            var printingPoints = new List<(int x, int y, char Delimiter)>();
+            var printingPoints = new List<CoordinatesPoint>();
             var radius = Size / 2;
             var x = -radius;
             var y = -radius;
@@ -23,7 +23,7 @@ namespace ShapePrinter
                 if (isCirclePoint)
                 {
                     printingPoints.Add(
-                        new ValueTuple<int, int, char>(x, y, Delimiter));
+                        new CoordinatesPoint(x, y, Delimiter));
                 }
 
                 if (x > radius)

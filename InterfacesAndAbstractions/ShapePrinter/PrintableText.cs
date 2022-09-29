@@ -12,14 +12,14 @@ namespace ShapePrinter
             Body = input;
         }
 
-        public List<(int, int, char)> GetPrintingScheme()
+        public List<CoordinatesPoint> GetPrintingScheme()
         {
-            var printingPoints = new List<(int x, int y, char Delimiter)>();
+            var printingPoints = new List<CoordinatesPoint>();
             var x = 1;
             var y = 1;
             foreach (var character in Body)
             {
-                printingPoints.Add(new ValueTuple<int, int, char>(x, y, character));
+                printingPoints.Add(new CoordinatesPoint(x, y, character));
                 x++;
             }
 

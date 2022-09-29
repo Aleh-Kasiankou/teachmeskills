@@ -43,10 +43,10 @@ namespace ShapePrinter
                     var startingPoint = GetStartingPoint();
                     for (int i = 0; i < scheme.Count; i++)
                     {
-                        var x = scheme[i].Item1 + startingPoint.Item1;
-                        var y = scheme[i].Item2 + startingPoint.Item2;
-                        var character = scheme[i].Item3;
-                        scheme[i] = (x, y, character);
+                        var x = scheme[i].X + startingPoint.X;
+                        var y = scheme[i].Y + startingPoint.Y;
+                        var character = scheme[i].Symbol;
+                        scheme[i] = new CoordinatesPoint(x, y, character);
                     }
 
                     Printer.AddToQueue(scheme);
@@ -153,7 +153,7 @@ namespace ShapePrinter
         }
 
 
-        private static (int, int) GetStartingPoint()
+        private static CoordinatesPoint GetStartingPoint()
         {
             bool isValid = false;
             Console.WriteLine("Please, select starting point in format 'x , y'");
@@ -179,7 +179,7 @@ namespace ShapePrinter
                 Console.WriteLine("The incorrect input");
             }
 
-            return (x - 1, y - 1);
+            return new CoordinatesPoint(x - 1, y - 1);
         }
 
         private static bool AskIsContinue()

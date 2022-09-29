@@ -9,9 +9,9 @@ namespace ShapePrinter
         {
         }
         
-        public override List<ValueTuple<int, int, char>> GetPrintingScheme()
+        public override List<CoordinatesPoint> GetPrintingScheme()
         {
-            var printingPoints = new List<(int x, int y, char Delimiter)>();
+            var printingPoints = new List<CoordinatesPoint>();
             var halfSize = Size / 2;
             var x = - halfSize;
             var y = -halfSize;
@@ -21,7 +21,7 @@ namespace ShapePrinter
                 bool isColumn = Math.Abs(x) == Math.Abs(halfSize) ;
                 if (isRow || isColumn)
                 {
-                    printingPoints.Add(new ValueTuple<int, int, char>(x, y, Delimiter));
+                    printingPoints.Add(new CoordinatesPoint(x, y, Delimiter));
                 }
 
                 if (x > 0 && isColumn)
