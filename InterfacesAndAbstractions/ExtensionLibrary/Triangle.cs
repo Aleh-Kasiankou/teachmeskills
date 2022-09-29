@@ -9,9 +9,9 @@ namespace ShapePrinter
         {
         }
 
-        public override List<(int, int, char)> GetPrintingScheme()
+        public override List<CoordinatesPoint> GetPrintingScheme()
         {
-            var printingPoints = new List<(int x, int y, char Delimiter)>();
+            var printingPoints = new List<CoordinatesPoint>();
             var halfSize = Size / 2;
             var x = -halfSize;
             var y = -halfSize;
@@ -29,7 +29,7 @@ namespace ShapePrinter
 
                 if (x == -halfSize || (y == 0 && x == halfSize) || S == 0)
                 {
-                    printingPoints.Add(new ValueTuple<int, int, char>(x, y, Delimiter));
+                    printingPoints.Add(new CoordinatesPoint(x, y, Delimiter));
                 }
 
 

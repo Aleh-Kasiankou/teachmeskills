@@ -5,7 +5,7 @@ namespace ShapePrinter
 {
     public interface IPrintable
     {
-        public List<ValueTuple<int, int, char>> GetPrintingScheme();
+        public List<CoordinatesPoint> GetPrintingScheme();
         
     }
 }
