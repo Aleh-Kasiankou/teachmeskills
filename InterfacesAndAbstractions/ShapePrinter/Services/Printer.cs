@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace ShapePrinter
 {
@@ -29,20 +30,21 @@ namespace ShapePrinter
 
             drawingScheme = PrintHelper.SortPointsByYAndX(drawingScheme);
 
+            ClearQueue();
+
             return drawingScheme;
         }
 
-
-        public static void Print()
+        private static string ConvertSchemeToString(List<CoordinatesPoint> drawingScheme,
+            out List<ConsoleColor> colorScheme)
         {
-            Console.Clear();
-            var drawingScheme = MergeQueue();
-            ClearQueue();
+            var textScheme = new StringBuilder();
+            colorScheme = new List<ConsoleColor>();
 
             var lastPointY = 1;
             if (drawingScheme[0].Y > 1)
             {
-                Console.Write(String.Concat(Enumerable.Repeat("\n", drawingScheme[0].Y - 1)));
+                textScheme.Append(String.Concat(Enumerable.Repeat("\n", drawingScheme[0].Y - 1)));
             }
 
             for (int index = 0; index < drawingScheme.Count; index++)
@@ -65,11 +67,25 @@ namespace ShapePrinter
                     margin += String.Concat(Enumerable.Repeat(" ", spacesNeeded));
                 }
 
-                Console.ForegroundColor = point.Color;
-                Console.Write(margin + point.Symbol);
+
+                textScheme.Append(margin + point.Symbol);
+                if (!char.IsWhiteSpace(point.Symbol))
+                {
+                    colorScheme.Add(point.Color);
+                }
+
                 lastPointY = point.Y;
-                Console.ForegroundColor = ConsoleColor.White;
             }
+
+            return textScheme.ToString();
+        }
+
+
+        public static void Print(Action<string, List<ConsoleColor>> outputString)
+        {
+            var drawingScheme = MergeQueue();
+            var textScheme = ConvertSchemeToString(drawingScheme, out var colorScheme);
+            outputString(textScheme, colorScheme);
         }
     }
 }

@@ -8,6 +8,8 @@ namespace ShapePrinter
     {
         private static readonly List<Type> PrintableTypes = AssemblyLoader.GetAssemblyTypes();
 
+        public static readonly Action<String, List<ConsoleColor>> OutputMethod = ConfigProvider.GetOutputMethod();
+
         public static void Run()
         {
             bool isContinue = true;
@@ -31,7 +33,7 @@ namespace ShapePrinter
                     isInputFinished = key is ConsoleKey.D;
                 }
 
-                Printer.Print();
+                Printer.Print(OutputMethod);
                 isContinue = AskIsContinue();
             }
         }
@@ -86,6 +88,25 @@ namespace ShapePrinter
             }
 
             return index;
+        }
+
+        internal static OutputMethod PromptForOutputMethod()
+        {
+            Console.WriteLine("Please select the preferable method of output");
+
+            var outputMethods =
+                Enum.GetValues(typeof(OutputMethod));
+            string displayMsg = "";
+            foreach (var method in outputMethods)
+            {
+                displayMsg += $"{(int)method} {method}\n";
+            }
+
+            Console.WriteLine(displayMsg);
+
+            var userSelectedMethod = (OutputMethod)int.Parse(Console.ReadLine());
+            
+            return userSelectedMethod;
         }
 
         internal static string GetText()
