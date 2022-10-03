@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using ShapePrinter.Data;
 
-namespace ShapePrinter
+namespace ShapePrinter.Services
 {
     public static class PrintHelper
     {
         public static int CalculateLeftMargin(List<CoordinatesPoint> scheme,
-                int currentPointIndex, out bool isSkip)
+            int currentPointIndex, out bool isSkip)
         {
             var currentPoint = scheme[currentPointIndex];
             var point = currentPointIndex > 0
@@ -34,7 +34,7 @@ namespace ShapePrinter
             margin -= closestPointToLeft.X;
             return margin;
         }
-        
+
         public static List<CoordinatesPoint> ConvertToPositiveCoordinates(List<CoordinatesPoint> drawingScheme)
         {
             var addToX = 0;
@@ -100,7 +100,8 @@ namespace ShapePrinter
                         else if (drawingScheme[i].X == drawingScheme[i + 1].X)
                         {
                             var conflictSymbol = '$';
-                            drawingScheme[i] = new CoordinatesPoint(drawingScheme[i].X, drawingScheme[i].Y, conflictSymbol);
+                            drawingScheme[i] =
+                                new CoordinatesPoint(drawingScheme[i].X, drawingScheme[i].Y, conflictSymbol);
                             drawingScheme[i + 1] = new CoordinatesPoint(drawingScheme[i + 1].X, drawingScheme[i + 1].Y,
                                 conflictSymbol);
                         }
@@ -114,8 +115,8 @@ namespace ShapePrinter
         public static List<CoordinatesPoint> SetColor(List<CoordinatesPoint> drawingScheme, Type type)
         {
             ColorAttribute color =
-                (ColorAttribute) Attribute.GetCustomAttribute(type, typeof (ColorAttribute));
-            
+                (ColorAttribute)Attribute.GetCustomAttribute(type, typeof(ColorAttribute));
+
             foreach (var point in drawingScheme)
             {
                 if (color != null) point.Color = color.Color;

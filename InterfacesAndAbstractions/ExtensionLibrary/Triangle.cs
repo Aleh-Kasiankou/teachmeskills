@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ShapePrinter.Data;
 
 namespace ShapePrinter
 {
@@ -25,9 +25,9 @@ namespace ShapePrinter
                 var dx = x - -halfSize;
                 var dy = y - y1;
 
-                var S = dx1 * dy - dx * dy1;
+                var s = dx1 * dy - dx * dy1;
 
-                if (x == -halfSize || (y == 0 && x == halfSize) || S == 0)
+                if (x == -halfSize || (y == 0 && x == halfSize) || s == 0)
                 {
                     printingPoints.Add(new CoordinatesPoint(x, y, Delimiter));
                 }

@@ -1,41 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ShapePrinter.Data;
 
-namespace ShapePrinter
+namespace ShapePrinter.Services
 {
     public static class UiHandler
     {
-        private static readonly List<Type> PrintableTypes = AssemblyLoader.GetAssemblyTypes();
+        private static readonly List<Type> PrintableTypes = AssemblyLoader.GetPrintableTypes();
 
-        public static readonly Action<String, List<ConsoleColor>> OutputMethod = ConfigProvider.GetOutputMethod();
+        public static readonly Action<String, List<ConsoleColor>> OutputMethod = DependencyInjector.GetOutputMethod();
 
-        public static void Run()
+        public static void RunDialog()
         {
-            bool isContinue = true;
-            while (isContinue)
-            {
-                bool isInputFinished = false;
+            StartUiPrintableConstructor();
+            Printer.Print(OutputMethod);
+            AskStopProgram(DependencyInjector.GetContinueProgramAction());
+        }
 
-                while (!isInputFinished)
-                {
-                    var printableType = PrintableTypes[GetPrintableObjId()];
-                    var objToPrint = PrintableFactory.CreatePrintableObject(printableType);
+        internal static void StartUiPrintableConstructor()
+        {
+            var printableType = PrintableTypes[GetPrintableObjId()];
+            var objToPrint = PrintableFactory.CreatePrintableObject(printableType);
 
-                    var printingScheme = objToPrint.GetPrintingScheme();
-                    printingScheme = PrintHelper.ConvertToPositiveCoordinates(printingScheme);
-                    printingScheme = PrintHelper.MoveStartingPoint(printingScheme);
-                    printingScheme = PrintHelper.SetColor(printingScheme, objToPrint.GetType());
-                    Printer.AddToQueue(printingScheme);
-
-                    Console.WriteLine("Continue? Press 'd' to draw the picture");
-                    var key = Console.ReadKey().Key;
-                    isInputFinished = key is ConsoleKey.D;
-                }
-
-                Printer.Print(OutputMethod);
-                isContinue = AskIsContinue();
-            }
+            var printingScheme = objToPrint.GetPrintingScheme();
+            printingScheme = PrintHelper.ConvertToPositiveCoordinates(printingScheme);
+            printingScheme = PrintHelper.MoveStartingPoint(printingScheme);
+            printingScheme = PrintHelper.SetColor(printingScheme, objToPrint.GetType());
+            Printer.AddToQueue(printingScheme);
+            AskAddAnotherShape(DependencyInjector.GetAddShapeAction());
         }
 
         internal static char GetPrintingChar()
@@ -105,7 +98,7 @@ namespace ShapePrinter
             Console.WriteLine(displayMsg);
 
             var userSelectedMethod = (OutputMethod)int.Parse(Console.ReadLine());
-            
+
             return userSelectedMethod;
         }
 
@@ -177,10 +170,32 @@ namespace ShapePrinter
             return new CoordinatesPoint(x - 1, y - 1);
         }
 
-        private static bool AskIsContinue()
+        private static void AskStopProgram(Action continueProgram)
         {
             Console.WriteLine("\nDraw a new picture? 'Y' to continue");
-            return Console.ReadKey().Key is ConsoleKey.Y;
+            if (Console.ReadKey().Key is ConsoleKey.Y)
+            {
+                continueProgram();
+            }
+        }
+
+        private static void AskAddAnotherShape(Action addAnotherShape)
+        {
+            while (true)
+            {
+                Console.WriteLine("\nAdd another object to Printer queue? Y/N");
+                var userKey = Console.ReadKey().Key;
+                if (userKey is ConsoleKey.Y)
+                {
+                    addAnotherShape();
+                    break;
+                }
+
+                if (userKey is ConsoleKey.N)
+                {
+                    break;
+                }
+            }
         }
     }
 }

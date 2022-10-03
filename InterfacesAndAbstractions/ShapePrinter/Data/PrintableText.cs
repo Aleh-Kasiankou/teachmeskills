@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ShapePrinter
+namespace ShapePrinter.Data
 {
     [Color(ConsoleColor.DarkRed)]
     public class PrintableText : IPrintable

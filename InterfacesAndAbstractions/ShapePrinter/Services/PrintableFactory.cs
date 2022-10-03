@@ -1,6 +1,7 @@
 ﻿using System;
+using ShapePrinter.Data;
 
-namespace ShapePrinter
+namespace ShapePrinter.Services
 {
     public static class PrintableFactory
     {

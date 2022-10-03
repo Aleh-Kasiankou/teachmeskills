@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 
-namespace ShapePrinter
+namespace ShapePrinter.Services
 {
-    public static class ConfigProvider
+    public static class DependencyInjector
     {
         public static Action<string, List<ConsoleColor>> GetOutputMethod()
         {
@@ -19,7 +18,7 @@ namespace ShapePrinter
                 {
                     Console.Clear();
                     var colorIndex = 0;
-                    
+
                     ConsoleColor systemConsoleColor = Console.ForegroundColor;
 
                     foreach (var symbol in textScheme)
@@ -46,6 +45,18 @@ namespace ShapePrinter
             }
 
             return outputMethod;
+        }
+
+        public static Action GetContinueProgramAction()
+        {
+            Action continueProgramDelegate = UiHandler.RunDialog;
+            return continueProgramDelegate;
+        }
+
+        public static Action GetAddShapeAction()
+        {
+            Action addShapeDelegate = UiHandler.StartUiPrintableConstructor;
+            return addShapeDelegate;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ShapePrinter
+namespace ShapePrinter.Data
 {
     public class CoordinatesPoint
     {

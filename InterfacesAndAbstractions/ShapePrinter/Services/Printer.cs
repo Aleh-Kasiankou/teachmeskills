@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ShapePrinter.Data;
 
-namespace ShapePrinter
+namespace ShapePrinter.Services
 {
     public static class Printer
     {

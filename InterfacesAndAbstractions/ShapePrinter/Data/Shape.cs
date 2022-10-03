@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ShapePrinter
+namespace ShapePrinter.Data
 {
     public abstract class Shape : IPrintable
     {
@@ -12,8 +12,9 @@ namespace ShapePrinter
         {
             if (size < 5)
             {
-                throw new Exception(message:"Wrong Size");
+                throw new Exception(message: "Wrong Size");
             }
+
             Size = size;
             Delimiter = delimiter;
         }

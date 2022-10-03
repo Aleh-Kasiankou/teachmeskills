@@ -3,30 +3,31 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using ShapePrinter.Data;
 
-namespace ShapePrinter
+namespace ShapePrinter.Services
 {
     public static class AssemblyLoader
     {
         private static Type _type = typeof(IPrintable);
 
-        internal static List<Type> GetAssemblyTypes()
+        internal static List<Type> GetPrintableTypes()
         {
             string currentAssemblyFolderPath = AppDomain.CurrentDomain.BaseDirectory;
             string[] filePaths = Directory.GetFiles(currentAssemblyFolderPath, "*.dll",
                 SearchOption.TopDirectoryOnly);
 
-            List<string> UsedAssebmliesFilePaths = new List<string>();
+            List<string> usedAssebmliesFilePaths = new List<string>();
 
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                UsedAssebmliesFilePaths.Add(assembly.Location);
+                usedAssebmliesFilePaths.Add(assembly.Location);
             }
 
 
             foreach (string filePath in filePaths)
             {
-                if (!UsedAssebmliesFilePaths.Contains(filePath))
+                if (!usedAssebmliesFilePaths.Contains(filePath))
                 {
                     Assembly assembly = Assembly.LoadFrom(filePath);
                     AppDomain.CurrentDomain.Load(assembly.GetName());
