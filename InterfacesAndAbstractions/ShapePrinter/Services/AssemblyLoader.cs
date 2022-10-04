@@ -17,17 +17,17 @@ namespace ShapePrinter.Services
             string[] filePaths = Directory.GetFiles(currentAssemblyFolderPath, "*.dll",
                 SearchOption.TopDirectoryOnly);
 
-            List<string> usedAssebmliesFilePaths = new List<string>();
+            List<string> usedAssembliesFilePaths = new List<string>();
 
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                usedAssebmliesFilePaths.Add(assembly.Location);
+                usedAssembliesFilePaths.Add(assembly.Location);
             }
 
 
             foreach (string filePath in filePaths)
             {
-                if (!usedAssebmliesFilePaths.Contains(filePath))
+                if (!usedAssembliesFilePaths.Contains(filePath))
                 {
                     Assembly assembly = Assembly.LoadFrom(filePath);
                     AppDomain.CurrentDomain.Load(assembly.GetName());
@@ -36,7 +36,7 @@ namespace ShapePrinter.Services
 
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
-                .Where(p => _type.IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract).ToList();
+                .Where(p => _type.IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract).ToList()?? new List<Type>();
         }
     }
 }

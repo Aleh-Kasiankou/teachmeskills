@@ -5,6 +5,8 @@ using ShapePrinter.Data;
 namespace ShapePrinter.Services
 {
     public static class PrintHelper
+    
+    // Perhaps make this class extend Printer? Is it possible with static classes?
     {
         public static int CalculateLeftMargin(List<CoordinatesPoint> scheme,
             int currentPointIndex, out bool isSkip)

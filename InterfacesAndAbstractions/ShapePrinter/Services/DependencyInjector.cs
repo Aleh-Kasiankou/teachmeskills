@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace ShapePrinter.Services
 {
     public static class DependencyInjector
     {
-        public static Action<string, List<ConsoleColor>> GetOutputMethod()
+        public static Action<string, List<ConsoleColor>> GetShapeOutputMethod()
         {
             OutputMethod userSelectedMethod = UiHandler.PromptForOutputMethod();
 
@@ -14,38 +13,31 @@ namespace ShapePrinter.Services
 
             if (userSelectedMethod is OutputMethod.Console)
             {
-                outputMethod = (textScheme, colorScheme) =>
-                {
-                    Console.Clear();
-                    var colorIndex = 0;
+                outputMethod = ConsoleHandler.OutputPrintingScheme;
 
-                    ConsoleColor systemConsoleColor = Console.ForegroundColor;
-
-                    foreach (var symbol in textScheme)
-                    {
-                        if (!char.IsWhiteSpace(symbol))
-                        {
-                            Console.ForegroundColor = colorScheme[colorIndex];
-                            colorIndex++;
-                        }
-                    }
-
-                    Console.Write(textScheme);
-                    Console.ForegroundColor = systemConsoleColor;
-                };
             }
             else
             {
-                outputMethod = (textScheme, colorScheme) =>
-                {
-                    var path = AppDomain.CurrentDomain.BaseDirectory + "shapes.txt";
-
-                    File.WriteAllText(path, textScheme);
-                };
+                outputMethod = FileHandler.WriteSchemeToFile;
             }
 
             return outputMethod;
         }
+
+        public static Action<string, bool> GetUiOutputMethod()
+        {
+            Action<string, bool> uiOutputMethod = ConsoleHandler.OutputData;
+            return uiOutputMethod;
+        }
+        
+        public static Func<string> GetUiInputMethod()
+        {
+            Func<string> uiInputMethod = ConsoleHandler.HandleUserInput;
+            Func<ConsoleKeyInfo> keyDetectMethod = ConsoleHandler.HandleUserKeyPress;
+            UiHandler.DetectKeyPress = keyDetectMethod;
+            return uiInputMethod;
+        }
+        
 
         public static Action GetContinueProgramAction()
         {

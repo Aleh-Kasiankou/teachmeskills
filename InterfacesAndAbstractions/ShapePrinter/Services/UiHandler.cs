@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ShapePrinter.Data;
@@ -9,12 +10,21 @@ namespace ShapePrinter.Services
     {
         private static readonly List<Type> PrintableTypes = AssemblyLoader.GetPrintableTypes();
 
-        public static readonly Action<String, List<ConsoleColor>> OutputMethod = DependencyInjector.GetOutputMethod();
+        private static Action<String, List<ConsoleColor>> DisplayShape { get; } =
+            DependencyInjector.GetShapeOutputMethod();
+
+        private static Action<String, bool> DisplayUi { get; } =
+            DependencyInjector.GetUiOutputMethod();
+
+        private static Func<string> PromptUser { get; } =
+            DependencyInjector.GetUiInputMethod();
+
+        public static Func<ConsoleKeyInfo>? DetectKeyPress;
 
         public static void RunDialog()
         {
             StartUiPrintableConstructor();
-            Printer.Print(OutputMethod);
+            Printer.Print(DisplayShape);
             AskStopProgram(DependencyInjector.GetContinueProgramAction());
         }
 
@@ -33,20 +43,20 @@ namespace ShapePrinter.Services
 
         internal static char GetPrintingChar()
         {
-            Console.WriteLine("Please specify the char used for the figure");
+            DisplayUi("Please specify the char used for the figure", true);
             bool isValid = false;
             char printingChar = '*';
 
             while (!isValid)
             {
-                var text = Console.ReadLine().ToCharArray();
+                var text = PromptUser()?.ToCharArray();
 
-                isValid = text.Length == 1;
-                printingChar = text[0];
+                isValid = text?.Length == 1;
+                if (text != null) printingChar = text[0];
 
                 if (!isValid)
                 {
-                    Console.WriteLine("Please type 1 character");
+                    DisplayUi("Please type 1 character", true);
                 }
             }
 
@@ -58,16 +68,18 @@ namespace ShapePrinter.Services
             Console.Clear();
             for (int i = 1; i <= PrintableTypes.Count(); i++)
             {
-                Console.WriteLine($"{i} {PrintableTypes[i - 1].Name}");
+                DisplayUi($"{i} {PrintableTypes[i - 1].Name}", true);
             }
 
             bool isValid = false;
             int index = 0;
 
-            Console.WriteLine("Please, select a printable entity");
+            DisplayUi("Please, select a printable entity or press Q to stop program", true);
             while (!isValid)
             {
-                isValid = Int32.TryParse(Console.ReadLine(), out var number);
+                var userInput = PromptUser();
+
+                isValid = Int32.TryParse(userInput, out var number);
                 if (isValid && number >= 1 && number <= PrintableTypes.Count)
                 {
                     index = number - 1;
@@ -75,7 +87,7 @@ namespace ShapePrinter.Services
 
                 else
                 {
-                    Console.WriteLine("Incorrect Id");
+                    DisplayUi("Incorrect Id", true);
                     isValid = false;
                 }
             }
@@ -85,37 +97,45 @@ namespace ShapePrinter.Services
 
         internal static OutputMethod PromptForOutputMethod()
         {
-            Console.WriteLine("Please select the preferable method of output");
-
-            var outputMethods =
-                Enum.GetValues(typeof(OutputMethod));
-            string displayMsg = "";
-            foreach (var method in outputMethods)
+            int userSelectedMethod = 1;
+            bool isValidInput = false;
+            while (!isValidInput)
             {
-                displayMsg += $"{(int)method} {method}\n";
+                ConsoleHandler.OutputData("Please select the preferable method of output", true); 
+                //console to avoid null reference
+
+                var outputMethods =
+                    Enum.GetValues(typeof(OutputMethod));
+                string displayMsg = "";
+                foreach (var method in outputMethods)
+                {
+                    if (method != null) displayMsg += $"{(int)method} {method}\n";
+                }
+
+                ConsoleHandler.OutputData(displayMsg, true);
+
+                userSelectedMethod = int.Parse(ConsoleHandler.HandleUserInput());
+
+                isValidInput = Enum.IsDefined(typeof(OutputMethod), userSelectedMethod) ;
             }
 
-            Console.WriteLine(displayMsg);
-
-            var userSelectedMethod = (OutputMethod)int.Parse(Console.ReadLine());
-
-            return userSelectedMethod;
+            return (OutputMethod) userSelectedMethod;
         }
 
         internal static string GetText()
         {
-            Console.WriteLine("Please specify the text");
+            DisplayUi("Please specify the text", true);
             bool isValid = false;
             var text = "";
 
             while (!isValid)
             {
-                text = Console.ReadLine();
+                text = PromptUser();
                 isValid = !String.IsNullOrWhiteSpace(text);
 
                 if (!isValid)
                 {
-                    Console.WriteLine("Empty text is not allowed");
+                    DisplayUi("Empty text is not allowed", true);
                 }
             }
 
@@ -125,14 +145,14 @@ namespace ShapePrinter.Services
         internal static int GetSize()
         {
             bool isValid = false;
-            Console.WriteLine("Please, select size");
+            DisplayUi("Please, select size", true);
             int size = 10;
             while (!isValid)
             {
-                isValid = int.TryParse(Console.ReadLine(), out size);
+                isValid = int.TryParse(PromptUser(), out size);
                 if (size < 5)
                 {
-                    Console.WriteLine("Please select size > 5");
+                    DisplayUi("Please select size > 5", true);
                     isValid = false;
                 }
             }
@@ -144,12 +164,12 @@ namespace ShapePrinter.Services
         internal static CoordinatesPoint GetStartingPoint()
         {
             bool isValid = false;
-            Console.WriteLine("Please, select starting point in format 'x , y'");
+            DisplayUi("Please, select starting point in format 'x , y'", true);
             int x = 1;
             int y = 1;
             while (!isValid)
             {
-                var coordinates = Console.ReadLine().Split(',');
+                var coordinates = PromptUser().Split(',');
                 if (coordinates.Length == 2)
                 {
                     isValid = int.TryParse(coordinates[0], out x);
@@ -164,7 +184,7 @@ namespace ShapePrinter.Services
                     }
                 }
 
-                Console.WriteLine("The incorrect input");
+                DisplayUi("The incorrect input", true);
             }
 
             return new CoordinatesPoint(x - 1, y - 1);
@@ -172,8 +192,8 @@ namespace ShapePrinter.Services
 
         private static void AskStopProgram(Action continueProgram)
         {
-            Console.WriteLine("\nDraw a new picture? 'Y' to continue");
-            if (Console.ReadKey().Key is ConsoleKey.Y)
+            DisplayUi("\nDraw a new picture? 'Y' to continue", true);
+            if (DetectKeyPress != null && DetectKeyPress().Key is ConsoleKey.Y)
             {
                 continueProgram();
             }
@@ -183,19 +203,27 @@ namespace ShapePrinter.Services
         {
             while (true)
             {
-                Console.WriteLine("\nAdd another object to Printer queue? Y/N");
-                var userKey = Console.ReadKey().Key;
-                if (userKey is ConsoleKey.Y)
+                DisplayUi("\nAdd another object to Printer queue? Y/N", true);
+                if (DetectKeyPress != null)
                 {
-                    addAnotherShape();
-                    break;
-                }
+                    var userKey = DetectKeyPress().Key;
+                    if (userKey is ConsoleKey.Y)
+                    {
+                        addAnotherShape();
+                        break;
+                    }
 
-                if (userKey is ConsoleKey.N)
-                {
-                    break;
+                    if (userKey is ConsoleKey.N)
+                    {
+                        break;
+                    }
                 }
             }
+        }
+
+        public static void StopProgram()
+        {
+            Environment.Exit(0);
         }
     }
 }

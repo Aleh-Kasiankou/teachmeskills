@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ShapePrinter.Data;
 
-namespace ShapePrinter
+namespace ExtensionLibrary
 {
     public class Triangle : Shape
     {
