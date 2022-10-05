@@ -1,4 +1,4 @@
-﻿namespace ShapePrinter.Services
+﻿namespace UserInterface
 {
     public enum OutputMethod
     {

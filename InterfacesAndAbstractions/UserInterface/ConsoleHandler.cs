@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ShapePrinter.Services
+namespace UserInterface
 {
     public static class ConsoleHandler
     {

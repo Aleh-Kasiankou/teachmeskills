@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ShapePrinter.Data
+namespace SharedAssets
 {
     public class CoordinatesPoint
     {

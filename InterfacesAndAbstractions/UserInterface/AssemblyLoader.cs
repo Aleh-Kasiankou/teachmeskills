@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using ShapePrinter.Data;
+using ShapeCreator;
 
-namespace ShapePrinter.Services
+namespace UserInterface
 {
     public static class AssemblyLoader
     {
-        private static Type _type = typeof(IPrintable);
+        private static readonly Type Type = typeof(IPrintable);
 
         internal static List<Type> GetPrintableTypes()
         {
@@ -36,7 +36,7 @@ namespace ShapePrinter.Services
 
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
-                .Where(p => _type.IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract).ToList()?? new List<Type>();
+                .Where(p => Type.IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract).ToList()?? new List<Type>();
         }
     }
 }

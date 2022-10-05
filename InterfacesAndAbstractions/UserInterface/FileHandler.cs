@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace ShapePrinter.Services
+namespace UserInterface
 {
     public static class FileHandler
     {

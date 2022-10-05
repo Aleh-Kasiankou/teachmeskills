@@ -2,9 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ShapePrinter.Data;
+using Printer;
+using ShapeCreator;
+using ShapeCreator.Objects;
+using SharedAssets;
 
-namespace ShapePrinter.Services
+namespace UserInterface
 {
     public static class UiHandler
     {
@@ -21,29 +24,31 @@ namespace ShapePrinter.Services
 
         public static Func<ConsoleKeyInfo>? DetectKeyPress;
 
-        public static void RunDialog()
+        public static void Initialize()
         {
             StartUiPrintableConstructor();
-            Printer.Print(DisplayShape);
+            Printer.Printer.Print(DisplayShape);
             AskStopProgram(DependencyInjector.GetContinueProgramAction());
         }
 
         internal static void StartUiPrintableConstructor()
         {
             var printableType = PrintableTypes[GetPrintableObjId()];
-            var objToPrint = PrintableFactory.CreatePrintableObject(printableType);
+            var printableArgs = CollectArgsForPrintableObj(printableType);
+            var objToPrint = PrintableFactory.CreatePrintableObject(printableType, printableArgs);
 
             var printingScheme = objToPrint.GetPrintingScheme();
             printingScheme = PrintHelper.ConvertToPositiveCoordinates(printingScheme);
-            printingScheme = PrintHelper.MoveStartingPoint(printingScheme);
+            var startingPoint = GetStartingPoint();
+            printingScheme = PrintHelper.MoveStartingPoint(printingScheme, startingPoint);
             printingScheme = PrintHelper.SetColor(printingScheme, objToPrint.GetType());
-            Printer.AddToQueue(printingScheme);
+            Printer.Printer.AddToQueue(printingScheme);
             AskAddAnotherShape(DependencyInjector.GetAddShapeAction());
         }
 
-        internal static char GetPrintingChar()
+        public static char GetPrintingChar()
         {
-            DisplayUi("Please specify the char used for the figure", true);
+            DisplayUi("Please specify the char used for printing", true);
             bool isValid = false;
             char printingChar = '*';
 
@@ -101,7 +106,7 @@ namespace ShapePrinter.Services
             bool isValidInput = false;
             while (!isValidInput)
             {
-                ConsoleHandler.OutputData("Please select the preferable method of output", true); 
+                ConsoleHandler.OutputData("Please select the preferable method of output"); 
                 //console to avoid null reference
 
                 var outputMethods =
@@ -112,7 +117,7 @@ namespace ShapePrinter.Services
                     if (method != null) displayMsg += $"{(int)method} {method}\n";
                 }
 
-                ConsoleHandler.OutputData(displayMsg, true);
+                ConsoleHandler.OutputData(displayMsg);
 
                 userSelectedMethod = int.Parse(ConsoleHandler.HandleUserInput());
 
@@ -122,7 +127,7 @@ namespace ShapePrinter.Services
             return (OutputMethod) userSelectedMethod;
         }
 
-        internal static string GetText()
+        public static string GetText()
         {
             DisplayUi("Please specify the text", true);
             bool isValid = false;
@@ -142,7 +147,7 @@ namespace ShapePrinter.Services
             return text;
         }
 
-        internal static int GetSize()
+        public static int GetSize()
         {
             bool isValid = false;
             DisplayUi("Please, select size", true);
@@ -161,7 +166,7 @@ namespace ShapePrinter.Services
         }
 
 
-        internal static CoordinatesPoint GetStartingPoint()
+        public static CoordinatesPoint GetStartingPoint()
         {
             bool isValid = false;
             DisplayUi("Please, select starting point in format 'x , y'", true);
@@ -219,6 +224,26 @@ namespace ShapePrinter.Services
                     }
                 }
             }
+        }
+
+        private static List<object> CollectArgsForPrintableObj(Type printableObj)
+        {
+            var args = new List<object>();
+            if (printableObj == typeof(PrintableText))
+            {
+                var text = UiHandler.GetText();
+                args.Add(text);
+                
+            }
+            else
+            {
+                var printableChar = UiHandler.GetPrintingChar();
+                args.Add(printableChar);
+                var size = UiHandler.GetSize();
+                args.Add(size);
+            }
+
+            return args;
         }
 
         public static void StopProgram()

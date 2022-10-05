@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using ShapePrinter.Data;
+using SharedAssets;
 
-namespace ShapePrinter.Services
+namespace Printer
 {
     public static class PrintHelper
-    
-    // Perhaps make this class extend Printer? Is it possible with static classes?
+
+        // Perhaps make this class extend Printer? Is it possible with static classes?
     {
         public static int CalculateLeftMargin(List<CoordinatesPoint> scheme,
             int currentPointIndex, out bool isSkip)
@@ -64,9 +64,9 @@ namespace ShapePrinter.Services
             return drawingScheme;
         }
 
-        public static List<CoordinatesPoint> MoveStartingPoint(List<CoordinatesPoint> printingScheme)
+        public static List<CoordinatesPoint> MoveStartingPoint(List<CoordinatesPoint> printingScheme,
+            CoordinatesPoint startingPoint)
         {
-            var startingPoint = UiHandler.GetStartingPoint();
             for (int i = 0; i < printingScheme.Count; i++)
             {
                 printingScheme[i].X += startingPoint.X;

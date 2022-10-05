@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
-using ShapePrinter.Data;
+using ShapeCreator;
+using SharedAssets;
+
 
 namespace ExtensionLibrary
 {
     public class Triangle : Shape
     {
-        public Triangle(int size, char printingChar) : base(size, printingChar)
+        public Triangle(char delimiter = '*', int size = 20) : base(delimiter, size)
         {
         }
 

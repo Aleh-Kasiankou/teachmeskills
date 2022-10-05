@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ShapePrinter.Services
+namespace UserInterface
 {
     public static class DependencyInjector
     {
@@ -40,8 +40,9 @@ namespace ShapePrinter.Services
         
 
         public static Action GetContinueProgramAction()
+        // switch to events
         {
-            Action continueProgramDelegate = UiHandler.RunDialog;
+            Action continueProgramDelegate = UiHandler.Initialize;
             return continueProgramDelegate;
         }
 

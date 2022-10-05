@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ShapePrinter.Data
+namespace SharedAssets
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class ColorAttribute : Attribute

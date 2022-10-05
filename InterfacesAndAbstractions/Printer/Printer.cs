@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ShapePrinter.Data;
+using SharedAssets;
 
-namespace ShapePrinter.Services
+namespace Printer
 {
     public static class Printer
     {

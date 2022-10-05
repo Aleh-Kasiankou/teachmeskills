@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using SharedAssets;
 
-namespace ShapePrinter.Data
+namespace ShapeCreator
 {
     public interface IPrintable
     {
