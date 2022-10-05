@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ShapeCreator.Objects;
 
 
 namespace ShapeCreator
@@ -8,8 +7,8 @@ namespace ShapeCreator
     public static class PrintableFactory
     {
         public static IPrintable
-            CreatePrintableObject(Type printableType, List<object> args) 
-        // TODO Add Exception check
+            CreatePrintableObject(Type printableType, List<object> args)
+            // TODO Add Exception check
 
         {
             IPrintable objToPrint =

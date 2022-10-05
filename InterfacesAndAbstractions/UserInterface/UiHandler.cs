@@ -1,52 +1,57 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Printer;
 using ShapeCreator;
 using ShapeCreator.Objects;
 using SharedAssets;
 
 namespace UserInterface
 {
-    public static class UiHandler
+    public class UiHandler
     {
-        private static readonly List<Type> PrintableTypes = AssemblyLoader.GetPrintableTypes();
+        private static List<Type>? _printableTypes;
 
-        private static Action<String, List<ConsoleColor>> DisplayShape { get; } =
-            DependencyInjector.GetShapeOutputMethod();
+        private Action<string, List<ConsoleColor>> DisplayShape { get; }
 
-        private static Action<String, bool> DisplayUi { get; } =
-            DependencyInjector.GetUiOutputMethod();
+        private Action<string, bool> DisplayUi { get; }
 
-        private static Func<string> PromptUser { get; } =
-            DependencyInjector.GetUiInputMethod();
+        private Func<string> PromptUser { get; }
 
-        public static Func<ConsoleKeyInfo>? DetectKeyPress;
+        public Func<ConsoleKeyInfo> DetectKeyPress;
 
-        public static void Initialize()
+        private readonly Printer.Printer _printer = new Printer.Printer();
+
+        public UiHandler()
         {
-            StartUiPrintableConstructor();
-            Printer.Printer.Print(DisplayShape);
-            AskStopProgram(DependencyInjector.GetContinueProgramAction());
+            _printableTypes = AssemblyLoader.GetPrintableTypes();
+            DisplayShape = DependencyInjector.GetShapeOutputMethod(this);
+            DisplayUi = DependencyInjector.GetUiOutputMethod(this);
+            PromptUser = DependencyInjector.GetUiInputMethod(this);
+            // DetectKeyPress is initialized in a line above
+            _printer.PrintEvent += AskStopProgram;
+        }
+        public void RenderMainMenu()
+        {
+            AddShapeToQueue();
+            _printer.Print(DisplayShape);
         }
 
-        internal static void StartUiPrintableConstructor()
+        
+        internal void AddShapeToQueue()
         {
-            var printableType = PrintableTypes[GetPrintableObjId()];
+            var printableType = _printableTypes[GetPrintableObjId()];
             var printableArgs = CollectArgsForPrintableObj(printableType);
             var objToPrint = PrintableFactory.CreatePrintableObject(printableType, printableArgs);
-
-            var printingScheme = objToPrint.GetPrintingScheme();
-            printingScheme = PrintHelper.ConvertToPositiveCoordinates(printingScheme);
+            
             var startingPoint = GetStartingPoint();
-            printingScheme = PrintHelper.MoveStartingPoint(printingScheme, startingPoint);
-            printingScheme = PrintHelper.SetColor(printingScheme, objToPrint.GetType());
-            Printer.Printer.AddToQueue(printingScheme);
-            AskAddAnotherShape(DependencyInjector.GetAddShapeAction());
+            var printingScheme = objToPrint.GetPrintingScheme();
+            _printer.AddToQueue(printingScheme, startingPoint, printableType);
+            
+            AskAddAnotherShape(DependencyInjector.GetAddShapeAction(this));
         }
 
-        public static char GetPrintingChar()
+
+        private char GetPrintingChar()
         {
             DisplayUi("Please specify the char used for printing", true);
             bool isValid = false;
@@ -68,12 +73,12 @@ namespace UserInterface
             return printingChar;
         }
 
-        private static int GetPrintableObjId()
+        private int GetPrintableObjId()
         {
             Console.Clear();
-            for (int i = 1; i <= PrintableTypes.Count(); i++)
+            for (int i = 1; i <= _printableTypes.Count; i++)
             {
-                DisplayUi($"{i} {PrintableTypes[i - 1].Name}", true);
+                DisplayUi($"{i} {_printableTypes[i - 1].Name}", true);
             }
 
             bool isValid = false;
@@ -85,7 +90,7 @@ namespace UserInterface
                 var userInput = PromptUser();
 
                 isValid = Int32.TryParse(userInput, out var number);
-                if (isValid && number >= 1 && number <= PrintableTypes.Count)
+                if (isValid && number >= 1 && number <= _printableTypes.Count)
                 {
                     index = number - 1;
                 }
@@ -100,13 +105,13 @@ namespace UserInterface
             return index;
         }
 
-        internal static OutputMethod PromptForOutputMethod()
+        internal OutputMethod PromptForOutputMethod()
         {
             int userSelectedMethod = 1;
             bool isValidInput = false;
             while (!isValidInput)
             {
-                ConsoleHandler.OutputData("Please select the preferable method of output"); 
+                ConsoleHandler.OutputData("Please select the preferable method of output");
                 //console to avoid null reference
 
                 var outputMethods =
@@ -121,13 +126,13 @@ namespace UserInterface
 
                 userSelectedMethod = int.Parse(ConsoleHandler.HandleUserInput());
 
-                isValidInput = Enum.IsDefined(typeof(OutputMethod), userSelectedMethod) ;
+                isValidInput = Enum.IsDefined(typeof(OutputMethod), userSelectedMethod);
             }
 
-            return (OutputMethod) userSelectedMethod;
+            return (OutputMethod)userSelectedMethod;
         }
 
-        public static string GetText()
+        private string GetText()
         {
             DisplayUi("Please specify the text", true);
             bool isValid = false;
@@ -147,7 +152,7 @@ namespace UserInterface
             return text;
         }
 
-        public static int GetSize()
+        private int GetSize()
         {
             bool isValid = false;
             DisplayUi("Please, select size", true);
@@ -166,7 +171,7 @@ namespace UserInterface
         }
 
 
-        public static CoordinatesPoint GetStartingPoint()
+        private CoordinatesPoint GetStartingPoint()
         {
             bool isValid = false;
             DisplayUi("Please, select starting point in format 'x , y'", true);
@@ -195,16 +200,16 @@ namespace UserInterface
             return new CoordinatesPoint(x - 1, y - 1);
         }
 
-        private static void AskStopProgram(Action continueProgram)
+        private void AskStopProgram(object? sender, EventArgs args)
         {
             DisplayUi("\nDraw a new picture? 'Y' to continue", true);
             if (DetectKeyPress != null && DetectKeyPress().Key is ConsoleKey.Y)
             {
-                continueProgram();
+                DependencyInjector.GetContinueProgramAction(this)?.Invoke();
             }
         }
 
-        private static void AskAddAnotherShape(Action addAnotherShape)
+        private void AskAddAnotherShape(Action addAnotherShape)
         {
             while (true)
             {
@@ -226,20 +231,19 @@ namespace UserInterface
             }
         }
 
-        private static List<object> CollectArgsForPrintableObj(Type printableObj)
+        private List<object> CollectArgsForPrintableObj(Type printableObj)
         {
             var args = new List<object>();
             if (printableObj == typeof(PrintableText))
             {
-                var text = UiHandler.GetText();
+                var text = GetText();
                 args.Add(text);
-                
             }
             else
             {
-                var printableChar = UiHandler.GetPrintingChar();
+                var printableChar = GetPrintingChar();
                 args.Add(printableChar);
-                var size = UiHandler.GetSize();
+                var size = GetSize();
                 args.Add(size);
             }
 

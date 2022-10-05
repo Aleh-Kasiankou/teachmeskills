@@ -5,9 +5,9 @@ namespace UserInterface
 {
     public static class DependencyInjector
     {
-        public static Action<string, List<ConsoleColor>> GetShapeOutputMethod()
+        public static Action<string, List<ConsoleColor>> GetShapeOutputMethod(UiHandler uiInstance)
         {
-            OutputMethod userSelectedMethod = UiHandler.PromptForOutputMethod();
+            OutputMethod userSelectedMethod = uiInstance.PromptForOutputMethod();
 
             Action<String, List<ConsoleColor>> outputMethod;
 
@@ -24,31 +24,31 @@ namespace UserInterface
             return outputMethod;
         }
 
-        public static Action<string, bool> GetUiOutputMethod()
+        public static Action<string, bool> GetUiOutputMethod(UiHandler uiInstance)
         {
             Action<string, bool> uiOutputMethod = ConsoleHandler.OutputData;
             return uiOutputMethod;
         }
         
-        public static Func<string> GetUiInputMethod()
+        public static Func<string> GetUiInputMethod(UiHandler uiInstance)
         {
             Func<string> uiInputMethod = ConsoleHandler.HandleUserInput;
             Func<ConsoleKeyInfo> keyDetectMethod = ConsoleHandler.HandleUserKeyPress;
-            UiHandler.DetectKeyPress = keyDetectMethod;
+            uiInstance.DetectKeyPress = keyDetectMethod;
             return uiInputMethod;
         }
         
 
-        public static Action GetContinueProgramAction()
+        public static Action GetContinueProgramAction(UiHandler uiInstance)
         // switch to events
         {
-            Action continueProgramDelegate = UiHandler.Initialize;
+            Action continueProgramDelegate = uiInstance.RenderMainMenu;
             return continueProgramDelegate;
         }
 
-        public static Action GetAddShapeAction()
+        public static Action GetAddShapeAction(UiHandler uiInstance)
         {
-            Action addShapeDelegate = UiHandler.StartUiPrintableConstructor;
+            Action addShapeDelegate = uiInstance.AddShapeToQueue;
             return addShapeDelegate;
         }
     }

@@ -6,22 +6,27 @@ using SharedAssets;
 
 namespace Printer
 {
-    public static class Printer
+    public class Printer
     {
-        private static List<List<CoordinatesPoint>> Queue { get; set; } = new List<List<CoordinatesPoint>>();
+        private List<List<CoordinatesPoint>> Queue { get; set; } = new List<List<CoordinatesPoint>>();
+        
+        public event EventHandler PrintEvent;
 
-        public static void AddToQueue(List<CoordinatesPoint> printableScheme)
+        public void AddToQueue(List<CoordinatesPoint> printableScheme, CoordinatesPoint startingPoint, Type objType)
         {
+            printableScheme = PrintHelper.ConvertToPositiveCoordinates(printableScheme);
+            printableScheme = PrintHelper.MoveStartingPoint(printableScheme, startingPoint);
+            printableScheme = PrintHelper.SetColor(printableScheme, objType);
             Queue.Add(printableScheme);
         }
 
-        public static void ClearQueue()
+        private void ClearQueue()
         {
             Queue = new List<List<CoordinatesPoint>>();
         }
 
 
-        private static List<CoordinatesPoint> MergeQueue()
+        private List<CoordinatesPoint> MergeQueue()
         {
             var drawingScheme = new List<CoordinatesPoint>();
             foreach (var printableEntity in Queue)
@@ -81,12 +86,19 @@ namespace Printer
             return textScheme.ToString();
         }
 
+        
 
-        public static void Print(Action<string, List<ConsoleColor>> outputString)
+        public void Print(Action<string, List<ConsoleColor>> outputString)
         {
             var drawingScheme = MergeQueue();
             var textScheme = ConvertSchemeToString(drawingScheme, out var colorScheme);
             outputString(textScheme, colorScheme);
+            OnPrintEvent();
+        }
+
+        protected virtual void OnPrintEvent()
+        {
+            PrintEvent?.Invoke(this, EventArgs.Empty);
         }
     }
 }
