@@ -8,35 +8,44 @@ namespace Printer
 {
     public class Printer
     {
-        private List<List<CoordinatesPoint>> Queue { get; set; } = new List<List<CoordinatesPoint>>();
-        
+        private List<PrinterQueueElement> Queue { get; set; } = new List<PrinterQueueElement>();
+
+        public List<HistoryRecord> History { get; private set; } = new List<HistoryRecord>();
+
         public event EventHandler PrintEvent;
+        public event EventHandler<HistoryArgs> QueueMergeEvent;
+
+        public Printer()
+        {
+            PrintEvent += ClearQueue;
+            QueueMergeEvent += AddToHistory;
+        }
 
         public void AddToQueue(List<CoordinatesPoint> printableScheme, CoordinatesPoint startingPoint, Type objType)
         {
             printableScheme = PrintHelper.ConvertToPositiveCoordinates(printableScheme);
             printableScheme = PrintHelper.MoveStartingPoint(printableScheme, startingPoint);
             printableScheme = PrintHelper.SetColor(printableScheme, objType);
-            Queue.Add(printableScheme);
+            Queue.Add(new PrinterQueueElement(objType, printableScheme));
         }
 
-        private void ClearQueue()
+        private void ClearQueue(object sender, EventArgs args)
         {
-            Queue = new List<List<CoordinatesPoint>>();
+            Queue = new List<PrinterQueueElement>();
         }
 
 
         private List<CoordinatesPoint> MergeQueue()
         {
             var drawingScheme = new List<CoordinatesPoint>();
-            foreach (var printableEntity in Queue)
+            foreach (var queueElement in Queue)
             {
-                drawingScheme.AddRange(printableEntity);
+                List<PrinterQueueElement> printedWith = Queue.FindAll(el => !Equals(el, queueElement)).ToList();
+                drawingScheme.AddRange(queueElement.DrawingScheme);
+                OnQueueMergeEvent(new HistoryArgs(queueElement.Type, printedWith));
             }
 
             drawingScheme = PrintHelper.SortPointsByYAndX(drawingScheme);
-
-            ClearQueue();
 
             return drawingScheme;
         }
@@ -86,7 +95,11 @@ namespace Printer
             return textScheme.ToString();
         }
 
-        
+        private void AddToHistory(object sender, HistoryArgs args)
+        {
+            var historyElement = new HistoryRecord(args.Type, args.PrintedWith);
+            History.Add(historyElement);
+        }
 
         public void Print(Action<string, List<ConsoleColor>> outputString)
         {
@@ -99,6 +112,11 @@ namespace Printer
         protected virtual void OnPrintEvent()
         {
             PrintEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnQueueMergeEvent(HistoryArgs e)
+        {
+            QueueMergeEvent?.Invoke(this, e);
         }
     }
 }

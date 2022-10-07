@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ShapeCreator;
 using ShapeCreator.Objects;
 using SharedAssets;
@@ -28,25 +29,30 @@ namespace UserInterface
             DisplayUi = DependencyInjector.GetUiOutputMethod(this);
             PromptUser = DependencyInjector.GetUiInputMethod(this);
             // DetectKeyPress is initialized in a line above
+            _printer.PrintEvent += DisplayHistory;
             _printer.PrintEvent += AskStopProgram;
         }
+
         public void RenderMainMenu()
         {
             AddShapeToQueue();
             _printer.Print(DisplayShape);
         }
 
-        
+
         internal void AddShapeToQueue()
         {
-            var printableType = _printableTypes[GetPrintableObjId()];
-            var printableArgs = CollectArgsForPrintableObj(printableType);
-            var objToPrint = PrintableFactory.CreatePrintableObject(printableType, printableArgs);
-            
-            var startingPoint = GetStartingPoint();
-            var printingScheme = objToPrint.GetPrintingScheme();
-            _printer.AddToQueue(printingScheme, startingPoint, printableType);
-            
+            var printableType = _printableTypes?[GetPrintableObjId()];
+            if (printableType != null)
+            {
+                var printableArgs = CollectArgsForPrintableObj(printableType);
+                var objToPrint = PrintableFactory.CreatePrintableObject(printableType, printableArgs);
+
+                var startingPoint = GetStartingPoint();
+                var printingScheme = objToPrint.GetPrintingScheme();
+                _printer.AddToQueue(printingScheme, startingPoint, printableType);
+            }
+
             AskAddAnotherShape(DependencyInjector.GetAddShapeAction(this));
         }
 
@@ -76,10 +82,11 @@ namespace UserInterface
         private int GetPrintableObjId()
         {
             Console.Clear();
-            for (int i = 1; i <= _printableTypes.Count; i++)
-            {
-                DisplayUi($"{i} {_printableTypes[i - 1].Name}", true);
-            }
+            if (_printableTypes != null)
+                for (int i = 1; i <= _printableTypes.Count; i++)
+                {
+                    DisplayUi($"{i} {_printableTypes[i - 1].Name}", true);
+                }
 
             bool isValid = false;
             int index = 0;
@@ -90,7 +97,7 @@ namespace UserInterface
                 var userInput = PromptUser();
 
                 isValid = Int32.TryParse(userInput, out var number);
-                if (isValid && number >= 1 && number <= _printableTypes.Count)
+                if (_printableTypes != null && isValid && number >= 1 && number <= _printableTypes.Count)
                 {
                     index = number - 1;
                 }
@@ -203,7 +210,7 @@ namespace UserInterface
         private void AskStopProgram(object? sender, EventArgs args)
         {
             DisplayUi("\nDraw a new picture? 'Y' to continue", true);
-            if (DetectKeyPress != null && DetectKeyPress().Key is ConsoleKey.Y)
+            if (DetectKeyPress().Key is ConsoleKey.Y)
             {
                 DependencyInjector.GetContinueProgramAction(this)?.Invoke();
             }
@@ -248,6 +255,21 @@ namespace UserInterface
             }
 
             return args;
+        }
+
+        private void DisplayHistory(object? sender, EventArgs args)
+        {
+            DisplayUi("\nHere is your history:", true);
+            foreach (var historyRecord in _printer.History)
+            {
+                var printedWith = String.Join("\n", historyRecord.PrintedWith.Select(p => p.Name).ToList());
+
+                string printedWithString = string.IsNullOrWhiteSpace(printedWith)
+                    ? "alone"
+                    : $@"with {printedWith}";
+                DisplayUi(
+                    $"Printed {historyRecord.Type.Name} at {historyRecord.DatePrinted} " + printedWithString, true);
+            }
         }
 
         public static void StopProgram()
