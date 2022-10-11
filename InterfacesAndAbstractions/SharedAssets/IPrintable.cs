@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace ShapePrinter
+namespace SharedAssets
 {
     public interface IPrintable
     {
         public List<CoordinatesPoint> GetPrintingScheme();
-        
     }
 }

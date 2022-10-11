@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using SharedAssets;
 
-namespace ShapePrinter
+namespace Printer
 {
     public static class PrintHelper
+
+        // Perhaps make this class extend Printer? Is it possible with static classes?
     {
         public static int CalculateLeftMargin(List<CoordinatesPoint> scheme,
-                int currentPointIndex, out bool isSkip)
+            int currentPointIndex, out bool isSkip)
         {
             var currentPoint = scheme[currentPointIndex];
             var point = currentPointIndex > 0
@@ -33,7 +36,7 @@ namespace ShapePrinter
             margin -= closestPointToLeft.X;
             return margin;
         }
-        
+
         public static List<CoordinatesPoint> ConvertToPositiveCoordinates(List<CoordinatesPoint> drawingScheme)
         {
             var addToX = 0;
@@ -61,9 +64,9 @@ namespace ShapePrinter
             return drawingScheme;
         }
 
-        public static List<CoordinatesPoint> MoveStartingPoint(List<CoordinatesPoint> printingScheme)
+        public static List<CoordinatesPoint> MoveStartingPoint(List<CoordinatesPoint> printingScheme,
+            CoordinatesPoint startingPoint)
         {
-            var startingPoint = UiHandler.GetStartingPoint();
             for (int i = 0; i < printingScheme.Count; i++)
             {
                 printingScheme[i].X += startingPoint.X;
@@ -99,12 +102,26 @@ namespace ShapePrinter
                         else if (drawingScheme[i].X == drawingScheme[i + 1].X)
                         {
                             var conflictSymbol = '$';
-                            drawingScheme[i] = new CoordinatesPoint(drawingScheme[i].X, drawingScheme[i].Y, conflictSymbol);
+                            drawingScheme[i] =
+                                new CoordinatesPoint(drawingScheme[i].X, drawingScheme[i].Y, conflictSymbol);
                             drawingScheme[i + 1] = new CoordinatesPoint(drawingScheme[i + 1].X, drawingScheme[i + 1].Y,
                                 conflictSymbol);
                         }
                     }
                 }
+            }
+
+            return drawingScheme;
+        }
+
+        public static List<CoordinatesPoint> SetColor(List<CoordinatesPoint> drawingScheme, Type type)
+        {
+            ColorAttribute color =
+                (ColorAttribute)Attribute.GetCustomAttribute(type, typeof(ColorAttribute));
+
+            foreach (var point in drawingScheme)
+            {
+                if (color != null) point.Color = color.Color;
             }
 
             return drawingScheme;

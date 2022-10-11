@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using SharedAssets;
 
-namespace ShapePrinter
+namespace ShapeCreator.Objects
 {
+    [Color(ConsoleColor.DarkCyan)]
     public class Square : Shape
     {
-        public Square(int size, char printingChar) : base(size, printingChar)
+        public Square(char delimiter = '*', int size = 20) : base(delimiter, size)
         {
         }
 

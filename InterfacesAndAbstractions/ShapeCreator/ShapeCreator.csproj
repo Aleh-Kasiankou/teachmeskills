@@ -5,7 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ShapeCreator\ShapeCreator.csproj" />
       <ProjectReference Include="..\SharedAssets\SharedAssets.csproj" />
     </ItemGroup>
 

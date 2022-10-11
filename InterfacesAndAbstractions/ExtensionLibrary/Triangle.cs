@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ShapeCreator;
+using SharedAssets;
 
-namespace ShapePrinter
+
+namespace ExtensionLibrary
 {
     public class Triangle : Shape
     {
-        public Triangle(int size, char printingChar) : base(size, printingChar)
+        public Triangle(char delimiter = '*', int size = 20) : base(delimiter, size)
         {
         }
 
@@ -25,9 +27,9 @@ namespace ShapePrinter
                 var dx = x - -halfSize;
                 var dy = y - y1;
 
-                var S = dx1 * dy - dx * dy1;
+                var s = dx1 * dy - dx * dy1;
 
-                if (x == -halfSize || (y == 0 && x == halfSize) || S == 0)
+                if (x == -halfSize || (y == 0 && x == halfSize) || s == 0)
                 {
                     printingPoints.Add(new CoordinatesPoint(x, y, Delimiter));
                 }
