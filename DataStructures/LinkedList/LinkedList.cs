@@ -1,56 +1,43 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
 
 namespace LinkedList
 {
     public abstract class LinkedList<T> : ILinkedList<T>
     {
-        protected LinkedListMember<T>[] Data { get; private set; }
-
-        protected LinkedListMember<T> FirstListMember { get; set; }
-        protected int LastElementIndex { get; set; } = -1;
-
-        protected LinkedList(int size = 16)
-        {
-            Data = new LinkedListMember<T>[size];
-            FirstListMember = Data[0];
-        }
-
+        protected LinkedListMember<T> Head { get; set; }
+        protected LinkedListMember<T> Tail { get; set; }
+        protected int LastElementIndex { get; private set; } = -1;
+        
         protected LinkedList(T[] array)
         {
-            Data = new LinkedListMember<T>[array.Length];
             foreach (var el in array)
             {
                 Add(el);
             }
-
-            FirstListMember = Data[0];
         }
 
-        public virtual void Add(T item)
+        public void Add(T item)
         {
             Insert(item, LastElementIndex + 1);
         }
 
-        // Decreases size of Data by one
+
         public virtual void RemoveAt(int index)
         {
             ValidateIndex(index);
 
             LinkedListMember<T> memberToRemove = GetListMemberAt(index);
-            
-            Data = Data.Where(val => val != memberToRemove).ToArray();
 
             if (index > 0)
             {
-                LinkedListMember<T> memberToUpdate = GetListMemberAt(index - 1);
-                memberToUpdate.NextItem = memberToRemove.NextItem;
+                LinkedListMember<T> previousListMember = GetListMemberAt(index - 1);
+                previousListMember.NextItem = memberToRemove.NextItem;
             }
-            
+
             if (index == 0)
             {
-                FirstListMember = FirstListMember.NextItem;
+                Head = Head.NextItem;
             }
 
             LastElementIndex--;
@@ -58,38 +45,62 @@ namespace LinkedList
 
         public virtual T GetElementAt(int index)
         {
+            ValidateIndex(index);
             var currentListMember = GetListMemberAt(index);
             return currentListMember.Value;
         }
 
-        public abstract void Insert(T item, int index);
+        public void Insert(T item, int index)
+        {
+            if (index > 0 && index <= LastElementIndex)
+            {
+                InsertNonMarginalElement(index, item);
+            }
+            
+            else if (index == 0)
+            {
+                InsertFirstListMember(item);
+                if (LastElementIndex == -1)
+                {
+                    Tail = Head;
+                }
+            }
+
+            else if (index == LastElementIndex + 1)
+            {
+                InsertLastListMember(item);
+            }
+            
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            LastElementIndex++;
+        }
 
         public abstract void Reverse();
 
-        protected void ValidateIndex(int index)
+        private void ValidateIndex(int index)
         {
-            if (index >= Data.Length || index < 0)
+            if (index > LastElementIndex ||
+                index < 0)
             {
                 throw new IndexOutOfRangeException();
             }
         }
 
-        protected void AdjustSize(int requiredIndex)
-        {
-            if (requiredIndex >= Data.Length)
-            {
-                var newSize = Data.Length * 2;
-                LinkedListMember<T>[] newData = new LinkedListMember<T>[newSize];
-                Data.CopyTo(newData, 0);
-                Data = newData;
-            }
-        }
+        protected abstract void InsertFirstListMember(T value);
 
-        protected virtual LinkedListMember<T> GetListMemberAt(int index)
+        protected abstract void InsertNonMarginalElement(int index, T value);
+
+        protected abstract void InsertLastListMember(T value);
+        
+        protected LinkedListMember<T> GetListMemberAt(int index)
         {
             ValidateIndex(index);
 
-            LinkedListMember<T> currentListMember = FirstListMember;
+            LinkedListMember<T> currentListMember = Head;
             for (int i = 1; i <= index; i++)
             {
                 currentListMember = currentListMember.NextItem;
@@ -100,8 +111,8 @@ namespace LinkedList
 
         public override string ToString()
         {
-            var stringRepresentation = new StringBuilder("{" + FirstListMember.Value.ToString());
-            LinkedListMember<T> listMember = FirstListMember;
+            var stringRepresentation = new StringBuilder("{" + Head.Value.ToString());
+            LinkedListMember<T> listMember = Head;
             for (int i = 0; i < LastElementIndex; i++)
             {
                 stringRepresentation.Append(", ");
