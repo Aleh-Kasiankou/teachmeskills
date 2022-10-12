@@ -2,54 +2,50 @@
 {
     public class DoublyLinkedList<T> : LinkedList<T>
     {
-        public DoublyLinkedList(int size = 16) : base(size)
-        {
-        }
-
         public DoublyLinkedList(T[] array) : base(array)
         {
         }
+    
 
-        public override void Insert(T item, int index)
+    public override void Reverse() //recheck
+    {
+        for (int i = LastElementIndex; i >= 0; i--)
         {
-            AdjustSize(LastElementIndex + 1);
-            ValidateIndex(index);
-
-            LinkedListMember<T> insertedListMember;
-            if (index != 0)
-            {
-                LinkedListMember<T> prevListMember = GetListMemberAt(index - 1);
-                DoublyLinkedListMember<T> nextListMember = prevListMember.NextItem as DoublyLinkedListMember<T>;
-
-                insertedListMember = new DoublyLinkedListMember<T>(item)
-                    { NextItem = nextListMember, PreviousItem = prevListMember };
-                prevListMember.NextItem = insertedListMember;
-                if (nextListMember != null) nextListMember.PreviousItem = insertedListMember; //possible null reference
-            }
-            else
-            {
-                LinkedListMember<T> nextListMember = GetListMemberAt(index);
-                insertedListMember = new DoublyLinkedListMember<T>(item)
-                    { NextItem = nextListMember, PreviousItem = null };
-                FirstListMember = insertedListMember;
-            }
-
-            LastElementIndex++;
-            Data[LastElementIndex] = insertedListMember;
+            DoublyLinkedListMember<T> currentListMember = (DoublyLinkedListMember<T>)GetListMemberAt(i);
+            (currentListMember.PreviousItem, currentListMember.NextItem) =
+                (currentListMember.NextItem, currentListMember.PreviousItem);
         }
 
-        public override void Reverse() //recheck
+        (Head, Tail) = (Tail, Head);
+    }
+
+    protected override void InsertFirstListMember(T value)
+    {
+        Head = new DoublyLinkedListMember<T>(value) { NextItem = Head};
+
+        if (LastElementIndex != -1) //crunch
         {
-            LinkedListMember<T> lastListMember = GetListMemberAt(LastElementIndex);
-
-            for (int i = LastElementIndex; i >= 0; i--)
-            {
-                DoublyLinkedListMember<T> currentListMember = (DoublyLinkedListMember<T>)GetListMemberAt(i);
-                (currentListMember.PreviousItem, currentListMember.NextItem) =
-                    (currentListMember.NextItem, currentListMember.PreviousItem);
-            }
-
-            FirstListMember = lastListMember;
+            var secondListMember = (DoublyLinkedListMember<T>)Head.NextItem;
+            secondListMember.PreviousItem = Head;
         }
     }
+
+    protected override void InsertNonMarginalElement(int index, T value)
+    {
+        LinkedListMember<T> prevListMember = GetListMemberAt(index - 1);
+        var nextListMember = (DoublyLinkedListMember<T>) prevListMember.NextItem;
+
+        var insertedListMember = new DoublyLinkedListMember<T>(value)
+            { NextItem = nextListMember, PreviousItem = prevListMember };
+        prevListMember.NextItem = insertedListMember;
+        nextListMember.PreviousItem = insertedListMember;
+    }
+
+    protected override void InsertLastListMember(T value)
+    {
+        Tail.NextItem = new DoublyLinkedListMember<T>(value){PreviousItem = Tail};
+        Tail = Tail.NextItem;
+    }
+}
+
 }

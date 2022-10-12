@@ -2,43 +2,36 @@
 {
     public class SinglyLinkedList<T> : LinkedList<T>
     {
-        public SinglyLinkedList(int size = 16) : base(size)
-        {
-        }
-
         public SinglyLinkedList(T[] array) : base(array)
         {
         }
 
-        public override void Insert(T item, int index)
+        protected override void InsertFirstListMember(T value)
         {
-            AdjustSize(LastElementIndex + 1);
-            ValidateIndex(index);
-
-            LinkedListMember<T> insertedListMember;
-            if (index != 0)
             {
-                LinkedListMember<T> prevListMember = GetListMemberAt(index - 1);
-                LinkedListMember<T> nextListMember = prevListMember.NextItem;
-
-                insertedListMember = new LinkedListMember<T>(item) { NextItem = nextListMember };
-                prevListMember.NextItem = insertedListMember;
+                Head = new LinkedListMember<T>(value) { NextItem = Head };
             }
-            else
+        }
+
+        protected override void InsertNonMarginalElement(int index, T value)
+        {
+            LinkedListMember<T> prevListMember = GetListMemberAt(index - 1);
+            LinkedListMember<T> nextListMember = prevListMember.NextItem;
+
+            var insertedListMember = new LinkedListMember<T>(value) { NextItem = nextListMember };
+            prevListMember.NextItem = insertedListMember;
+        }
+
+        protected override void InsertLastListMember(T value)
+        {
             {
-                LinkedListMember<T> nextListMember = GetListMemberAt(index);
-                insertedListMember = new LinkedListMember<T>(item) { NextItem = nextListMember };
-                FirstListMember = insertedListMember;
+                Tail.NextItem = new LinkedListMember<T>(value);
+                Tail = Tail.NextItem;
             }
-
-            LastElementIndex++;
-            Data[LastElementIndex] = insertedListMember;
         }
 
         public override void Reverse()
         {
-            LinkedListMember<T> lastListMember = GetListMemberAt(LastElementIndex);
-
             for (int i = LastElementIndex; i >= 1; i--)
             {
                 LinkedListMember<T> prevListMember = GetListMemberAt(i - 1);
@@ -46,8 +39,8 @@
                 currentListMember.NextItem = prevListMember;
             }
 
-            FirstListMember.NextItem = null;
-            FirstListMember = lastListMember;
+            Head.NextItem = null;
+            (Head, Tail) = (Tail, Head);
         }
     }
 }
