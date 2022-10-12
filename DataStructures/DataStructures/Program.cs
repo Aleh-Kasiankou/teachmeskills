@@ -1,6 +1,7 @@
 ﻿using System;
 using LinkedList.DoublyLinkedList;
 using LinkedList.SinglyLinkedList;
+using Queue;
 using Stack;
 
 namespace DataStructures
@@ -10,7 +11,8 @@ namespace DataStructures
         static void Main(string[] args)
         {
             // TestLinkedList();
-            TestStack();
+            // TestStack();
+            TestQueue();
         }
 
         internal static void TestLinkedList()
@@ -36,7 +38,8 @@ namespace DataStructures
 
         internal static void TestStack()
         {
-            var testStack = new Stack<int>(new[] { 1, 2, 3, 4 });
+            // var testStack = new Stack<int>(new[] { 1, 2, 3, 4 });
+            var testStack = new Stack<int>();
             Console.WriteLine(testStack);
             testStack.Push(5);
             Console.WriteLine(testStack);
@@ -45,8 +48,30 @@ namespace DataStructures
             Console.WriteLine(testStack);
             Console.WriteLine(testStack.Pop());
             Console.WriteLine(testStack);
+            Console.WriteLine(testStack.Pop());
+            Console.WriteLine(testStack);
+            testStack.Push(6);
             testStack.Clean();
             Console.WriteLine(testStack);
+            // Console.WriteLine(testStack.Pop());
+        }
+
+        internal static void TestQueue()
+        {
+            // var testQueue = new Queue<int>(new[] { 1, 2, 3, 4 });
+            var testQueue = new Queue<int>();
+            Console.WriteLine(testQueue);
+            testQueue.Enqueue(5);
+            Console.WriteLine(testQueue);
+            testQueue.Enqueue(6);
+            
+            Console.WriteLine(testQueue);
+            Console.WriteLine(testQueue.Dequeue());
+            Console.WriteLine(testQueue);
+            Console.WriteLine(testQueue.Dequeue());
+            Console.WriteLine(testQueue);
+            // Console.WriteLine(testQueue.Dequeue());
+            // Console.WriteLine(testQueue);
         }
 
     }
