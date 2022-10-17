@@ -6,7 +6,7 @@ namespace InteractiveTable
     {
         static void Main(string[] args)
         {
-            var table = new Table();
+            var table = new Table("Lol");
             table.AddColumn(typeof(int));
             table.AddColumn(typeof(string));
             table.AddColumn(typeof(string));

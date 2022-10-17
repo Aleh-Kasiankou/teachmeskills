@@ -6,7 +6,20 @@ namespace InteractiveTable
 {
     public class Table
     {
+        private Table()
+        {
+        }
+
+        public Table(string identifier)
+        {
+            LastCell = new TablePointer(this);
+            Identifier = identifier;
+        }
+        
+        
+
         public string Identifier { get; set; }
+        public TablePointer LastCell { get; set; }
         public List<Column> Columns { get; } = new List<Column>();
         public List<string> Rows { get; set; } = new List<string>();
 
@@ -29,6 +42,12 @@ namespace InteractiveTable
             
         }
 
+        public void AppendData(object obj)
+        {
+            WriteData(LastCell.ColumnId, LastCell.RowId, obj);
+            LastCell.Next();
+        }
+
         public object ReadData(string columnId, string raw)
         {
             Column column = FindColumn(columnId);
@@ -42,15 +61,20 @@ namespace InteractiveTable
             
             if (!Rows.Contains(row))
             {
-                string rowToAdd;
+                
 
                 do
                 {
-                    rowToAdd = TableHelper.GenerateIdentifier(TableEntity.Row);
-                    Rows.Add(rowToAdd);
+                    AppendRow();
                     
-                } while (rowToAdd != row);
+                } while (Rows[^1] != row);
             }
+        }
+
+        private void AppendRow()
+        {
+            var rowToAdd = TableHelper.GenerateIdentifier(TableEntity.Row);
+            Rows.Add(rowToAdd);
         }
 
         private void ValidateRowName(string row)
@@ -76,7 +100,7 @@ namespace InteractiveTable
 
         public override string ToString()
         {
-            var stringRepresentation = new StringBuilder();
+            var stringRepresentation = new StringBuilder($"Table {Identifier}\n");
 
             // add column names
             for (int i = 0; i < Columns.Count; i++)

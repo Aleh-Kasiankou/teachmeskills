@@ -6,7 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta2" />
+      <ProjectReference Include="..\InteractiveTable\InteractiveTable.csproj" />
+      <ProjectReference Include="..\Io\Io.csproj" />
+      <ProjectReference Include="..\UserInterface\UserInterface.csproj" />
     </ItemGroup>
 
 </Project>
