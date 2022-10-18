@@ -9,14 +9,34 @@ namespace UserInterface
     public class Ui
     {
         private Table CurrentTable { get; set; }
+        private List<Person> PeopleData { get; set; }
+
+        private ConsoleHandler ConsoleHandler { get; } = new ConsoleHandler();
 
         public void Start()
         {
-            var importApp = new ImportManager<Person>();
-            List<Person> peopleData = importApp.ImportData();
-            BuildTable(peopleData);
+            if (PeopleData is null)
+            {
+                var importApp = new ImportManager<Person>();
+                PeopleData = importApp.ImportData();
+                BuildTable(PeopleData);
+            }
+            
+            RenderMenu();
+        }
+
+        private void RenderMenu()
+        {
+            Console.Clear();
             Console.WriteLine(CurrentTable);
-            RunUserAction();
+            
+            Console.WriteLine("Please, click one of the functional buttons to proceed:\n" +
+                              $"{ConsoleHandler.Add} to Add new cells\n" +
+                              $"{ConsoleHandler.Write} to Edit/Set a value for a cell\n" + 
+                              $"{ConsoleHandler.Delete} to Delete a Cell\n");
+
+            ConsoleHandler.HandleInput();
+            RenderMenu();
         }
 
 
@@ -31,6 +51,7 @@ namespace UserInterface
             }
 
             FillTable(personProps, peopleData);
+            ConsoleHandler.Table = CurrentTable;
         }
 
         private void FillTable(PropertyInfo[] props, List<Person> peopleData)
@@ -42,17 +63,6 @@ namespace UserInterface
                     CurrentTable.AppendData(prop.GetValue(person));
                 }
             }
-        }
-
-
-        private void RunUserAction()
-        {
-            var action = PromptForAction();
-        }
-
-        private string PromptForAction()
-        {
-            return "Action selected";
         }
     }
 }

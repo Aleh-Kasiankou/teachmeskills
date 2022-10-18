@@ -9,7 +9,7 @@ namespace InteractiveTable
 
         public Type ColumnType { get; }
 
-        public Dictionary<string, object> Items { get;}
+        public Dictionary<string, object> Items { get; }
 
         private Column()
         {
@@ -21,19 +21,18 @@ namespace InteractiveTable
             Items = new Dictionary<string, object>();
             ColumnType = columnType;
         }
-        
+
         public Column(string identifier, Dictionary<string, object> items, Type columnType)
         {
             Identifier = identifier;
             Items = items;
             ColumnType = columnType;
         }
-        
+
 
         public void WriteToRow(string row, object objToWrite)
         {
-            ValidateType(objToWrite);
-            Items[row] = objToWrite;
+            Items[row] = ValidateType(objToWrite);
         }
 
         public void ClearRow(string row)
@@ -47,10 +46,11 @@ namespace InteractiveTable
             return keyExists ? data : default;
         }
 
-        private void ValidateType(object obj)
+        private object ValidateType(object obj)
         {
-            var objType = obj.GetType();
-            if (objType != ColumnType)
+            var objType = obj?.GetType();
+            object returnObj = obj;
+            if (objType != ColumnType && objType != null)
             {
                 try
                 {
@@ -59,11 +59,20 @@ namespace InteractiveTable
                 }
                 catch (Exception)
                 {
-                    throw new ArgumentException(
-                        $"The column '{Identifier}' only accepts data of {ColumnType} type, {objType} given");
+                    try
+                    {
+                        returnObj = Activator.CreateInstance(ColumnType, obj); // in case there is a suitable constructor
+                    }
+
+                    catch (Exception)
+                    {
+                        throw new ArgumentException(
+                            $"The column '{Identifier}' only accepts data of {ColumnType} type, {objType} given");
+                    }
                 }
-                
             }
+
+            return returnObj;
         }
     }
 }

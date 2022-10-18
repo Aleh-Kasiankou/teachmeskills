@@ -1,4 +1,6 @@
-﻿namespace Io
+﻿using System;
+
+namespace Io
 {
     public class Address
     {
@@ -8,6 +10,19 @@
 
         private Address()
         {
+        }
+
+        public Address(string compoundAddress)
+        {
+            var addrParts = compoundAddress.Split(',');
+            if (addrParts.Length >= 3)
+            {
+                Country = addrParts[0];
+                State = addrParts[1];
+                Street = addrParts[2];
+            }
+
+            throw new ArgumentException("Invalid Address");
         }
 
         public Address(string country, string state, string street)
