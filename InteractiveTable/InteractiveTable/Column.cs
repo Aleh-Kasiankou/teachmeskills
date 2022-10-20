@@ -10,16 +10,18 @@ namespace InteractiveTable
         public Type ColumnType { get; }
 
         public Dictionary<string, object> Items { get; }
+        public string ColumnTitle { get; set; }
 
         private Column()
         {
         }
 
-        public Column(string identifier, Type columnType)
+        public Column(string identifier, Type columnType, string columnTitle)
         {
             Identifier = identifier;
             Items = new Dictionary<string, object>();
             ColumnType = columnType;
+            ColumnTitle = columnTitle;
         }
 
         public Column(string identifier, Dictionary<string, object> items, Type columnType)

@@ -1,5 +1,6 @@
 ﻿using System;
 using InteractiveTable;
+using Logger;
 
 namespace UserInterface
 {
@@ -8,11 +9,14 @@ namespace UserInterface
         public const ConsoleKey Add = ConsoleKey.A;
         public const ConsoleKey Write = ConsoleKey.W;
         public const ConsoleKey Delete = ConsoleKey.D;
+        public const ConsoleKey Exit = ConsoleKey.Backspace;
+        public ILogger Logger{ get;}
 
         public Table Table { get; set; }
 
-        public ConsoleHandler()
+        public ConsoleHandler(ILogger logger)
         {
+            Logger = logger;
             PressKeyEvent+= KeyHandler;
         }
 
@@ -60,6 +64,8 @@ namespace UserInterface
 
         private void KeyHandler(object sender, KeyPressEventArgs args)
         {
+            // event TableAction
+            
             switch (args.Key.Key)
             {
                 case Add:
@@ -71,7 +77,19 @@ namespace UserInterface
                 case Write:
                     WriteCells();
                     break;
+                case Exit:
+                {
+                    OnExitEvent();
+                    break;
+                }
             }
+        }
+
+        public event Action ExitEvent;
+
+        private void OnExitEvent()
+        {
+            ExitEvent?.Invoke();
         }
     }
 }

@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Io", "Io\Io.csproj", "{AC23
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter", "Starter\Starter.csproj", "{84AAB2C6-7980-4BF2-9838-375A3D7815E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{2DAF50AE-31B6-4F26-B930-9DCCEA9BA15F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{84AAB2C6-7980-4BF2-9838-375A3D7815E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84AAB2C6-7980-4BF2-9838-375A3D7815E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84AAB2C6-7980-4BF2-9838-375A3D7815E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DAF50AE-31B6-4F26-B930-9DCCEA9BA15F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DAF50AE-31B6-4F26-B930-9DCCEA9BA15F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DAF50AE-31B6-4F26-B930-9DCCEA9BA15F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DAF50AE-31B6-4F26-B930-9DCCEA9BA15F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
