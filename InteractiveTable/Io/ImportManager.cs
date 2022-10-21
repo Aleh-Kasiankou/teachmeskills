@@ -9,7 +9,10 @@ namespace Io
 {
     public class ImportManager<T>
     {
-        public string FilePath { get; set; } = @"../../../../\Io\bin\Debug\netcoreapp3.1\samplePersonList.json";
+        public string FilePath { get; set; } =
+            "C:\\Users\\alehk\\OneDrive\\Документы\\TMS\\teachmeskills\\InteractiveTable\\Io\\bin\\Debug\\netcoreapp3.1\\samplePersonList.json";
+
+        // @"../../../../\Io\bin\Debug\netcoreapp3.1\samplePersonList.json";
         public ILogger Logger { get; set; }
 
         public ImportManager(ILogger logger)
@@ -29,21 +32,20 @@ namespace Io
         {
             FileStream stream = null;
             string json = null;
-            
+
             try
             {
                 stream = File.Open(FilePath, FileMode.OpenOrCreate);
                 TextReader jsonReader = new StreamReader(stream);
                 json = jsonReader.ReadToEnd();
             }
-            
+
             finally
             {
                 stream?.Dispose();
             }
 
             return json;
-            
         }
 
         private List<T> ConvertTableToData(Table table)
