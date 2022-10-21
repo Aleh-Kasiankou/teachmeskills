@@ -10,7 +10,7 @@ namespace UserInterface
     public class Ui
     {
         private Table CurrentTable { get; set; }
-        public ILogger Logger { get; set; }
+        private ILogger Logger { get; set; }
 
         private ConsoleHandler ConsoleHandler { get; }
 
@@ -56,7 +56,7 @@ namespace UserInterface
 
         private void BuildTable(List<Person> peopleData)
         {
-            Logger.Log("Building new table", LogLevel.Info);
+            Logger?.Log("Building new table", LogLevel.Info);
             var personProps = typeof(Person).GetProperties();
             CurrentTable = new Table("People", Logger);
             foreach (var prop in personProps)
@@ -71,7 +71,7 @@ namespace UserInterface
         
         private void FillTable(PropertyInfo[] props, List<Person> peopleData)
         {
-            Logger.Log("Filling table with imported data", LogLevel.Info);
+            Logger?.Log("Filling table with imported data", LogLevel.Info);
             foreach (Person person in peopleData)
             {
                 foreach (var prop in props)
@@ -80,13 +80,13 @@ namespace UserInterface
                 }
             }
         
-            Logger.Log($"Added {peopleData.Count} imported entries to {CurrentTable.Identifier} table", LogLevel.Info);
+            Logger?.Log($"Added {peopleData.Count} imported entries to {CurrentTable.Identifier} table", LogLevel.Info);
         }
 
         private void FinishProgram()
         {
             ImportApp.ExportData(CurrentTable);
-            Logger.Log("Program is stopping", LogLevel.Info);
+            Logger?.Log("Program is stopping", LogLevel.Info);
             Environment.Exit(0);
         }
     }

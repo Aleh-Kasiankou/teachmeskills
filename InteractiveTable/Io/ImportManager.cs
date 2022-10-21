@@ -22,7 +22,7 @@ namespace Io
 
         public List<T> ImportTable()
         {
-            Logger.Log($"Importing Data from {FilePath}", LogLevel.Info);
+            Logger?.Log($"Importing Data from {FilePath}", LogLevel.Info);
             string jsonObject = ReadJsonFromFile();
             List<T> importedData = JsonConvert.DeserializeObject<List<T>>(jsonObject);
             return importedData;
@@ -50,9 +50,9 @@ namespace Io
 
         private List<T> ConvertTableToData(Table table)
         {
-            Logger.Log($"Converting table {table.Identifier} to list of {nameof(T)} to save", LogLevel.Info);
+            Logger?.Log($"Converting table {table.Identifier} to list of {nameof(T)} to save", LogLevel.Info);
             List<object> args = new List<object>();
-            List<T> Data = new List<T>();
+            List<T> data = new List<T>();
 
             foreach (var row in table.Rows)
             {
@@ -63,21 +63,21 @@ namespace Io
                 }
 
                 T dataItem = (T)Activator.CreateInstance(typeof(T), args.ToArray());
-                Data.Add(dataItem);
+                data.Add(dataItem);
                 args = new List<object>();
             }
 
-            return Data;
+            return data;
         }
 
         public void ExportData(object objToExport)
         {
-            List<T> DataToExport = ConvertTableToData(objToExport as Table);
-            Logger.Log($"Saving data to {FilePath}", LogLevel.Info);
+            List<T> dataToExport = ConvertTableToData(objToExport as Table);
+            Logger?.Log($"Saving data to {FilePath}", LogLevel.Info);
             Stream stream = null;
             try
             {
-                string json = JsonConvert.SerializeObject(DataToExport);
+                string json = JsonConvert.SerializeObject(dataToExport);
                 stream = File.Open(FilePath, FileMode.Truncate);
                 TextWriter jsonWriter = new StreamWriter(stream);
                 jsonWriter.Write(json);
