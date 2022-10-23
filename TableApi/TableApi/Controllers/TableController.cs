@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using InteractiveTable;
 using Io;
 using Logger;
 using Microsoft.AspNetCore.Mvc;
@@ -6,29 +7,38 @@ using Microsoft.AspNetCore.Mvc;
 namespace TableApi.Controllers
 {
     [ApiController]
-    [Route("table")]
+    [Route("table/get")]
     public class TableController : ControllerBase
     {
+        public ILogger Logger { get; set; }
+
+        public TableController(ILogger logger)
+        {
+            Logger = logger;
+        }
+
         public ImportManager<Person> ImportManager { get; set; } = new ImportManager<Person>(new FileLogger());
-        
+
         [HttpGet]
-        public IEnumerable<Person> Get()
+        public Table Get()
         {
             var data = ImportManager.ImportTable();
+            var tableBuilder = new TableBuilder<Person>(Logger);
+            var table = tableBuilder.CreateTable(data);
 
-            return data;
+
+            return table;
         }
         
-        [HttpGet("{id}")]
-        public ActionResult<Person> Get(int id)
+        [Route("page/{id}")]
+        public List<List<object>> Get(int id)
         {
             var data = ImportManager.ImportTable();
-            if (data.Count < id + 1)
-            {
-                return BadRequest();
-            }
+            var tableBuilder = new TableBuilder<Person>(Logger);
+            var table = tableBuilder.CreateTable(data);
+            var page = table.ReadPage(id);
 
-            return data[id];
+            return page;
         }
     }
 }

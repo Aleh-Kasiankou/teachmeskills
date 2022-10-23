@@ -48,31 +48,10 @@ namespace Io
             return json;
         }
 
-        private List<T> ConvertTableToData(Table table)
+        
+
+        public void ExportData(List<T> dataToExport)
         {
-            Logger?.Log($"Converting table {table.Identifier} to list of {nameof(T)} to save", LogLevel.Info);
-            List<object> args = new List<object>();
-            List<T> data = new List<T>();
-
-            foreach (var row in table.Rows)
-            {
-                foreach (var column in table.Columns)
-                {
-                    var prop = table.ReadData(column.Identifier, row);
-                    args.Add(prop);
-                }
-
-                T dataItem = (T)Activator.CreateInstance(typeof(T), args.ToArray());
-                data.Add(dataItem);
-                args = new List<object>();
-            }
-
-            return data;
-        }
-
-        public void ExportData(object objToExport)
-        {
-            List<T> dataToExport = ConvertTableToData(objToExport as Table);
             Logger?.Log($"Saving data to {FilePath}", LogLevel.Info);
             Stream stream = null;
             try

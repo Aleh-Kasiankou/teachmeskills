@@ -9,8 +9,8 @@ namespace InteractiveTable
 
         public Type ColumnType { get; }
 
-        public Dictionary<string, object> Items { get; }
-        public string ColumnTitle { get; set; }
+        private Dictionary<string, object> Items { get; }
+        private string ColumnTitle { get; set; }
 
         private Column()
         {

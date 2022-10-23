@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Io", "..\InteractiveTable\I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "..\InteractiveTable\Logger\Logger.csproj", "{1F4BDDDB-1439-4A0F-B1D5-A450C38E130E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveTable", "..\InteractiveTable\InteractiveTable\InteractiveTable.csproj", "{36ACF732-2B4C-41AE-A096-6CD92E4671BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{1F4BDDDB-1439-4A0F-B1D5-A450C38E130E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F4BDDDB-1439-4A0F-B1D5-A450C38E130E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F4BDDDB-1439-4A0F-B1D5-A450C38E130E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36ACF732-2B4C-41AE-A096-6CD92E4671BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36ACF732-2B4C-41AE-A096-6CD92E4671BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36ACF732-2B4C-41AE-A096-6CD92E4671BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36ACF732-2B4C-41AE-A096-6CD92E4671BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

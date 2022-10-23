@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
 using InteractiveTable;
 using Io;
 using Logger;
@@ -29,11 +27,12 @@ namespace UserInterface
             if (CurrentTable is null)
             {
                 var peopleData = ImportApp.ImportTable();
-                BuildTable(peopleData);
-                
+                var tableBuilder = new TableBuilder<Person>(Logger);
+                var table = tableBuilder.CreateTable(peopleData);
+                CurrentTable = table;
+                ConsoleHandler.Table = table;
             }
-            
-            
+
 
             RenderMenu();
         }
@@ -54,38 +53,11 @@ namespace UserInterface
         }
 
 
-        private void BuildTable(List<Person> peopleData)
-        {
-            Logger?.Log("Building new table", LogLevel.Info);
-            var personProps = typeof(Person).GetProperties();
-            CurrentTable = new Table("People", Logger);
-            foreach (var prop in personProps)
-            {
-                Type propType = prop.PropertyType;
-                CurrentTable.AddColumn(propType, prop.Name);
-            }
-        
-            FillTable(personProps, peopleData);
-            ConsoleHandler.Table = CurrentTable;
-        }
-        
-        private void FillTable(PropertyInfo[] props, List<Person> peopleData)
-        {
-            Logger?.Log("Filling table with imported data", LogLevel.Info);
-            foreach (Person person in peopleData)
-            {
-                foreach (var prop in props)
-                {
-                    CurrentTable.AppendData(prop.GetValue(person));
-                }
-            }
-        
-            Logger?.Log($"Added {peopleData.Count} imported entries to {CurrentTable.Identifier} table", LogLevel.Info);
-        }
-
         private void FinishProgram()
         {
-            ImportApp.ExportData(CurrentTable);
+            var tableBuilder = new TableBuilder<Person>(Logger);
+            var dataToExport = tableBuilder.ConvertTableToData(CurrentTable);
+            ImportApp.ExportData(dataToExport);
             Logger?.Log("Program is stopping", LogLevel.Info);
             Environment.Exit(0);
         }
