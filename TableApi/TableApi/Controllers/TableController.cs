@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using InteractiveTable;
 using Io;
 using Logger;
@@ -29,14 +30,23 @@ namespace TableApi.Controllers
 
             return table;
         }
-        
+
         [Route("page/{id}")]
-        public List<List<object>> Get(int id)
+        public ActionResult<List<List<object>>> Get(int id)
         {
             var data = ImportManager.ImportTable();
             var tableBuilder = new TableBuilder<Person>(Logger);
             var table = tableBuilder.CreateTable(data);
-            var page = table.ReadPage(id);
+            List<List<object>> page; 
+            try
+            {
+                page = table.ReadPage(id);
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e);
+            }
+
 
             return page;
         }

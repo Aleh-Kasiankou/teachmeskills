@@ -86,6 +86,7 @@ namespace InteractiveTable
 
         private void AppendRows(string row)
         {
+            _logger.Log($"Attempt to create rows to {row}", LogLevel.Warning);
             NameProvider.ValidateRowName(row);
 
             if (!Rows.Contains(row))

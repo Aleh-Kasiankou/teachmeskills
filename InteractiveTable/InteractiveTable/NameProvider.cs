@@ -11,8 +11,8 @@ namespace InteractiveTable
         }
 
         private readonly ILogger _logger;
-        private static char ColumnNameHash { get; set; } = 'A';
-        private static int RowNameHash { get; set; } = 1;
+        private char ColumnNameHash { get; set; } = 'A';
+        private int RowNameHash { get; set; } = 1;
 
         public string GenerateIdentifier(TableEntity entity)
         {

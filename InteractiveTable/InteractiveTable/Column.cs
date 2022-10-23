@@ -45,7 +45,7 @@ namespace InteractiveTable
         public object ReadRow(string row)
         {
             bool keyExists = Items.TryGetValue(row, out object data);
-            return keyExists ? data : default;
+            return keyExists ? data : throw new ArgumentException($"There is no row with ID {row}");
         }
 
         private object ValidateType(object obj)
