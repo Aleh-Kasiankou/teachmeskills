@@ -30,8 +30,20 @@ namespace TableApi.Controllers
 
             return table;
         }
+        
+        [Route("data/")]
+        public List<object> GetFullTable()
+        {
+            var data = ImportManager.ImportTable();
+            var tableBuilder = new TableBuilder<Person>(Logger);
+            var table = tableBuilder.CreateTable(data);
+            List<object> tableData = tableBuilder.ConvertTableToData(table);
 
-        [Route("page/{id}")]
+
+            return tableData;
+        }
+
+        [Route("data/page/{id}")]
         public ActionResult<List<List<object>>> Get(int id)
         {
             var data = ImportManager.ImportTable();

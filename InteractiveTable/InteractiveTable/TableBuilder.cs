@@ -50,11 +50,11 @@ namespace InteractiveTable
             _logger?.Log($"Added {peopleData.Count} imported entries to {table.Identifier} table", LogLevel.Info);
         }
         
-        public List<T> ConvertTableToData(Table table)
+        public List<object> ConvertTableToData(Table table)
         {
             _logger?.Log($"Converting table {table.Identifier} to list of {nameof(T)} to save", LogLevel.Info);
             List<object> args = new List<object>();
-            List<T> data = new List<T>();
+            List<object> data = new List<object>();
 
             foreach (var row in table.Rows)
             {
