@@ -11,5 +11,7 @@ namespace Io
         public ILogger Logger { get;}
 
         public void ExportData(List<object> dataToExport);
+        
+        public void ExportData(List<T> dataToExport);
     }
 }

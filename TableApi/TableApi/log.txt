@@ -3394,3 +3394,15 @@ Info - 10/27/2022 3:19:30 PM -- Validating column name C
 Info - 10/27/2022 3:19:30 PM -- Validating column name A
 Info - 10/27/2022 3:19:30 PM -- Validating column name B
 Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 6:55:39 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 6:55:39 PM -- Saving data to C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 6:55:51 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 6:58:56 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 7:01:12 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 7:01:12 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 7:01:35 PM -- Saving data to C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 7:01:45 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 7:02:10 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 7:02:10 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 7:02:10 PM -- Saving data to C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 7:02:25 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json

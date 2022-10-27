@@ -10,17 +10,16 @@ namespace TableApi.Controllers
     [Route("table/get")]
     public class TableController : ControllerBase
     {
-        private IImportHandler<Person> ImportHandler { get;}
-        private ITableBuilder<Person> TableBuilder { get;}
+        private IImportHandler<Person> ImportHandler { get; }
+        private ITableBuilder<Person> TableBuilder { get; }
 
         public TableController(IImportHandler<Person> importHandler, ITableBuilder<Person> tableBuilder)
         {
             ImportHandler = importHandler;
             TableBuilder = tableBuilder;
         }
-
-        [HttpGet]
-        [Route("filepath")]
+        
+        [HttpGet("filepath")]
         public string GetTablePath()
         {
             return ImportHandler.FilePath;
@@ -35,8 +34,8 @@ namespace TableApi.Controllers
 
             return table;
         }
-        
-        [Route("data/")]
+
+        [HttpGet("data/")]
         public List<object> GetFullTableWithData()
         {
             var data = ImportHandler.ImportTable();
@@ -47,12 +46,12 @@ namespace TableApi.Controllers
             return tableData;
         }
 
-        [Route("data/page/{id}")]
+        [HttpGet("data/page/{id}")]
         public ActionResult<List<List<object>>> GetTablePageWithData(int id)
         {
             var data = ImportHandler.ImportTable();
             var table = TableBuilder.CreateTable(data);
-            List<List<object>> page; 
+            List<List<object>> page;
             try
             {
                 page = table.ReadPage(id);
