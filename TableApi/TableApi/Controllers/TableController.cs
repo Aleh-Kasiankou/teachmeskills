@@ -20,6 +20,13 @@ namespace TableApi.Controllers
         }
 
         [HttpGet]
+        [Route("filepath")]
+        public string GetTablePath()
+        {
+            return ImportHandler.FilePath;
+        }
+
+        [HttpGet]
         public Table GetTable()
         {
             var data = ImportHandler.ImportTable();
