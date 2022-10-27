@@ -48,7 +48,7 @@ namespace TableApi.Controllers
         }
 
         [Route("data/page/{id}")]
-        public ActionResult<List<List<object>>> GetTablePageWithData(int id)
+        public IActionResult GetTablePageWithData(int id)
         {
             var data = ImportHandler.ImportTable();
             var table = TableBuilder.CreateTable(data);
@@ -63,7 +63,7 @@ namespace TableApi.Controllers
             }
 
 
-            return page;
+            return Ok(page);
         }
     }
 }
