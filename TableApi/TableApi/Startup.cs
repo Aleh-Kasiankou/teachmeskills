@@ -22,16 +22,17 @@ namespace TableApi
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
-            services.AddScoped<ILogger, FileLogger>();
+            services.AddSingleton<ILogger, FileLogger>();
+            services.ConfigurePersonManagementServices();
+            services.AddSwaggerDocument(config => { config.Title = "Table API Endpoints"; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +50,10 @@ namespace TableApi
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            
+            app.UseOpenApi();
+            
+            app.UseSwaggerUi3(config => { config.DocExpansion = "list"; });
         }
     }
 }

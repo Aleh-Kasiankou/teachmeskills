@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using InteractiveTable;
 using Io;
-using Logger;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TableApi.Controllers
@@ -11,44 +10,48 @@ namespace TableApi.Controllers
     [Route("table/get")]
     public class TableController : ControllerBase
     {
-        public ILogger Logger { get; set; }
+        private IImportHandler<Person> ImportHandler { get;}
+        private ITableBuilder<Person> TableBuilder { get;}
 
-        public TableController(ILogger logger)
+        public TableController(IImportHandler<Person> importHandler, ITableBuilder<Person> tableBuilder)
         {
-            Logger = logger;
+            ImportHandler = importHandler;
+            TableBuilder = tableBuilder;
         }
 
-        public ImportManager<Person> ImportManager { get; set; } = new ImportManager<Person>(new FileLogger());
+        [HttpGet]
+        [Route("filepath")]
+        public string GetTablePath()
+        {
+            return ImportHandler.FilePath;
+        }
 
         [HttpGet]
-        public Table Get()
+        public Table GetTable()
         {
-            var data = ImportManager.ImportTable();
-            var tableBuilder = new TableBuilder<Person>(Logger);
-            var table = tableBuilder.CreateTable(data);
+            var data = ImportHandler.ImportTable();
+            var table = TableBuilder.CreateTable(data);
 
 
             return table;
         }
         
         [Route("data/")]
-        public List<object> GetFullTable()
+        public List<object> GetFullTableWithData()
         {
-            var data = ImportManager.ImportTable();
-            var tableBuilder = new TableBuilder<Person>(Logger);
-            var table = tableBuilder.CreateTable(data);
-            List<object> tableData = tableBuilder.ConvertTableToData(table);
+            var data = ImportHandler.ImportTable();
+            var table = TableBuilder.CreateTable(data);
+            List<object> tableData = TableBuilder.ConvertTableToData(table);
 
 
             return tableData;
         }
 
         [Route("data/page/{id}")]
-        public ActionResult<List<List<object>>> Get(int id)
+        public ActionResult<List<List<object>>> GetTablePageWithData(int id)
         {
-            var data = ImportManager.ImportTable();
-            var tableBuilder = new TableBuilder<Person>(Logger);
-            var table = tableBuilder.CreateTable(data);
+            var data = ImportHandler.ImportTable();
+            var table = TableBuilder.CreateTable(data);
             List<List<object>> page; 
             try
             {

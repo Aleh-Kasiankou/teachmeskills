@@ -5,7 +5,7 @@ using Logger;
 
 namespace InteractiveTable
 {
-    public class TableBuilder<T>
+    public class TableBuilder<T> : ITableBuilder<T>
     {
         private readonly ILogger _logger;
         public PropertyInfo[] Props { get; set; } = typeof(T).GetProperties();
@@ -60,10 +60,12 @@ namespace InteractiveTable
             {
                 foreach (var column in table.Columns)
                 {
-                    var prop = table.ReadCell(column.Identifier, row);
+                    var prop = table.ReadCell(column.Identifier, row); // string to int
+                    Type type = column.ColumnType;
+                    prop = Convert.ChangeType(prop, type); // crutch
                     args.Add(prop);
                 }
-
+                
                 T dataItem = (T)Activator.CreateInstance(typeof(T), args.ToArray());
                 data.Add(dataItem);
                 args = new List<object>();

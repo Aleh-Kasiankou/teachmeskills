@@ -9,18 +9,17 @@ namespace TableApi.Controllers
     [Route("people/get")]
     public class PeopleController : ControllerBase
     {
-        public ILogger Logger { get; set; }
-        
-        public PeopleController(ILogger logger)
+        private IImportHandler<Person> ImportHandler { get;}
+
+        public PeopleController(IImportHandler<Person> importHandler)
         {
-            Logger = logger;
+            ImportHandler = importHandler;
         }
 
         [HttpGet]
         public IEnumerable<Person> Get()
         {
-            var importManager = new ImportManager<Person>(Logger);
-            var data = importManager.ImportTable();
+            var data = ImportHandler.ImportTable();
 
             return data;
         }
@@ -28,8 +27,7 @@ namespace TableApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Person> Get(int id)
         {
-            var importManager = new ImportManager<Person>(Logger);
-            var data = importManager.ImportTable();
+            var data = ImportHandler.ImportTable();
             if (data.Count < id + 1)
             {
                 return BadRequest();

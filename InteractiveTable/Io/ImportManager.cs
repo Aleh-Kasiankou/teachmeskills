@@ -7,18 +7,20 @@ using Newtonsoft.Json;
 
 namespace Io
 {
-    public class ImportManager<T>
+    public class ImportManager<T> : IImportHandler<T>
     {
-        public string FilePath { get; set; } =
-            "C:\\Users\\alehk\\OneDrive\\Документы\\TMS\\teachmeskills\\InteractiveTable\\Io\\bin\\Debug\\netcoreapp3.1\\samplePersonList.json";
+        public string FilePath { get; }
 
-        // @"../../../../\Io\bin\Debug\netcoreapp3.1\samplePersonList.json";
-        public ILogger Logger { get; set; }
+        public ILogger Logger { get; }
 
-        public ImportManager(ILogger logger)
+        
+        public ImportManager(ILogger logger, IDataPathProvider pathProvider) 
+        
         {
             Logger = logger;
+            FilePath = pathProvider.Path;
         }
+
 
         public List<T> ImportTable()
         {
@@ -48,9 +50,8 @@ namespace Io
             return json;
         }
 
-        
 
-        public void ExportData(List<T> dataToExport)
+        public void ExportData(List<object> dataToExport)
         {
             Logger?.Log($"Saving data to {FilePath}", LogLevel.Info);
             Stream stream = null;
