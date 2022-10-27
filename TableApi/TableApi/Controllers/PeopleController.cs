@@ -25,7 +25,7 @@ namespace TableApi.Controllers
         }
         
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public ActionResult<Person> Get(int id)
         {
             var data = ImportHandler.ImportTable();
             if (data.Count < id + 1)
@@ -33,7 +33,7 @@ namespace TableApi.Controllers
                 return BadRequest();
             }
 
-            return Ok(data[id]);
+            return data[id];
         }
     }
 }
