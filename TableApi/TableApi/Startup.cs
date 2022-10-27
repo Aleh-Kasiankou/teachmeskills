@@ -30,7 +30,8 @@ namespace TableApi
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
-            services.AddScoped<ILogger, FileLogger>();
+            services.AddSingleton<ILogger, FileLogger>();
+            services.ConfigurePersonManagementServices();
             services.AddSwaggerDocument(config => { config.Title = "Table API Endpoints"; });
         }
 

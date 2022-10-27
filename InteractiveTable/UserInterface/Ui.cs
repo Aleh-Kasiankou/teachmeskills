@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using InteractiveTable;
 using Io;
 using Logger;
@@ -17,7 +18,7 @@ namespace UserInterface
         public Ui(ILogger logger = null)
         {
             Logger = logger ?? new FileLogger();
-            ImportApp = new ImportManager<Person>(Logger);
+            ImportApp = new ImportManager<Person>(Logger, new DataPathProvider());
             ConsoleHandler = new ConsoleHandler(Logger);
             ConsoleHandler.ExitEvent += FinishProgram;
         }

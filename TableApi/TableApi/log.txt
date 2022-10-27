@@ -2831,3 +2831,566 @@ Warning - 10/26/2022 4:11:35 PM -- Attempt to create rows to 10
 Info - 10/26/2022 4:11:35 PM -- Validating row name 10
 Info - 10/26/2022 4:11:35 PM -- Validating column name C
 Info - 10/26/2022 4:11:35 PM -- Added 10 imported entries to People table
+Info - 10/27/2022 3:15:08 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 3:15:08 PM -- Building new table
+Info - 10/27/2022 3:15:08 PM -- Adding column Name
+Info - 10/27/2022 3:15:08 PM -- Adding column Age
+Info - 10/27/2022 3:15:08 PM -- Adding column Address
+Info - 10/27/2022 3:15:08 PM -- Filling table with imported data
+Info - 10/27/2022 3:15:08 PM -- Writing Kira to People table [A, 1]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Kira to People table [A, 1]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 1
+Info - 10/27/2022 3:15:08 PM -- Validating row name 1
+Info - 10/27/2022 3:15:08 PM -- Adding new row
+Info - 10/27/2022 3:15:08 PM -- Validating column name A
+Info - 10/27/2022 3:15:08 PM -- Writing 18 to People table [B, 1]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write 18 to People table [B, 1]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 1
+Info - 10/27/2022 3:15:08 PM -- Validating row name 1
+Info - 10/27/2022 3:15:08 PM -- Validating column name B
+Info - 10/27/2022 3:15:08 PM -- Writing USA, Atlanta, Dom Pushkina Ulitsa Kolotushkina to People table [C, 1]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write USA, Atlanta, Dom Pushkina Ulitsa Kolotushkina to People table [C, 1]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 1
+Info - 10/27/2022 3:15:08 PM -- Validating row name 1
+Info - 10/27/2022 3:15:08 PM -- Validating column name C
+Info - 10/27/2022 3:15:08 PM -- Writing Nina to People table [A, 2]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Nina to People table [A, 2]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 2
+Info - 10/27/2022 3:15:08 PM -- Validating row name 2
+Info - 10/27/2022 3:15:08 PM -- Adding new row
+Info - 10/27/2022 3:15:08 PM -- Validating column name A
+Info - 10/27/2022 3:15:08 PM -- Writing 16 to People table [B, 2]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write 16 to People table [B, 2]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 2
+Info - 10/27/2022 3:15:08 PM -- Validating row name 2
+Info - 10/27/2022 3:15:08 PM -- Validating column name B
+Info - 10/27/2022 3:15:08 PM -- Writing Ukraine, Lvyvska oblast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 2]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Ukraine, Lvyvska oblast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 2]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 2
+Info - 10/27/2022 3:15:08 PM -- Validating row name 2
+Info - 10/27/2022 3:15:08 PM -- Validating column name C
+Info - 10/27/2022 3:15:08 PM -- Writing Andy to People table [A, 3]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Andy to People table [A, 3]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 3
+Info - 10/27/2022 3:15:08 PM -- Validating row name 3
+Info - 10/27/2022 3:15:08 PM -- Adding new row
+Info - 10/27/2022 3:15:08 PM -- Validating column name A
+Info - 10/27/2022 3:15:08 PM -- Writing 25 to People table [B, 3]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write 25 to People table [B, 3]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 3
+Info - 10/27/2022 3:15:08 PM -- Validating row name 3
+Info - 10/27/2022 3:15:08 PM -- Validating column name B
+Info - 10/27/2022 3:15:08 PM -- Writing France, Champagne, Dom Pushkina Ulitsa Kolotushkina to People table [C, 3]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write France, Champagne, Dom Pushkina Ulitsa Kolotushkina to People table [C, 3]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 3
+Info - 10/27/2022 3:15:08 PM -- Validating row name 3
+Info - 10/27/2022 3:15:08 PM -- Validating column name C
+Info - 10/27/2022 3:15:08 PM -- Writing Fred to People table [A, 4]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Fred to People table [A, 4]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 4
+Info - 10/27/2022 3:15:08 PM -- Validating row name 4
+Info - 10/27/2022 3:15:08 PM -- Adding new row
+Info - 10/27/2022 3:15:08 PM -- Validating column name A
+Info - 10/27/2022 3:15:08 PM -- Writing 45 to People table [B, 4]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write 45 to People table [B, 4]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 4
+Info - 10/27/2022 3:15:08 PM -- Validating row name 4
+Info - 10/27/2022 3:15:08 PM -- Validating column name B
+Info - 10/27/2022 3:15:08 PM -- Writing Canada, West Coast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 4]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Canada, West Coast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 4]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 4
+Info - 10/27/2022 3:15:08 PM -- Validating row name 4
+Info - 10/27/2022 3:15:08 PM -- Validating column name C
+Info - 10/27/2022 3:15:08 PM -- Writing Rick to People table [A, 5]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Rick to People table [A, 5]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 5
+Info - 10/27/2022 3:15:08 PM -- Validating row name 5
+Info - 10/27/2022 3:15:08 PM -- Adding new row
+Info - 10/27/2022 3:15:08 PM -- Validating column name A
+Info - 10/27/2022 3:15:08 PM -- Writing 73 to People table [B, 5]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write 73 to People table [B, 5]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 5
+Info - 10/27/2022 3:15:08 PM -- Validating row name 5
+Info - 10/27/2022 3:15:08 PM -- Validating column name B
+Info - 10/27/2022 3:15:08 PM -- Writing Uganda, Motherland, Dom Pushkina Ulitsa Kolotushkina to People table [C, 5]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Uganda, Motherland, Dom Pushkina Ulitsa Kolotushkina to People table [C, 5]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 5
+Info - 10/27/2022 3:15:08 PM -- Validating row name 5
+Info - 10/27/2022 3:15:08 PM -- Validating column name C
+Info - 10/27/2022 3:15:08 PM -- Writing Morty to People table [A, 6]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Morty to People table [A, 6]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 6
+Info - 10/27/2022 3:15:08 PM -- Validating row name 6
+Info - 10/27/2022 3:15:08 PM -- Adding new row
+Info - 10/27/2022 3:15:08 PM -- Validating column name A
+Info - 10/27/2022 3:15:08 PM -- Writing 15 to People table [B, 6]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write 15 to People table [B, 6]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 6
+Info - 10/27/2022 3:15:08 PM -- Validating row name 6
+Info - 10/27/2022 3:15:08 PM -- Validating column name B
+Info - 10/27/2022 3:15:08 PM -- Writing Uganda, Fatherland, Dom Pushkina Ulitsa Kolotushkina to People table [C, 6]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Uganda, Fatherland, Dom Pushkina Ulitsa Kolotushkina to People table [C, 6]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 6
+Info - 10/27/2022 3:15:08 PM -- Validating row name 6
+Info - 10/27/2022 3:15:08 PM -- Validating column name C
+Info - 10/27/2022 3:15:08 PM -- Writing Volodymir to People table [A, 7]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Volodymir to People table [A, 7]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 7
+Info - 10/27/2022 3:15:08 PM -- Validating row name 7
+Info - 10/27/2022 3:15:08 PM -- Adding new row
+Info - 10/27/2022 3:15:08 PM -- Validating column name A
+Info - 10/27/2022 3:15:08 PM -- Writing 36 to People table [B, 7]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write 36 to People table [B, 7]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 7
+Info - 10/27/2022 3:15:08 PM -- Validating row name 7
+Info - 10/27/2022 3:15:08 PM -- Validating column name B
+Info - 10/27/2022 3:15:08 PM -- Writing Ukraine, Kiyv oblast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 7]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Ukraine, Kiyv oblast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 7]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 7
+Info - 10/27/2022 3:15:08 PM -- Validating row name 7
+Info - 10/27/2022 3:15:08 PM -- Validating column name C
+Info - 10/27/2022 3:15:08 PM -- Writing AppleJack to People table [A, 8]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write AppleJack to People table [A, 8]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 8
+Info - 10/27/2022 3:15:08 PM -- Validating row name 8
+Info - 10/27/2022 3:15:08 PM -- Adding new row
+Info - 10/27/2022 3:15:08 PM -- Validating column name A
+Info - 10/27/2022 3:15:08 PM -- Writing 17 to People table [B, 8]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write 17 to People table [B, 8]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 8
+Info - 10/27/2022 3:15:08 PM -- Validating row name 8
+Info - 10/27/2022 3:15:08 PM -- Validating column name B
+Info - 10/27/2022 3:15:08 PM -- Writing PonyLand, PonyWill Land, Dom Pushkina Ulitsa Kolotushkina to People table [C, 8]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write PonyLand, PonyWill Land, Dom Pushkina Ulitsa Kolotushkina to People table [C, 8]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 8
+Info - 10/27/2022 3:15:08 PM -- Validating row name 8
+Info - 10/27/2022 3:15:08 PM -- Validating column name C
+Info - 10/27/2022 3:15:08 PM -- Writing Jean to People table [A, 9]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Jean to People table [A, 9]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 9
+Info - 10/27/2022 3:15:08 PM -- Validating row name 9
+Info - 10/27/2022 3:15:08 PM -- Adding new row
+Info - 10/27/2022 3:15:08 PM -- Validating column name A
+Info - 10/27/2022 3:15:08 PM -- Writing 18 to People table [B, 9]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write 18 to People table [B, 9]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 9
+Info - 10/27/2022 3:15:08 PM -- Validating row name 9
+Info - 10/27/2022 3:15:08 PM -- Validating column name B
+Info - 10/27/2022 3:15:08 PM -- Writing USA, California, Dom Pushkina Ulitsa Kolotushkina to People table [C, 9]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write USA, California, Dom Pushkina Ulitsa Kolotushkina to People table [C, 9]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 9
+Info - 10/27/2022 3:15:08 PM -- Validating row name 9
+Info - 10/27/2022 3:15:08 PM -- Validating column name C
+Info - 10/27/2022 3:15:08 PM -- Writing Lucy to People table [A, 10]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write Lucy to People table [A, 10]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 10
+Info - 10/27/2022 3:15:08 PM -- Validating row name 10
+Info - 10/27/2022 3:15:08 PM -- Adding new row
+Info - 10/27/2022 3:15:08 PM -- Validating column name A
+Info - 10/27/2022 3:15:08 PM -- Writing 0 to People table [B, 10]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write 0 to People table [B, 10]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 10
+Info - 10/27/2022 3:15:08 PM -- Validating row name 10
+Info - 10/27/2022 3:15:08 PM -- Validating column name B
+Info - 10/27/2022 3:15:08 PM -- Writing  to People table [C, 10]
+Info - 10/27/2022 3:15:08 PM -- Attempt to write  to People table [C, 10]
+Warning - 10/27/2022 3:15:08 PM -- Attempt to create rows to 10
+Info - 10/27/2022 3:15:08 PM -- Validating row name 10
+Info - 10/27/2022 3:15:08 PM -- Validating column name C
+Info - 10/27/2022 3:15:08 PM -- Added 10 imported entries to People table
+Info - 10/27/2022 3:15:28 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 3:15:28 PM -- Building new table
+Info - 10/27/2022 3:15:28 PM -- Adding column Name
+Info - 10/27/2022 3:15:28 PM -- Adding column Age
+Info - 10/27/2022 3:15:28 PM -- Adding column Address
+Info - 10/27/2022 3:15:28 PM -- Filling table with imported data
+Info - 10/27/2022 3:15:28 PM -- Writing Kira to People table [A, 1]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Kira to People table [A, 1]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 1
+Info - 10/27/2022 3:15:28 PM -- Validating row name 1
+Info - 10/27/2022 3:15:28 PM -- Adding new row
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Writing 18 to People table [B, 1]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write 18 to People table [B, 1]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 1
+Info - 10/27/2022 3:15:28 PM -- Validating row name 1
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Writing USA, Atlanta, Dom Pushkina Ulitsa Kolotushkina to People table [C, 1]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write USA, Atlanta, Dom Pushkina Ulitsa Kolotushkina to People table [C, 1]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 1
+Info - 10/27/2022 3:15:28 PM -- Validating row name 1
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Writing Nina to People table [A, 2]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Nina to People table [A, 2]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 2
+Info - 10/27/2022 3:15:28 PM -- Validating row name 2
+Info - 10/27/2022 3:15:28 PM -- Adding new row
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Writing 16 to People table [B, 2]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write 16 to People table [B, 2]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 2
+Info - 10/27/2022 3:15:28 PM -- Validating row name 2
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Writing Ukraine, Lvyvska oblast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 2]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Ukraine, Lvyvska oblast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 2]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 2
+Info - 10/27/2022 3:15:28 PM -- Validating row name 2
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Writing Andy to People table [A, 3]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Andy to People table [A, 3]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 3
+Info - 10/27/2022 3:15:28 PM -- Validating row name 3
+Info - 10/27/2022 3:15:28 PM -- Adding new row
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Writing 25 to People table [B, 3]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write 25 to People table [B, 3]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 3
+Info - 10/27/2022 3:15:28 PM -- Validating row name 3
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Writing France, Champagne, Dom Pushkina Ulitsa Kolotushkina to People table [C, 3]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write France, Champagne, Dom Pushkina Ulitsa Kolotushkina to People table [C, 3]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 3
+Info - 10/27/2022 3:15:28 PM -- Validating row name 3
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Writing Fred to People table [A, 4]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Fred to People table [A, 4]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 4
+Info - 10/27/2022 3:15:28 PM -- Validating row name 4
+Info - 10/27/2022 3:15:28 PM -- Adding new row
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Writing 45 to People table [B, 4]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write 45 to People table [B, 4]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 4
+Info - 10/27/2022 3:15:28 PM -- Validating row name 4
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Writing Canada, West Coast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 4]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Canada, West Coast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 4]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 4
+Info - 10/27/2022 3:15:28 PM -- Validating row name 4
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Writing Rick to People table [A, 5]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Rick to People table [A, 5]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 5
+Info - 10/27/2022 3:15:28 PM -- Validating row name 5
+Info - 10/27/2022 3:15:28 PM -- Adding new row
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Writing 73 to People table [B, 5]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write 73 to People table [B, 5]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 5
+Info - 10/27/2022 3:15:28 PM -- Validating row name 5
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Writing Uganda, Motherland, Dom Pushkina Ulitsa Kolotushkina to People table [C, 5]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Uganda, Motherland, Dom Pushkina Ulitsa Kolotushkina to People table [C, 5]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 5
+Info - 10/27/2022 3:15:28 PM -- Validating row name 5
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Writing Morty to People table [A, 6]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Morty to People table [A, 6]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 6
+Info - 10/27/2022 3:15:28 PM -- Validating row name 6
+Info - 10/27/2022 3:15:28 PM -- Adding new row
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Writing 15 to People table [B, 6]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write 15 to People table [B, 6]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 6
+Info - 10/27/2022 3:15:28 PM -- Validating row name 6
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Writing Uganda, Fatherland, Dom Pushkina Ulitsa Kolotushkina to People table [C, 6]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Uganda, Fatherland, Dom Pushkina Ulitsa Kolotushkina to People table [C, 6]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 6
+Info - 10/27/2022 3:15:28 PM -- Validating row name 6
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Writing Volodymir to People table [A, 7]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Volodymir to People table [A, 7]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 7
+Info - 10/27/2022 3:15:28 PM -- Validating row name 7
+Info - 10/27/2022 3:15:28 PM -- Adding new row
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Writing 36 to People table [B, 7]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write 36 to People table [B, 7]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 7
+Info - 10/27/2022 3:15:28 PM -- Validating row name 7
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Writing Ukraine, Kiyv oblast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 7]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Ukraine, Kiyv oblast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 7]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 7
+Info - 10/27/2022 3:15:28 PM -- Validating row name 7
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Writing AppleJack to People table [A, 8]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write AppleJack to People table [A, 8]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 8
+Info - 10/27/2022 3:15:28 PM -- Validating row name 8
+Info - 10/27/2022 3:15:28 PM -- Adding new row
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Writing 17 to People table [B, 8]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write 17 to People table [B, 8]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 8
+Info - 10/27/2022 3:15:28 PM -- Validating row name 8
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Writing PonyLand, PonyWill Land, Dom Pushkina Ulitsa Kolotushkina to People table [C, 8]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write PonyLand, PonyWill Land, Dom Pushkina Ulitsa Kolotushkina to People table [C, 8]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 8
+Info - 10/27/2022 3:15:28 PM -- Validating row name 8
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Writing Jean to People table [A, 9]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Jean to People table [A, 9]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 9
+Info - 10/27/2022 3:15:28 PM -- Validating row name 9
+Info - 10/27/2022 3:15:28 PM -- Adding new row
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Writing 18 to People table [B, 9]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write 18 to People table [B, 9]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 9
+Info - 10/27/2022 3:15:28 PM -- Validating row name 9
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Writing USA, California, Dom Pushkina Ulitsa Kolotushkina to People table [C, 9]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write USA, California, Dom Pushkina Ulitsa Kolotushkina to People table [C, 9]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 9
+Info - 10/27/2022 3:15:28 PM -- Validating row name 9
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Writing Lucy to People table [A, 10]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write Lucy to People table [A, 10]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 10
+Info - 10/27/2022 3:15:28 PM -- Validating row name 10
+Info - 10/27/2022 3:15:28 PM -- Adding new row
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Writing 0 to People table [B, 10]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write 0 to People table [B, 10]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 10
+Info - 10/27/2022 3:15:28 PM -- Validating row name 10
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Writing  to People table [C, 10]
+Info - 10/27/2022 3:15:28 PM -- Attempt to write  to People table [C, 10]
+Warning - 10/27/2022 3:15:28 PM -- Attempt to create rows to 10
+Info - 10/27/2022 3:15:28 PM -- Validating row name 10
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Added 10 imported entries to People table
+Info - 10/27/2022 3:15:28 PM -- Converting table People to list of T to save
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:15:28 PM -- Validating column name A
+Info - 10/27/2022 3:15:28 PM -- Validating column name B
+Info - 10/27/2022 3:15:28 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/27/2022 3:19:30 PM -- Building new table
+Info - 10/27/2022 3:19:30 PM -- Adding column Name
+Info - 10/27/2022 3:19:30 PM -- Adding column Age
+Info - 10/27/2022 3:19:30 PM -- Adding column Address
+Info - 10/27/2022 3:19:30 PM -- Filling table with imported data
+Info - 10/27/2022 3:19:30 PM -- Writing Kira to People table [A, 1]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Kira to People table [A, 1]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 1
+Info - 10/27/2022 3:19:30 PM -- Validating row name 1
+Info - 10/27/2022 3:19:30 PM -- Adding new row
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Writing 18 to People table [B, 1]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write 18 to People table [B, 1]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 1
+Info - 10/27/2022 3:19:30 PM -- Validating row name 1
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Writing USA, Atlanta, Dom Pushkina Ulitsa Kolotushkina to People table [C, 1]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write USA, Atlanta, Dom Pushkina Ulitsa Kolotushkina to People table [C, 1]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 1
+Info - 10/27/2022 3:19:30 PM -- Validating row name 1
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Writing Nina to People table [A, 2]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Nina to People table [A, 2]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 2
+Info - 10/27/2022 3:19:30 PM -- Validating row name 2
+Info - 10/27/2022 3:19:30 PM -- Adding new row
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Writing 16 to People table [B, 2]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write 16 to People table [B, 2]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 2
+Info - 10/27/2022 3:19:30 PM -- Validating row name 2
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Writing Ukraine, Lvyvska oblast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 2]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Ukraine, Lvyvska oblast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 2]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 2
+Info - 10/27/2022 3:19:30 PM -- Validating row name 2
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Writing Andy to People table [A, 3]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Andy to People table [A, 3]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 3
+Info - 10/27/2022 3:19:30 PM -- Validating row name 3
+Info - 10/27/2022 3:19:30 PM -- Adding new row
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Writing 25 to People table [B, 3]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write 25 to People table [B, 3]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 3
+Info - 10/27/2022 3:19:30 PM -- Validating row name 3
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Writing France, Champagne, Dom Pushkina Ulitsa Kolotushkina to People table [C, 3]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write France, Champagne, Dom Pushkina Ulitsa Kolotushkina to People table [C, 3]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 3
+Info - 10/27/2022 3:19:30 PM -- Validating row name 3
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Writing Fred to People table [A, 4]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Fred to People table [A, 4]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 4
+Info - 10/27/2022 3:19:30 PM -- Validating row name 4
+Info - 10/27/2022 3:19:30 PM -- Adding new row
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Writing 45 to People table [B, 4]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write 45 to People table [B, 4]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 4
+Info - 10/27/2022 3:19:30 PM -- Validating row name 4
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Writing Canada, West Coast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 4]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Canada, West Coast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 4]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 4
+Info - 10/27/2022 3:19:30 PM -- Validating row name 4
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Writing Rick to People table [A, 5]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Rick to People table [A, 5]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 5
+Info - 10/27/2022 3:19:30 PM -- Validating row name 5
+Info - 10/27/2022 3:19:30 PM -- Adding new row
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Writing 73 to People table [B, 5]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write 73 to People table [B, 5]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 5
+Info - 10/27/2022 3:19:30 PM -- Validating row name 5
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Writing Uganda, Motherland, Dom Pushkina Ulitsa Kolotushkina to People table [C, 5]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Uganda, Motherland, Dom Pushkina Ulitsa Kolotushkina to People table [C, 5]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 5
+Info - 10/27/2022 3:19:30 PM -- Validating row name 5
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Writing Morty to People table [A, 6]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Morty to People table [A, 6]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 6
+Info - 10/27/2022 3:19:30 PM -- Validating row name 6
+Info - 10/27/2022 3:19:30 PM -- Adding new row
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Writing 15 to People table [B, 6]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write 15 to People table [B, 6]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 6
+Info - 10/27/2022 3:19:30 PM -- Validating row name 6
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Writing Uganda, Fatherland, Dom Pushkina Ulitsa Kolotushkina to People table [C, 6]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Uganda, Fatherland, Dom Pushkina Ulitsa Kolotushkina to People table [C, 6]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 6
+Info - 10/27/2022 3:19:30 PM -- Validating row name 6
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Writing Volodymir to People table [A, 7]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Volodymir to People table [A, 7]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 7
+Info - 10/27/2022 3:19:30 PM -- Validating row name 7
+Info - 10/27/2022 3:19:30 PM -- Adding new row
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Writing 36 to People table [B, 7]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write 36 to People table [B, 7]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 7
+Info - 10/27/2022 3:19:30 PM -- Validating row name 7
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Writing Ukraine, Kiyv oblast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 7]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Ukraine, Kiyv oblast, Dom Pushkina Ulitsa Kolotushkina to People table [C, 7]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 7
+Info - 10/27/2022 3:19:30 PM -- Validating row name 7
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Writing AppleJack to People table [A, 8]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write AppleJack to People table [A, 8]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 8
+Info - 10/27/2022 3:19:30 PM -- Validating row name 8
+Info - 10/27/2022 3:19:30 PM -- Adding new row
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Writing 17 to People table [B, 8]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write 17 to People table [B, 8]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 8
+Info - 10/27/2022 3:19:30 PM -- Validating row name 8
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Writing PonyLand, PonyWill Land, Dom Pushkina Ulitsa Kolotushkina to People table [C, 8]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write PonyLand, PonyWill Land, Dom Pushkina Ulitsa Kolotushkina to People table [C, 8]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 8
+Info - 10/27/2022 3:19:30 PM -- Validating row name 8
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Writing Jean to People table [A, 9]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Jean to People table [A, 9]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 9
+Info - 10/27/2022 3:19:30 PM -- Validating row name 9
+Info - 10/27/2022 3:19:30 PM -- Adding new row
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Writing 18 to People table [B, 9]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write 18 to People table [B, 9]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 9
+Info - 10/27/2022 3:19:30 PM -- Validating row name 9
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Writing USA, California, Dom Pushkina Ulitsa Kolotushkina to People table [C, 9]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write USA, California, Dom Pushkina Ulitsa Kolotushkina to People table [C, 9]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 9
+Info - 10/27/2022 3:19:30 PM -- Validating row name 9
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Writing Lucy to People table [A, 10]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write Lucy to People table [A, 10]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 10
+Info - 10/27/2022 3:19:30 PM -- Validating row name 10
+Info - 10/27/2022 3:19:30 PM -- Adding new row
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Writing 0 to People table [B, 10]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write 0 to People table [B, 10]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 10
+Info - 10/27/2022 3:19:30 PM -- Validating row name 10
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Writing  to People table [C, 10]
+Info - 10/27/2022 3:19:30 PM -- Attempt to write  to People table [C, 10]
+Warning - 10/27/2022 3:19:30 PM -- Attempt to create rows to 10
+Info - 10/27/2022 3:19:30 PM -- Validating row name 10
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Added 10 imported entries to People table
+Info - 10/27/2022 3:19:30 PM -- Converting table People to list of T to save
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
+Info - 10/27/2022 3:19:30 PM -- Validating column name A
+Info - 10/27/2022 3:19:30 PM -- Validating column name B
+Info - 10/27/2022 3:19:30 PM -- Validating column name C
