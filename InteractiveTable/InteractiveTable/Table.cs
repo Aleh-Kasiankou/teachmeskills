@@ -75,7 +75,7 @@ namespace InteractiveTable
 
             for (int i = 1; pageData.Count < PageSize; i++)
             {
-                if (i >= (page - 1) * PageSize)
+                if (i > (page - 1) * PageSize)
                 {
                     pageData.Add(ReadRow(i.ToString()));
                 }

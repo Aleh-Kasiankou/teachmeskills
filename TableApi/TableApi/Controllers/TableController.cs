@@ -18,7 +18,7 @@ namespace TableApi.Controllers
             ImportHandler = importHandler;
             TableBuilder = tableBuilder;
         }
-        
+
         [HttpGet("filepath")]
         public string GetTablePath()
         {
@@ -52,14 +52,8 @@ namespace TableApi.Controllers
             var data = ImportHandler.ImportTable();
             var table = TableBuilder.CreateTable(data);
             List<List<object>> page;
-            try
-            {
-                page = table.ReadPage(id);
-            }
-            catch (ArgumentException e)
-            {
-                return BadRequest(e);
-            }
+
+            page = table.ReadPage(id);
 
 
             return page;
