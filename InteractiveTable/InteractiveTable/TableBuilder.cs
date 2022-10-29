@@ -18,7 +18,7 @@ namespace InteractiveTable
         public Table CreateTable(List<T> dataList)
         {
             _logger?.Log("Building new table", LogLevel.Info);
-            
+
             var table = new Table("People", _logger);
             SetTableLayout(Props, table);
             FillTable(table, dataList, Props);
@@ -28,7 +28,6 @@ namespace InteractiveTable
 
         private void SetTableLayout(PropertyInfo[] props, Table table)
         {
-            
             foreach (var prop in props)
             {
                 Type propType = prop.PropertyType;
@@ -39,7 +38,7 @@ namespace InteractiveTable
         private void FillTable(Table table, List<T> peopleData, PropertyInfo[] props)
         {
             _logger?.Log("Filling table with imported data", LogLevel.Info);
-            foreach (T T in peopleData)
+            foreach (T T in peopleData ?? new List<T>())
             {
                 foreach (var prop in props)
                 {
@@ -47,9 +46,9 @@ namespace InteractiveTable
                 }
             }
 
-            _logger?.Log($"Added {peopleData.Count} imported entries to {table.Identifier} table", LogLevel.Info);
+            _logger?.Log($"Added {peopleData?.Count ?? 0} imported entries to {table.Identifier} table", LogLevel.Info);
         }
-        
+
         public List<object> ConvertTableToData(Table table)
         {
             _logger?.Log($"Converting table {table.Identifier} to list of {nameof(T)} to save", LogLevel.Info);
@@ -60,12 +59,17 @@ namespace InteractiveTable
             {
                 foreach (var column in table.Columns)
                 {
-                    var prop = table.ReadCell(column.Identifier, row); // string to int
+                    var prop = table.ReadCell(column.Identifier, row);
                     Type type = column.ColumnType;
-                    prop = Convert.ChangeType(prop, type); // crutch
+                    if (!type.IsValueType || prop != null)
+                    {
+                        prop = Convert.ChangeType(prop, type);
+                    }
+                    
+
                     args.Add(prop);
                 }
-                
+
                 T dataItem = (T)Activator.CreateInstance(typeof(T), args.ToArray());
                 data.Add(dataItem);
                 args = new List<object>();

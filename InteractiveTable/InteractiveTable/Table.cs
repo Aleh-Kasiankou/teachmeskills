@@ -26,7 +26,7 @@ namespace InteractiveTable
         public List<string> Rows { get; set; } = new List<string>();
         private readonly ILogger _logger;
         public int PageSize { get; set; } = 5;
-        private NameProvider NameProvider { get;}
+        private NameProvider NameProvider { get; }
 
         public void AddColumn(Type type, string columnTitle)
         {
@@ -39,8 +39,8 @@ namespace InteractiveTable
         public void WriteData(string columnId, string row, object value)
         {
             _logger?.Log($"Attempt to write {value} to {Identifier} table [{columnId}, {row}]", LogLevel.Info);
-            AppendRows(row);
             Column column = FindColumn(columnId);
+            AppendRows(row);
             column.WriteToRow(row, value);
         }
 
@@ -69,13 +69,13 @@ namespace InteractiveTable
             return rowData;
         }
 
-        public List<List<object>> ReadPage(int page) // unfinished pagination. Need page validation
+        public List<List<object>> ReadPage(int page) // Used in API. No Validation
         {
             var pageData = new List<List<object>>();
 
             for (int i = 1; pageData.Count < PageSize; i++)
             {
-                if (i >= (page - 1) * PageSize)
+                if (i > (page - 1) * PageSize)
                 {
                     pageData.Add(ReadRow(i.ToString()));
                 }
@@ -104,7 +104,7 @@ namespace InteractiveTable
             var rowToAdd = NameProvider.GenerateIdentifier(TableEntity.Row);
             Rows.Add(rowToAdd);
         }
-        
+
 
         private Column FindColumn(string identifier)
         {

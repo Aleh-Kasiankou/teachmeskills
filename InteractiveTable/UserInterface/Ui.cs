@@ -23,7 +23,7 @@ namespace UserInterface
             ConsoleHandler.ExitEvent += FinishProgram;
         }
 
-        public void Start()
+        public void Start(Exception e)
         {
             if (CurrentTable is null)
             {
@@ -35,22 +35,33 @@ namespace UserInterface
             }
 
 
-            RenderMenu();
+            RenderMenu(e);
         }
 
-        private void RenderMenu()
+        private void NotifyAboutCriticalError(Exception e)
+        {
+            var msg = $"Sorry, something went wrong:\n {e.Message}";
+            ConsoleHandler.NotifyUser(msg);
+        }
+
+        private void RenderMenu(Exception e)
         {
             Console.Clear();
+
+            if (!(e is null))
+            {
+                NotifyAboutCriticalError(e);
+            }
+
             Console.WriteLine(CurrentTable);
 
             Console.WriteLine("Please, click one of the functional buttons to proceed:\n" +
-                              $"{ConsoleHandler.Add} to Add new cells\n" +
                               $"{ConsoleHandler.Write} to Edit/Set a value for a cell\n" +
                               $"{ConsoleHandler.Delete} to Delete a Cell\n" +
                               $"{ConsoleHandler.Exit} to Stop Program\n");
 
             ConsoleHandler.HandleInput();
-            RenderMenu();
+            RenderMenu(null);
         }
 
 

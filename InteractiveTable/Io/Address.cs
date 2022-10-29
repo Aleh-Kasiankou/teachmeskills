@@ -21,8 +21,10 @@ namespace Io
                 State = addrParts[1];
                 Street = addrParts[2];
             }
-
-            throw new ArgumentException("Invalid Address");
+            else
+            {
+                throw new ArgumentException("Invalid Address");
+            }
         }
 
         public Address(string country, string state, string street)

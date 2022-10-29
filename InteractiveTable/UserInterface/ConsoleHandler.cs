@@ -6,7 +6,6 @@ namespace UserInterface
 {
     public sealed class ConsoleHandler
     {
-        public const ConsoleKey Add = ConsoleKey.A;
         public const ConsoleKey Write = ConsoleKey.W;
         public const ConsoleKey Delete = ConsoleKey.D;
         public const ConsoleKey Exit = ConsoleKey.Backspace;
@@ -20,17 +19,17 @@ namespace UserInterface
             PressKeyEvent+= KeyHandler;
         }
 
+        public void NotifyUser(string message)
+        {
+            Console.WriteLine(message);
+        }
+
         public void HandleInput()
         {
             var key = Console.ReadKey();
             OnPressKeyEvent(this, new KeyPressEventArgs(key));
         }
-
-        private void AddCells()
-        {
-            Table.AppendData(null);
-        }
-
+        
         private void WriteCells()
         {
             var cellPosition = GetCellPosition();
@@ -68,9 +67,6 @@ namespace UserInterface
             
             switch (args.Key.Key)
             {
-                case Add:
-                    AddCells();
-                    break;
                 case Delete:
                     DeleteCells();
                     break;

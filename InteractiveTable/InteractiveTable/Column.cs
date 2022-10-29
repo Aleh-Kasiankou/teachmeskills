@@ -45,7 +45,7 @@ namespace InteractiveTable
         public object ReadRow(string row)
         {
             bool keyExists = Items.TryGetValue(row, out object data);
-            return keyExists ? data : throw new ArgumentException($"There is no row with ID {row}");
+            return keyExists ? data : null;
         }
 
         private object ValidateType(object obj)
@@ -75,6 +75,11 @@ namespace InteractiveTable
             }
 
             return returnObj;
+        }
+
+        public override string ToString()
+        {
+            return Identifier;
         }
     }
 }

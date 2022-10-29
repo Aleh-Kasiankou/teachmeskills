@@ -69,5 +69,24 @@ namespace Io
                 stream?.Dispose();
             }
         }
+
+        public void ExportData(List<T> dataToExport)
+        {
+            Logger?.Log($"Saving data to {FilePath}", LogLevel.Info);
+            Stream stream = null;
+            try
+            {
+                string json = JsonConvert.SerializeObject(dataToExport);
+                stream = File.Open(FilePath, FileMode.Truncate);
+                TextWriter jsonWriter = new StreamWriter(stream);
+                jsonWriter.Write(json);
+                jsonWriter.Flush();
+            }
+
+            finally
+            {
+                stream?.Dispose();
+            }
+        }
     }
 }
