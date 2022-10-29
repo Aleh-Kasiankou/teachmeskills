@@ -23,7 +23,7 @@ namespace UserInterface
             ConsoleHandler.ExitEvent += FinishProgram;
         }
 
-        public void Start()
+        public void Start(Exception e)
         {
             if (CurrentTable is null)
             {
@@ -35,18 +35,24 @@ namespace UserInterface
             }
 
 
-            RenderMenu();
+            RenderMenu(e);
         }
 
-        public void NotifyAboutCriticalError(Exception e)
+        private void NotifyAboutCriticalError(Exception e)
         {
-            var msg = $"Sorry, it seems application feels under the weather:\n {e.Message}";
+            var msg = $"Sorry, something went wrong:\n {e.Message}";
             ConsoleHandler.NotifyUser(msg);
         }
 
-        private void RenderMenu()
+        private void RenderMenu(Exception e)
         {
             Console.Clear();
+
+            if (!(e is null))
+            {
+                NotifyAboutCriticalError(e);
+            }
+
             Console.WriteLine(CurrentTable);
 
             Console.WriteLine("Please, click one of the functional buttons to proceed:\n" +
@@ -55,7 +61,7 @@ namespace UserInterface
                               $"{ConsoleHandler.Exit} to Stop Program\n");
 
             ConsoleHandler.HandleInput();
-            RenderMenu();
+            RenderMenu(null);
         }
 
 

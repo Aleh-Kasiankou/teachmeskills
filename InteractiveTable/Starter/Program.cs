@@ -8,16 +8,17 @@ namespace Starter
         static void Main(string[] args)
         {
             var ui = new Ui();
+            Exception exceptionToPrint = null;
             while (true)
             {
                 try
                 {
-                    ui.Start();
+                    ui.Start(exceptionToPrint);
                 }
 
                 catch (Exception e)
                 {
-                    ui.NotifyAboutCriticalError(e);
+                    exceptionToPrint = e;
                 }
             }
             
