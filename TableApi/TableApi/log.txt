@@ -3406,3 +3406,8 @@ Info - 10/27/2022 7:02:10 PM -- Importing Data from C:\Users\alehk\OneDrive\До
 Info - 10/27/2022 7:02:10 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
 Info - 10/27/2022 7:02:10 PM -- Saving data to C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
 Info - 10/27/2022 7:02:25 PM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/29/2022 4:51:27 AM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/29/2022 4:51:38 AM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/29/2022 4:51:47 AM -- Importing Data from C:\Users\alehk\OneDrive\Документы\TMS\teachmeskills\InteractiveTable\Io\bin\Debug\netcoreapp3.1\samplePersonList.json
+Info - 10/29/2022 4:56:59 AM -- Importing Data from .\samplePersonList.json
+Info - 10/29/2022 4:58:50 AM -- Importing Data from samplePersonList.json

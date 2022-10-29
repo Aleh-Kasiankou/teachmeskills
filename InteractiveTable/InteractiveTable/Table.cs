@@ -26,7 +26,7 @@ namespace InteractiveTable
         public List<string> Rows { get; set; } = new List<string>();
         private readonly ILogger _logger;
         public int PageSize { get; set; } = 5;
-        private NameProvider NameProvider { get;}
+        private NameProvider NameProvider { get; }
 
         public void AddColumn(Type type, string columnTitle)
         {
@@ -104,7 +104,7 @@ namespace InteractiveTable
             var rowToAdd = NameProvider.GenerateIdentifier(TableEntity.Row);
             Rows.Add(rowToAdd);
         }
-        
+
 
         private Column FindColumn(string identifier)
         {

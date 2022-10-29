@@ -20,6 +20,11 @@ namespace UserInterface
             PressKeyEvent+= KeyHandler;
         }
 
+        public void NotifyUser(string message)
+        {
+            Console.WriteLine(message);
+        }
+
         public void HandleInput()
         {
             var key = Console.ReadKey();

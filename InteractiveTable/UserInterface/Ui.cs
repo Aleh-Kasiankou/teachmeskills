@@ -38,6 +38,12 @@ namespace UserInterface
             RenderMenu();
         }
 
+        public void NotifyAboutCriticalError(Exception e)
+        {
+            var msg = $"Sorry, it seems application feels under the weather:\n {e.Message}";
+            ConsoleHandler.NotifyUser(msg);
+        }
+
         private void RenderMenu()
         {
             Console.Clear();

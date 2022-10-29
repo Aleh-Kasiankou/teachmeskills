@@ -1,4 +1,5 @@
-﻿using UserInterface;
+﻿using System;
+using UserInterface;
 
 namespace Starter
 {
@@ -7,7 +8,20 @@ namespace Starter
         static void Main(string[] args)
         {
             var ui = new Ui();
-            ui.Start();
+            while (true)
+            {
+                try
+                {
+                    ui.Start();
+                }
+
+                catch (Exception e)
+                {
+                    ui.NotifyAboutCriticalError(e);
+                }
+            }
+            
+
 
         }
     }
