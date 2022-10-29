@@ -50,7 +50,6 @@ namespace UserInterface
             Console.WriteLine(CurrentTable);
 
             Console.WriteLine("Please, click one of the functional buttons to proceed:\n" +
-                              $"{ConsoleHandler.Add} to Add new cells\n" +
                               $"{ConsoleHandler.Write} to Edit/Set a value for a cell\n" +
                               $"{ConsoleHandler.Delete} to Delete a Cell\n" +
                               $"{ConsoleHandler.Exit} to Stop Program\n");
