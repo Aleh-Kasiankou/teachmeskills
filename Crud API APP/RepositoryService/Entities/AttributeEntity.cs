@@ -6,15 +6,13 @@
         {
             
         }
-        public AttributeEntity(string name, string attributeType, string guid)
+        public AttributeEntity(string name, string attributeType)
         {
             Name = name;
             AttributeType = attributeType;
-            Guid = guid;
         }
 
         public int Id { get; set; }
-        public string Guid { get; set; }
         public string AttributeType { get; set; }
         public string Name { get;  set; }
         public string DefaultValue { get; set; }

@@ -39,9 +39,9 @@ namespace RepositoryService
             return attributeList;
         }
 
-        public AttributeBase GetById(string guid)
+        public AttributeBase GetById(int id)
         {
-                var attributeData = Db.AttributeList.First(attr => attr.Guid == guid);
+                var attributeData = Db.AttributeList.First(attr => attr.Id == id);
                 AttributeBase attribute = CastToDotNetObj(attributeData);
                 return attribute;
 
@@ -49,7 +49,7 @@ namespace RepositoryService
 
         public void Create(AttributeBase attributeData)
         {
-            AttributeEntity attribute = new AttributeEntity(attributeData.Name, attributeData.AttributeType, attributeData.Id.ToString());
+            AttributeEntity attribute = new AttributeEntity(attributeData.Name, attributeData.AttributeType);
             switch (attributeData.AttributeType)
             {
                 case "NumericAttribute":
@@ -88,14 +88,14 @@ namespace RepositoryService
             Db.SaveChanges();
         }
 
-        public void UpdateById(string guid)
+        public void UpdateById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveById(string guid)
+        public void RemoveById(int id)
         {
-            var entityToRemove = Db.AttributeList.First(attr => attr.Guid == guid);
+            var entityToRemove = Db.AttributeList.First(attr => attr.Id == id);
             Db.AttributeList.Remove(entityToRemove);
             Db.SaveChanges();
         }
@@ -106,25 +106,22 @@ namespace RepositoryService
             switch (attributeEntity.AttributeType)
             {
                 case "NumericAttribute":
-                    attribute = new NumericAttribute(attributeEntity.Name, attributeEntity.Label,
-                        Guid.Parse(attributeEntity.Guid));
+                    attribute = new NumericAttribute(attributeEntity.Name, attributeEntity.Label);
                     break;
                 case "PriceAttribute":
-                    attribute = new PriceAttribute(attributeEntity.Name, Guid.Parse(attributeEntity.Guid));
+                    attribute = new PriceAttribute(attributeEntity.Name);
                     break;
                 case "SingleSelectAttribute":
-                    attribute = new SingleSelectAttribute(attributeEntity.Name, attributeEntity.PossibleValues,
-                        Guid.Parse(attributeEntity.Guid));
+                    attribute = new SingleSelectAttribute(attributeEntity.Name, attributeEntity.PossibleValues);
                     break;
                 case "MultipleSelectAttribute":
-                    attribute = new MultipleSelectAttribute(attributeEntity.Name, attributeEntity.PossibleValues,
-                        Guid.Parse(attributeEntity.Guid));
+                    attribute = new MultipleSelectAttribute(attributeEntity.Name, attributeEntity.PossibleValues);
                     break;
                 case "TextAttribute":
-                    attribute = new TextAttribute(attributeEntity.Name, Guid.Parse(attributeEntity.Guid));
+                    attribute = new TextAttribute(attributeEntity.Name);
                     break;
                 case "YesNoAttribute":
-                    attribute = new YesNoAttribute(attributeEntity.Name, Guid.Parse(attributeEntity.Guid));
+                    attribute = new YesNoAttribute(attributeEntity.Name);
                     break;
                 default:
                     attribute = null;

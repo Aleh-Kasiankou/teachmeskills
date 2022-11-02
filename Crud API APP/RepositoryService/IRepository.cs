@@ -6,10 +6,10 @@ namespace RepositoryService
     public interface IRepository<T, U>
     {
         List<U> GetAll();
-        U GetById(string guid);
+        U GetById(int id);
         void Create(AttributeBase attribute);
-        void UpdateById(string guid);
-        void RemoveById(string guid);
+        void UpdateById(int id);
+        void RemoveById(int id);
 
     }
 }

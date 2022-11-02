@@ -4,7 +4,7 @@ namespace Models.Attribute.AttributeType.Numeric
 {
     public sealed class NumericAttribute : AttributeBase
     {
-        public NumericAttribute(string name, string label, Guid guid) : base(name, guid)
+        public NumericAttribute(string name, string label) : base(name)
         {
             Label = label;
         }

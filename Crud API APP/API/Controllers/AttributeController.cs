@@ -32,7 +32,7 @@ namespace API.Controllers
         }
         
         [HttpGet("get/{id}")]
-        public AttributeBase GetAttribute([FromRoute]string id)
+        public AttributeBase GetAttribute([FromRoute]int id)
         {
             AttributeBase attr = Repository.GetById(id);
             return attr;
@@ -41,48 +41,48 @@ namespace API.Controllers
         [HttpPost("add/numeric")]
         public void AddNumericAttribute([FromQuery]string name, [FromBody] string label)
         {
-            AttributeBase attribute = new NumericAttribute(name, label, Guid.NewGuid());
+            AttributeBase attribute = new NumericAttribute(name, label);
             Repository.Create(attribute);
         }
 
         [HttpPost("add/price")]
         public void AddPriceAttribute([FromQuery] string name)
         {
-            var attribute = new PriceAttribute(name, Guid.NewGuid());
+            var attribute = new PriceAttribute(name);
             Repository.Create(attribute);
         }
 
         [HttpPost("add/single_select")]
         public void AddSingleSelectAttribute([FromQuery] string name, [FromBody] List<SelectableOption> possibleValues)
         {
-            var attribute = new SingleSelectAttribute(name, possibleValues, Guid.NewGuid());
+            var attribute = new SingleSelectAttribute(name, possibleValues);
             Repository.Create(attribute);
         }
 
         [HttpPost("add/multiple_select")]
         public void AddMultiSelectAttribute([FromQuery] string name,[FromBody] List<SelectableOption> possibleValues)
         {
-            var attribute = new MultipleSelectAttribute(name, possibleValues, Guid.NewGuid());
+            var attribute = new MultipleSelectAttribute(name, possibleValues);
             Repository.Create(attribute);
         }
 
         [HttpPost("add/text")]
         public void AddTextAttribute([FromQuery] string name)
         {
-            var attribute = new TextAttribute(name, Guid.NewGuid());
+            var attribute = new TextAttribute(name);
             Repository.Create(attribute);
         }
 
         [HttpPost("add/yes_no")]
         public void AddYesNoAttribute([FromQuery] string name)
         {
-            var attribute = new YesNoAttribute(name, Guid.NewGuid());
+            var attribute = new YesNoAttribute(name);
             Repository.Create(attribute);
         }
 
 
         [HttpDelete("delete/{id}")]
-        public void DeleteAttribute([FromRoute]string id)
+        public void DeleteAttribute([FromRoute]int id)
         {
             Repository.RemoveById(id);
         }

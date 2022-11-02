@@ -6,12 +6,12 @@ namespace Models.Attribute.AttributeType.Selectable
 {
     public abstract class SelectableAttribute : AttributeBase, ISelectableAttribute
     {
-        public SelectableAttribute(string name, string possibleValues, Guid guid) : base(name, guid)
+        public SelectableAttribute(string name, string possibleValues) : base(name)
         {
             UpdatePossibleValues(possibleValues);
         }
 
-        public SelectableAttribute(string name, List<SelectableOption> possibleValues, Guid guid) : base(name, guid)
+        public SelectableAttribute(string name, List<SelectableOption> possibleValues) : base(name)
         {
             PossibleValues = possibleValues;
         }

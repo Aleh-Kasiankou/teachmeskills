@@ -7,7 +7,7 @@ namespace Models.Attribute.AttributeType.YesNo
 {
     public sealed class YesNoAttribute : AttributeBase
     {
-        public YesNoAttribute(string name, Guid guid) : base(name, guid)
+        public YesNoAttribute(string name) : base(name)
         {
         }
 

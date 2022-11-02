@@ -6,11 +6,11 @@ namespace Models.Attribute.AttributeType.Selectable
 {
     public class SingleSelectAttribute : SelectableAttribute
     {
-        public SingleSelectAttribute(string name, string possibleValues, Guid guid) : base(name, possibleValues, guid)
+        public SingleSelectAttribute(string name, string possibleValues) : base(name, possibleValues)
         {
         }
         
-        public SingleSelectAttribute(string name, List<SelectableOption> possibleValues, Guid guid) : base(name, possibleValues, guid)
+        public SingleSelectAttribute(string name, List<SelectableOption> possibleValues) : base(name, possibleValues)
         {
         }
 
