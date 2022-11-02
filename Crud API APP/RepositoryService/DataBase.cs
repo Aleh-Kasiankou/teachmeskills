@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Models.Attribute;
-using Models.Attribute.AttributeType;
 using RepositoryService.Entities;
 
 namespace RepositoryService
@@ -18,6 +16,8 @@ namespace RepositoryService
         }
         
         public DbSet<AttributeEntity> AttributeList { get; set; }
+        public DbSet<AttributeTypeEntity>AttributeType { get; set; }
+        public DbSet<PossibleValueEntity>PossibleValue { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using API.Helpers.Mapping;
+using API.Helpers.Validation;
 using Microsoft.AspNetCore.Mvc;
-using Models.Attribute;
-using Models.Attribute.AttributeType.Numeric;
-using Models.Attribute.AttributeType.Price;
-using Models.Attribute.AttributeType.Selectable;
-using Models.Attribute.AttributeType.Text;
-using Models.Attribute.AttributeType.YesNo;
+using Models;
 using RepositoryService;
 using RepositoryService.Entities;
+using RepositoryService.Repositories;
 
 
 namespace API.Controllers
@@ -17,74 +14,56 @@ namespace API.Controllers
     [Route("attribute")]
     public class AttributeController : ControllerBase
     {
-        public AttributeController(IRepository<AttributeEntity> repository)
+        public AttributeController(IRepository<AttributeEntity> repository, IValidator<AttributeModel> validator, IMapper<AttributeModel> mapper)
         {
-            Repository = repository;
+            _repository = repository;
+            _validator = validator;
+            _mapper = mapper;
         }
 
-        private IRepository<AttributeEntity> Repository { get; set; }
+        private readonly IRepository<AttributeEntity> _repository;
+        private readonly IValidator<AttributeModel> _validator;
+        private readonly IMapper<AttributeModel> _mapper;
 
         [HttpGet("get")]
         public List<AttributeEntity> GetAttributes()
         {
-            List<AttributeEntity> attributesList = Repository.GetAll();
+            List<AttributeEntity> attributesList = _repository.GetAll();
             return attributesList;
         }
         
         [HttpGet("get/{id}")]
-        public AttributeEntity GetAttribute([FromRoute]int id)
+        public AttributeModel GetAttribute([FromRoute]int id)
         {
-            AttributeEntity attr = Repository.GetById(id);
-            return attr;
+            AttributeEntity entity = _repository.GetById(id);
+            AttributeModel model = _mapper.ToModel(entity) as AttributeModel;
+            return model;
         }
 
-        [HttpPost("add/numeric")]
-        public void AddNumericAttribute([FromQuery]string name, [FromBody] string label)
+        [HttpPost("add")]
+        public IActionResult CreateAttribute([FromBody] AttributeModel model)
         {
-            AttributeBase attribute = new NumericAttribute(name, label);
-            Repository.Create(attribute);
-        }
+            (bool IsValid, string FormattedExceptionList) validationResult = _validator.Validate(model);
 
-        [HttpPost("add/price")]
-        public void AddPriceAttribute([FromQuery] string name)
-        {
-            var attribute = new PriceAttribute(name);
-            Repository.Create(attribute);
+            if (validationResult.IsValid)
+            {
+                // TODO check if entity successfully created
+                AttributeEntity entity = _mapper.ToEntity(model) as AttributeEntity;
+                _repository.Create(entity);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(validationResult.FormattedExceptionList);
+            }
         }
-
-        [HttpPost("add/single_select")]
-        public void AddSingleSelectAttribute([FromQuery] string name, [FromBody] List<SelectableOption> possibleValues)
-        {
-            var attribute = new SingleSelectAttribute(name, possibleValues);
-            Repository.Create(attribute);
-        }
-
-        [HttpPost("add/multiple_select")]
-        public void AddMultiSelectAttribute([FromQuery] string name,[FromBody] List<SelectableOption> possibleValues)
-        {
-            var attribute = new MultipleSelectAttribute(name, possibleValues);
-            Repository.Create(attribute);
-        }
-
-        [HttpPost("add/text")]
-        public void AddTextAttribute([FromQuery] string name)
-        {
-            var attribute = new TextAttribute(name);
-            Repository.Create(attribute);
-        }
-
-        [HttpPost("add/yes_no")]
-        public void AddYesNoAttribute([FromQuery] string name)
-        {
-            var attribute = new YesNoAttribute(name);
-            Repository.Create(attribute);
-        }
+        
 
 
         [HttpDelete("delete/{id}")]
         public void DeleteAttribute([FromRoute]int id)
         {
-            Repository.RemoveById(id);
+            _repository.RemoveById(id);
         }
     }
 }

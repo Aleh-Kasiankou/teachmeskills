@@ -1,12 +1,16 @@
+using API.Helpers.Formatting;
+using API.Helpers.Mapping;
+using API.Helpers.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Models.Attribute;
+using Models;
 using RepositoryService;
 using RepositoryService.Entities;
+using RepositoryService.Repositories;
 
 namespace API
 {
@@ -28,8 +32,14 @@ namespace API
             );
             services.Configure<ConnectionStrings>(Configuration.GetSection(ConnectionStrings.ConfigSection));
             services.AddScoped<IRepository<AttributeEntity>, AttributeRepository>();
-            services.AddSwaggerDocument(config => { config.Title = "ProductAPI"; });
-            
+            services.AddScoped<IRepository<AttributeTypeEntity>, AttributeTypeRepository>();
+            services.AddScoped<IRepository<PossibleValueEntity>, PossibleValueRepository>();
+            services.AddScoped<IValidator<AttributeModel>, AttributeEntityValidator>();
+            services.AddSingleton<IFormatter<ValidationError>, ValidationErrorFormatter>();
+            services.AddScoped<IMapper<AttributeModel>, AttributeMapper>();
+            services.AddScoped<IMapper<AttributeTypeModel>, AttributeTypeMapper>();
+            services.AddScoped<IMapper<PossibleValueModel>, PossibleValueMapper>();
+            services.AddSwaggerDocument(config => { config.Title = "AttributeAPI"; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +59,7 @@ namespace API
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
             app.UseOpenApi();
-            
+
             app.UseSwaggerUi3(config => { config.DocExpansion = "list"; });
         }
     }
