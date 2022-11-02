@@ -14,11 +14,9 @@ namespace RepositoryService
 {
     //todo Get rid of hardcoded names
     //todo Perhaps inherit YesNo from selectable attribute?
-    //todo Try to somehow remove generics from IRepository
     //todo store in json, deserialize upon instance creation
     //todo delegate conversion to separate method or class
-    //todo need return List of AttributeBase objects (or casted?)
-    public class AttributeRepository : IRepository<AttributeEntity, AttributeBase>
+    public class AttributeRepository : IRepository<AttributeEntity>
     {
         public AttributeRepository(IOptions<ConnectionStrings> credentials)
         {
@@ -27,23 +25,17 @@ namespace RepositoryService
 
         private DataBase Db { get; }
 
-        public List<AttributeBase> GetAll()
+        public List<AttributeEntity> GetAll()
         {
-            var attributeList = new List<AttributeBase>();
-            var attributeDataList = Db.AttributeList.ToList();
-            foreach (var attributeData in attributeDataList)
-            {
-                attributeList.Add(CastToDotNetObj(attributeData));
-            }
+            var attributeEntityList = Db.AttributeList.ToList();
 
-            return attributeList;
+            return attributeEntityList;
         }
 
-        public AttributeBase GetById(int id)
+        public AttributeEntity GetById(int id)
         {
-                var attributeData = Db.AttributeList.First(attr => attr.Id == id);
-                AttributeBase attribute = CastToDotNetObj(attributeData);
-                return attribute;
+                var attributeEntity = Db.AttributeList.First(attr => attr.Id == id);
+                return attributeEntity;
 
         }
 

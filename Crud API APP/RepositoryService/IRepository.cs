@@ -3,10 +3,10 @@ using Models.Attribute;
 
 namespace RepositoryService
 {
-    public interface IRepository<T, U>
+    public interface IRepository<T>
     {
-        List<U> GetAll();
-        U GetById(int id);
+        List<T> GetAll();
+        T GetById(int id);
         void Create(AttributeBase attribute);
         void UpdateById(int id);
         void RemoveById(int id);

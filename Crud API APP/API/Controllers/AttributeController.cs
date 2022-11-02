@@ -17,24 +17,24 @@ namespace API.Controllers
     [Route("attribute")]
     public class AttributeController : ControllerBase
     {
-        public AttributeController(IRepository<AttributeEntity, AttributeBase> repository)
+        public AttributeController(IRepository<AttributeEntity> repository)
         {
             Repository = repository;
         }
 
-        private IRepository<AttributeEntity, AttributeBase> Repository { get; set; }
+        private IRepository<AttributeEntity> Repository { get; set; }
 
         [HttpGet("get")]
-        public List<AttributeBase> GetAttributes()
+        public List<AttributeEntity> GetAttributes()
         {
-            List<AttributeBase> attributesList = Repository.GetAll();
+            List<AttributeEntity> attributesList = Repository.GetAll();
             return attributesList;
         }
         
         [HttpGet("get/{id}")]
-        public AttributeBase GetAttribute([FromRoute]int id)
+        public AttributeEntity GetAttribute([FromRoute]int id)
         {
-            AttributeBase attr = Repository.GetById(id);
+            AttributeEntity attr = Repository.GetById(id);
             return attr;
         }
 

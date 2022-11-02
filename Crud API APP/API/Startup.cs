@@ -27,7 +27,7 @@ namespace API
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
             services.Configure<ConnectionStrings>(Configuration.GetSection(ConnectionStrings.ConfigSection));
-            services.AddScoped<IRepository<AttributeEntity, AttributeBase>, AttributeRepository>();
+            services.AddScoped<IRepository<AttributeEntity>, AttributeRepository>();
             services.AddSwaggerDocument(config => { config.Title = "ProductAPI"; });
             
         }
