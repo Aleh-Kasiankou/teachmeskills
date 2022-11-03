@@ -27,7 +27,7 @@ namespace RepositoryService.Repositories
             return attributeTypeEntity;
         }
 
-        public void Create(AttributeTypeEntity attribute)
+        public int Create(AttributeTypeEntity attribute)
         {
             throw new NotSupportedException();
         }

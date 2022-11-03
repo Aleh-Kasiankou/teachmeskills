@@ -29,10 +29,11 @@ namespace RepositoryService.Repositories
             return attributeEntity;
         }
 
-        public void Create(AttributeEntity attributeEntity)
+        public int Create(AttributeEntity attributeEntity)
         {
             Db.AttributeList.Add(attributeEntity);
             Db.SaveChanges();
+            return attributeEntity.Id;
         }
 
         public void UpdateById(int id)

@@ -14,29 +14,34 @@ namespace API.Controllers
     [Route("attribute")]
     public class AttributeController : ControllerBase
     {
-        public AttributeController(IRepository<AttributeEntity> repository, IValidator<AttributeModel> validator, IMapper<AttributeModel> mapper)
+        public AttributeController(IRepository<AttributeEntity> repository, IValidator<AttributeModel> validator,
+            IMapper<PossibleValueModel> valueMapper, IMapper<AttributeModel> attributeMapper, IRepository<PossibleValueEntity> optionRepository)
         {
-            _repository = repository;
+            _attributeRepository = repository;
             _validator = validator;
-            _mapper = mapper;
+            _valueMapper = valueMapper;
+            _attributeMapper = attributeMapper;
+            _optionRepository = optionRepository;
         }
 
-        private readonly IRepository<AttributeEntity> _repository;
+        private readonly IRepository<AttributeEntity> _attributeRepository;
+        private readonly IRepository<PossibleValueEntity> _optionRepository;
         private readonly IValidator<AttributeModel> _validator;
-        private readonly IMapper<AttributeModel> _mapper;
+        private readonly IMapper<AttributeModel> _attributeMapper;
+        private readonly IMapper<PossibleValueModel> _valueMapper;
 
         [HttpGet("get")]
         public List<AttributeEntity> GetAttributes()
         {
-            List<AttributeEntity> attributesList = _repository.GetAll();
+            List<AttributeEntity> attributesList = _attributeRepository.GetAll();
             return attributesList;
         }
-        
+
         [HttpGet("get/{id}")]
-        public AttributeModel GetAttribute([FromRoute]int id)
+        public AttributeModel GetAttribute([FromRoute] int id)
         {
-            AttributeEntity entity = _repository.GetById(id);
-            AttributeModel model = _mapper.ToModel(entity) as AttributeModel;
+            AttributeEntity entity = _attributeRepository.GetById(id);
+            AttributeModel model = _attributeMapper.ToModel(entity) as AttributeModel;
             return model;
         }
 
@@ -48,8 +53,19 @@ namespace API.Controllers
             if (validationResult.IsValid)
             {
                 // TODO check if entity successfully created
-                AttributeEntity entity = _mapper.ToEntity(model) as AttributeEntity;
-                _repository.Create(entity);
+                AttributeEntity entity = _attributeMapper.ToEntity(model) as AttributeEntity;
+                
+                var attrId = _attributeRepository.Create(entity);
+                 
+                var attributeEntity = _attributeRepository.GetById(attrId);
+
+                foreach (var option in model.PossibleValues)
+                {
+                    option.SetAttributeId(attrId);
+                    var optionEntity = _valueMapper.ToEntity(option) as PossibleValueEntity;
+                    _optionRepository.Create(optionEntity);
+                }
+
                 return Ok();
             }
             else
@@ -57,13 +73,12 @@ namespace API.Controllers
                 return BadRequest(validationResult.FormattedExceptionList);
             }
         }
-        
 
 
         [HttpDelete("delete/{id}")]
-        public void DeleteAttribute([FromRoute]int id)
+        public void DeleteAttribute([FromRoute] int id)
         {
-            _repository.RemoveById(id);
+            _attributeRepository.RemoveById(id);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace RepositoryService.Repositories
     {
         List<T> GetAll();
         T GetById(int id);
-        void Create(T attribute);
+        int Create(T attribute);
         void UpdateById(int id);
         void RemoveById(int id);
 

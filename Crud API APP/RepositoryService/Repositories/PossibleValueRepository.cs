@@ -27,10 +27,11 @@ namespace RepositoryService.Repositories
             return possibleValueEntity;
         }
 
-        public void Create(PossibleValueEntity valueEntity)
+        public int Create(PossibleValueEntity valueEntity)
         {
             Db.PossibleValue.Add(valueEntity);
             Db.SaveChanges();
+            return valueEntity.Id;
         }
 
         public void UpdateById(int id)

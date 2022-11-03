@@ -11,6 +11,7 @@ namespace API.Helpers.Mapping
             var castedModel = (PossibleValueModel) model;
             var entity = new PossibleValueEntity()
             {
+                AttributeEntityId = castedModel.GetAttributeId(),
                 Value = castedModel.Value,
                 IsDefault = castedModel.IsDefault,
                 Guid = Guid.NewGuid().ToString()
