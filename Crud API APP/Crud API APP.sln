@@ -1,10 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{B3248EC4-461D-464B-9801-05BFB58454E8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryService", "RepositoryService\RepositoryService.csproj", "{5C3637B4-3ADE-49A4-B86A-2DB9BCE1A3E9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{71323D88-3122-43A0-A100-4CB7A894DCF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttributeAPI", "AttributeAPI\AttributeAPI.csproj", "{B3248EC4-461D-464B-9801-05BFB58454E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +12,5 @@ Global
 		{B3248EC4-461D-464B-9801-05BFB58454E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3248EC4-461D-464B-9801-05BFB58454E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3248EC4-461D-464B-9801-05BFB58454E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C3637B4-3ADE-49A4-B86A-2DB9BCE1A3E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C3637B4-3ADE-49A4-B86A-2DB9BCE1A3E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C3637B4-3ADE-49A4-B86A-2DB9BCE1A3E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C3637B4-3ADE-49A4-B86A-2DB9BCE1A3E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71323D88-3122-43A0-A100-4CB7A894DCF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71323D88-3122-43A0-A100-4CB7A894DCF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71323D88-3122-43A0-A100-4CB7A894DCF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71323D88-3122-43A0-A100-4CB7A894DCF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
