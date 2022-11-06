@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace AsyncHouseholdChores
+namespace AsyncHouseholdChores.Feelings
 {
     public class Anxiety : Feeling
     {
         public Anxiety()
         {
-            Console.WriteLine("Here we are again :(");
+            Console.WriteLine("Oh shit, here we are again :(");
         }
     }
 }

@@ -1,22 +1,50 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
+using AsyncHouseholdChores.Feelings;
+using AsyncHouseholdChores.Household;
 
 namespace AsyncHouseholdChores
 {
     public class Person
     {
-        public async Task<Satisfaction> DoHouseholdChores(House house)
+        public async Task<Satisfaction> DoHouseholdChores(House house, CancellationToken token)
         {
-            var washingClothes = WashClothes();
-            var listeningToMusic = ListenToMusic();
+            var unfinishedChores = new List<Task<IChoreResult>>();
+            
+            unfinishedChores.Add(WashClothes());
+            Task listeningToMusic = ListenToMusic();
             house.Furniture = CleanDust();
             house.Carpet = VacuumCarpet();
-            var washingFloor = WashFloor();
-            var cleaningBath = CleanBath();
+            unfinishedChores.Add(WashFloor());
+            unfinishedChores.Add(CleanBath());
 
-            house.Floor = await washingFloor;
-            house.Bath = await cleaningBath;
-            house.Clothing = await washingClothes;
+            Task.WaitAll(unfinishedChores.ToArray(), token);
+            
+            foreach (var task in unfinishedChores)
+            {
+                if (task.Result.GetType() == typeof(Clothing))
+                {
+                    house.Clothing = task.Result as Clothing;
+                }
+
+                else if(task.Result.GetType() == typeof(Floor))
+                {
+                    house.Floor = task.Result as Floor;
+                }
+
+                else if(task.Result.GetType() == typeof(Bath))
+                {
+                    house.Bath = task.Result as Bath;
+                }
+
+                else
+                {
+                    throw new ArgumentException("Unexpected chore was done");
+                }
+                
+            }
             await listeningToMusic;
             Console.WriteLine("No more chores left");
             return new Satisfaction();
@@ -33,7 +61,7 @@ namespace AsyncHouseholdChores
             return new Furniture(State.Appealing);
         }
 
-        private async Task<Floor> WashFloor()
+        private async Task<IChoreResult> WashFloor()
         {
             Console.WriteLine("Putting a basin under water");
             await Task.Delay(600);
@@ -43,7 +71,7 @@ namespace AsyncHouseholdChores
             return new Floor(State.Appealing);
         }
 
-        private async Task<Clothing> WashClothes()
+        private async Task<IChoreResult> WashClothes()
         {
             Console.WriteLine("Putting clothes into washing machine");
             Console.WriteLine("Turning on the machine");
@@ -60,7 +88,7 @@ namespace AsyncHouseholdChores
             return new Carpet(State.Appealing);
         }
 
-        private async Task<Bath> CleanBath()
+        private async Task<IChoreResult> CleanBath()
         {
             Console.WriteLine("Spreading detergent over the bath and leaving for some time");
             await Task.Delay(2500);

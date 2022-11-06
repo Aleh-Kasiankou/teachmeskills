@@ -1,4 +1,4 @@
-﻿namespace AsyncHouseholdChores
+﻿namespace AsyncHouseholdChores.Household
 {
     public class Floor : ItemWithState
     {

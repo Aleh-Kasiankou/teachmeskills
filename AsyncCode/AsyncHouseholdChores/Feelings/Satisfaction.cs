@@ -1,4 +1,4 @@
-﻿namespace AsyncHouseholdChores
+﻿namespace AsyncHouseholdChores.Feelings
 {
     public class Satisfaction : Feeling
     {

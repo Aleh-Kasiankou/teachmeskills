@@ -1,4 +1,6 @@
-﻿namespace AsyncHouseholdChores
+﻿using AsyncHouseholdChores.Household;
+
+namespace AsyncHouseholdChores
 {
     public class House
     {

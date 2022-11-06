@@ -1,6 +1,6 @@
-﻿namespace AsyncHouseholdChores
+﻿namespace AsyncHouseholdChores.Household
 {
-    public abstract class ItemWithState
+    public abstract class ItemWithState : IChoreResult
     {
         public ItemWithState(State state)
         {
