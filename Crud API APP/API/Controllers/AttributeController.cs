@@ -3,7 +3,6 @@ using API.Helpers.Mapping;
 using API.Helpers.Validation;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using RepositoryService;
 using RepositoryService.Entities;
 using RepositoryService.Repositories;
 
@@ -15,7 +14,8 @@ namespace API.Controllers
     public class AttributeController : ControllerBase
     {
         public AttributeController(IRepository<AttributeEntity> repository, IValidator<AttributeModel> validator,
-            IMapper<PossibleValueModel> valueMapper, IMapper<AttributeModel> attributeMapper, IRepository<PossibleValueEntity> optionRepository)
+            IMapper<PossibleValueModel> valueMapper, IMapper<AttributeModel> attributeMapper,
+            IRepository<PossibleValueEntity> optionRepository)
         {
             _attributeRepository = repository;
             _validator = validator;
@@ -30,14 +30,14 @@ namespace API.Controllers
         private readonly IMapper<AttributeModel> _attributeMapper;
         private readonly IMapper<PossibleValueModel> _valueMapper;
 
-        [HttpGet("get")]
+        [HttpGet]
         public List<AttributeEntity> GetAttributes()
         {
             List<AttributeEntity> attributesList = _attributeRepository.GetAll();
             return attributesList;
         }
 
-        [HttpGet("get/{id}")]
+        [HttpGet("{id:int}")]
         public AttributeModel GetAttribute([FromRoute] int id)
         {
             AttributeEntity entity = _attributeRepository.GetById(id);
@@ -45,7 +45,7 @@ namespace API.Controllers
             return model;
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public IActionResult CreateAttribute([FromBody] AttributeModel model)
         {
             (bool IsValid, string FormattedExceptionList) validationResult = _validator.Validate(model);
@@ -54,9 +54,9 @@ namespace API.Controllers
             {
                 // TODO check if entity successfully created
                 AttributeEntity entity = _attributeMapper.ToEntity(model) as AttributeEntity;
-                
+
                 var attrId = _attributeRepository.Create(entity);
-                 
+
                 var attributeEntity = _attributeRepository.GetById(attrId);
 
                 foreach (var option in model.PossibleValues)
@@ -75,7 +75,7 @@ namespace API.Controllers
         }
 
 
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id:int}")]
         public void DeleteAttribute([FromRoute] int id)
         {
             _attributeRepository.RemoveById(id);

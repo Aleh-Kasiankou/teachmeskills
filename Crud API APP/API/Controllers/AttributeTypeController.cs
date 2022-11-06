@@ -17,14 +17,14 @@ namespace API.Controllers
 
         private IRepository<AttributeTypeEntity> _repository;
         
-        [HttpGet("get")]
+        [HttpGet]
         public List<AttributeTypeEntity> GetAttributeTypes()
         {
             List<AttributeTypeEntity> attributeTypesList = _repository.GetAll();
             return attributeTypesList;
         }
         
-        [HttpGet("get/{id}")]
+        [HttpGet("{id:int}")]
         public AttributeTypeEntity GetAttributeById([FromRoute] int id)
         {
             AttributeTypeEntity attributeTypeEntity = _repository.GetById(id);
