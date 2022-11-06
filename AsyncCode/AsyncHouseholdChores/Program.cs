@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Threading.Tasks;
 
-namespace SyncHouseholdChores
+namespace AsyncHouseholdChores
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            var startTime = DateTime.Now;
             var person = new Person();
-            person.DoHouseholdChores();
+            var startTime = DateTime.Now;
+            await person.DoHouseholdChores();
             var finishTime = DateTime.Now;
             Console.WriteLine($"Chores took {(finishTime - startTime).Seconds} seconds");
         }

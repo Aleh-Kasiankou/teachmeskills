@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "breakfast", "breakfast\brea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncHouseholdChores", "SyncHouseholdChores\SyncHouseholdChores.csproj", "{9C580BDC-760F-441C-9EBC-5E511ADE29C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncHouseholdChores", "AsyncHouseholdChores\AsyncHouseholdChores.csproj", "{24D73B62-B208-4637-92DB-97EF69404A0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{9C580BDC-760F-441C-9EBC-5E511ADE29C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C580BDC-760F-441C-9EBC-5E511ADE29C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C580BDC-760F-441C-9EBC-5E511ADE29C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24D73B62-B208-4637-92DB-97EF69404A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24D73B62-B208-4637-92DB-97EF69404A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24D73B62-B208-4637-92DB-97EF69404A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24D73B62-B208-4637-92DB-97EF69404A0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
