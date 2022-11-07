@@ -1,11 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
-using API.Entities;
 using API.Helpers;
-using API.Models;
-using API.Services.Formatting;
-using API.Services.Repositories;
-using API.Services.Validation;
+using API.Services.DI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,20 +21,18 @@ namespace API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataBase>();
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             ).AddJsonOptions(x =>
             {
-                // serialize enums as strings in api responses (e.g. Role)
                 x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 
             });
-            
+            services.AddDbContext<DataBase>();
             services.Configure<ConnectionStrings>(Configuration.GetSection(ConnectionStrings.ConfigSection));
-            services.AddScoped<IRepository<AttributeEntity>, AttributeRepository>();
-            services.AddScoped<IValidator<AttributeEntity>, AttributeEntityValidator>();
-            services.AddScoped<IFormatter<ValidationError>, ValidationErrorFormatter>();
+            
+            services.ConfigureAttributeServices();
+            
             services.AddSwaggerDocument(config => { config.Title = "AttributeAPI"; });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }

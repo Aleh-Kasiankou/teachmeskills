@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using API.Entities;
-
-namespace API.Models.PossibleValues
+﻿namespace API.Models.PossibleValues
 {
     public class PossibleValueCreateRequest : BaseModel
     {

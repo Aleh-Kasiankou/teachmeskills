@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using API.Entities;
-using API.Models;
 using API.Services.Formatting;
 
 namespace API.Services.Validation
