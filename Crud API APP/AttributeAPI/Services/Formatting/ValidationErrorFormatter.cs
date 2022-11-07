@@ -12,7 +12,7 @@ namespace API.Services.Formatting
             
             foreach (var error in objList)
             {
-                formattedString.Append(error.Message + "\n");
+                formattedString.AppendLine(error.Message);
             }
 
             return formattedString.ToString();

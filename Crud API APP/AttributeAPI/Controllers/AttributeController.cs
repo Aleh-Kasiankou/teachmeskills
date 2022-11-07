@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using API.Entities;
-using API.Models;
 using API.Models.Attribute;
 using API.Services.Repositories;
 using API.Services.Validation;
@@ -28,10 +28,18 @@ namespace API.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public AttributeEntity GetAttribute([FromRoute] int id)
+        public IActionResult GetAttribute([FromRoute] int id)
         {
-            AttributeEntity entity = _repository.GetById(id);
-            return entity;
+            try
+            {
+                AttributeEntity entity = _repository.GetById(id);
+                return Ok(entity);
+            }
+            catch (InvalidOperationException)
+            {
+                return BadRequest($"There is no attribute with id {id}");
+            }
+            
         }
 
         [HttpPost]

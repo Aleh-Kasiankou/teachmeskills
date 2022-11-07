@@ -4,7 +4,7 @@ namespace API.Services.Validation
 {
     public interface IValidator<T>
     {
-        public List<ValidationError> ValidationErrors { get; }
-        (bool IsValid, string formattedExceptionList) Validate(T entity);
+        List<ValidationError> ValidationErrors { get; }
+        void Validate(T entity);
     }
 }

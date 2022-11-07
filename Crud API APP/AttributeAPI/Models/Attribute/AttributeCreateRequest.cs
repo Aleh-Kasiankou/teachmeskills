@@ -9,7 +9,10 @@ namespace API.Models.Attribute
     {
         [Required]
         public string Name { get;  set; }
+
         [Required]
+        [EnumDataType(typeof(AttributeType))]
+
         public AttributeType AttributeType { get; set; }
 
         public string DefaultLiteralValue { get; set; } = null;

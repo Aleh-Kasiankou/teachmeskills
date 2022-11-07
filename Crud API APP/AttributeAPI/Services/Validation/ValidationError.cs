@@ -2,26 +2,18 @@
 
 namespace API.Services.Validation
 {
-    public abstract class ValidationError : Exception
+    public class ValidationError : Exception
     {
-    }
-
-    public class NoNameProvidedError : ValidationError
-    {
-        private const string Msg = "Attribute must have a name";
-        public override string Message { get; } = Msg;
-    }
-
-    public class InvalidTypeProvidedError : ValidationError
-    {
-        public InvalidTypeProvidedError(string type)
+        public ValidationError()
         {
-            Message = $"{type} is not a valid Type name";
         }
-        
-        public override string Message { get; }
-    }
 
+        public ValidationError(string message) : base(message)
+        {
+            
+        }
+    }
+    
     public class WrongTypeParameterProvided : ValidationError
     {
         public WrongTypeParameterProvided(string message )
