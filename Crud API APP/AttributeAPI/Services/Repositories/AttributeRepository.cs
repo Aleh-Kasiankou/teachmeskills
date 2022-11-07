@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using API.Entities;
 using API.Helpers;
 using API.Models;
@@ -39,7 +40,7 @@ namespace API.Services.Repositories
             return attributeEntity;
         }
 
-        public int Create(BaseModel model)
+        public async Task<int> Create(BaseModel model)
         {
             var createRequestModel = (AttributeCreateRequest)model;
             AttributeEntity attributeEntity = _mapper.Map<AttributeEntity>(createRequestModel);
@@ -47,11 +48,11 @@ namespace API.Services.Repositories
 
 
             _db.Attribute.Add(attributeEntity);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
             return attributeEntity.Id;
         }
 
-        public void UpdateById(int id, BaseModel model)
+        public async Task UpdateById(int id, BaseModel model)
         {
             var updateRequestModel = (AttributeUpdateRequest)model;
             AttributeEntity attributeEntity = GetById(id);
@@ -60,14 +61,14 @@ namespace API.Services.Repositories
             _validator.Validate(attributeEntity);
 
             _db.Update(attributeEntity);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
 
-        public void RemoveById(int id)
+        public async Task RemoveById(int id)
         {
             var entityToRemove = GetById(id);
             _db.Attribute.Remove(entityToRemove);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
     }
 }

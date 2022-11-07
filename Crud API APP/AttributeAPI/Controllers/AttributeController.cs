@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using API.Entities;
 using API.Models.Attribute;
 using API.Services.Repositories;
@@ -43,11 +44,11 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateAttribute([FromBody] AttributeCreateRequest model)
+        public async Task<IActionResult> CreateAttribute([FromBody] AttributeCreateRequest model)
         {
             try
             {
-                var id = _repository.Create(model);
+                int id = await _repository.Create(model);
 
                 return Ok($"The id of the created attribute is {id}");
             }
@@ -59,11 +60,11 @@ namespace API.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult EditAttribute([FromRoute] int id, [FromBody] AttributeUpdateRequest model)
+        public async Task<IActionResult> EditAttribute([FromRoute] int id, [FromBody] AttributeUpdateRequest model)
         {
             try
             {
-                _repository.UpdateById(id, model);
+                await _repository.UpdateById(id, model);
 
                 return Ok($"The attribute has been successfully updated!");
             }
@@ -71,13 +72,30 @@ namespace API.Controllers
             {
                 return BadRequest(e.Message);
             }
+            catch (InvalidOperationException)
+            {
+                return BadRequest($"There is no attribute with id {id}");
+            }
         }
 
 
         [HttpDelete("{id:int}")]
-        public void DeleteAttribute([FromRoute] int id)
+        public async Task<IActionResult> DeleteAttribute([FromRoute] int id)
         {
-            _repository.RemoveById(id);
+            try
+            {
+                await _repository.RemoveById(id);
+                return Ok();
+            }
+            catch (InvalidOperationException)
+            {
+                return BadRequest($"There is no attribute with id {id}");
+            }
+            catch (AggregateException e)
+            {
+                return BadRequest(e.Message);
+            }
+
         }
     }
 }
