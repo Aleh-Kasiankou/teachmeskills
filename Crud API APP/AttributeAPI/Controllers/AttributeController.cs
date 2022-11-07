@@ -13,12 +13,12 @@ namespace API.Controllers
     [Route("attribute")]
     public class AttributeController : ControllerBase
     {
+        private readonly IRepository<AttributeEntity> _repository;
+
         public AttributeController(IRepository<AttributeEntity> repository)
         {
             _repository = repository;
         }
-
-        private readonly IRepository<AttributeEntity> _repository;
 
         [HttpGet]
         public IEnumerable<AttributeEntity> GetAttributes()
