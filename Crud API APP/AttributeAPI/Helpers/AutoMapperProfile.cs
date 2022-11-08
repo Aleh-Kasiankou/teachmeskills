@@ -10,14 +10,11 @@ namespace API.Helpers
     {
         public AutoMapperProfile()
         {
-            var map = CreateMap<AttributeCreateRequest, AttributeEntity>().ForMember(d => d.PossibleValues,
-                opt => opt.MapFrom((attributeCreateRequest, attributeEntity, i, context) =>
-                    context.Mapper.Map<IEnumerable<PossibleValueCreateRequest>, IEnumerable<PossibleValueEntity>>(
-                        attributeCreateRequest.PossibleValues)));
+            var map = CreateMap<AttributeCreateRequest, Attribute>();
+            
+            CreateMap<PossibleValueCreateRequest, PossibleValue>();
 
-            CreateMap<PossibleValueCreateRequest, PossibleValueEntity>();
-
-            CreateMap<AttributeUpdateRequest, AttributeEntity>()
+            CreateMap<AttributeUpdateRequest, Attribute>()
                 .ForAllMembers(x => x.Condition(
                     (src, dest, prop) =>
                     {

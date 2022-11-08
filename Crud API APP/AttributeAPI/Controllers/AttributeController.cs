@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using API.Entities;
 using API.Models.Attribute;
 using API.Services.Repositories;
 using API.Services.Validation;
 using Microsoft.AspNetCore.Mvc;
+using Attribute = API.Entities.Attribute;
 
 
 namespace API.Controllers
@@ -14,31 +14,29 @@ namespace API.Controllers
     [Route("attribute")]
     public class AttributeController : ControllerBase
     {
-        private readonly IRepository<AttributeEntity> _repository;
+        private readonly IRepository<Attribute> _repository;
 
-        public AttributeController(IRepository<AttributeEntity> repository)
+        public AttributeController(IRepository<Attribute> repository)
         {
             _repository = repository;
         }
 
         [HttpGet]
-        public IEnumerable<AttributeEntity> GetAttributes()
+        public IEnumerable<Attribute> GetAttributes()
         {
-            IEnumerable<AttributeEntity> attributesList = _repository.GetAll();
-            return attributesList;
+            return _repository.GetAll();;
         }
 
-        [HttpGet("{id:int}")]
-        public IActionResult GetAttribute([FromRoute] int id)
+        [HttpGet("{id:Guid}")]
+        public IActionResult GetAttribute([FromRoute] Guid id)
         {
             try
             {
-                AttributeEntity entity = _repository.GetById(id);
-                return Ok(entity);
+                return Ok(_repository.GetById(id));
             }
             catch (InvalidOperationException)
             {
-                return BadRequest($"There is no attribute with id {id}");
+                return NotFound($"There is no attribute with id {id}");
             }
             
         }
@@ -48,19 +46,19 @@ namespace API.Controllers
         {
             try
             {
-                int id = await _repository.Create(model);
+                Guid id = await _repository.Create(model);
 
                 return Ok($"The id of the created attribute is {id}");
             }
 
-            catch (ValidationError e)
+            catch (ValidationErrorException e)
             {
                 return BadRequest(e.Message);
             }
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> EditAttribute([FromRoute] int id, [FromBody] AttributeUpdateRequest model)
+        [HttpPut("{id:Guid}")]
+        public async Task<IActionResult> EditAttribute([FromRoute] Guid id, [FromBody] AttributeUpdateRequest model)
         {
             try
             {
@@ -68,7 +66,7 @@ namespace API.Controllers
 
                 return Ok($"The attribute has been successfully updated!");
             }
-            catch (ValidationError e)
+            catch (ValidationErrorException e)
             {
                 return BadRequest(e.Message);
             }
@@ -79,8 +77,8 @@ namespace API.Controllers
         }
 
 
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> DeleteAttribute([FromRoute] int id)
+        [HttpDelete("{id:Guid}")]
+        public async Task<IActionResult> DeleteAttribute([FromRoute] Guid id)
         {
             try
             {

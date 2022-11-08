@@ -4,17 +4,17 @@ using Microsoft.Extensions.Options;
 
 namespace API.Helpers
 {
-    public class DataBase : DbContext
+    public class AttributeDbContext : DbContext
     {
         private readonly string _dbConnString;
         
-        public DataBase(IOptions<ConnectionStrings> credentials)
+        public AttributeDbContext(IOptions<ConnectionStrings> credentials)
         {
             _dbConnString = credentials.Value.Default;
         }
         
-        public DbSet<AttributeEntity> Attribute { get; set; }
-        public DbSet<PossibleValueEntity>PossibleValue { get; set; }
+        public DbSet<Attribute> Attribute { get; set; }
+        public DbSet<PossibleValue>PossibleValue { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

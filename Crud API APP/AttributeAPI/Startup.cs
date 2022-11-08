@@ -28,7 +28,7 @@ namespace API
                 x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 
             });
-            services.AddDbContext<DataBase>();
+            services.AddDbContext<AttributeDbContext>();
             services.Configure<ConnectionStrings>(Configuration.GetSection(ConnectionStrings.ConfigSection));
             
             services.ConfigureAttributeServices();

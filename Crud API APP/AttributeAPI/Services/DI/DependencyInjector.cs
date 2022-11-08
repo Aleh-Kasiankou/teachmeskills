@@ -10,9 +10,9 @@ namespace API.Services.DI
     {
         public static IServiceCollection ConfigureAttributeServices(this IServiceCollection services)
         {
-            services.AddScoped<IRepository<AttributeEntity>, AttributeRepository>();
-            services.AddScoped<IValidator<AttributeEntity>, AttributeEntityValidator>();
-            services.AddScoped<IFormatter<ValidationError>, ValidationErrorFormatter>();
+            services.AddScoped<IRepository<Attribute>, AttributeRepository>();
+            services.AddScoped<IValidator<Attribute>, AttributeEntityValidator>();
+            services.AddScoped<IFormatter<ValidationErrorException>, ValidationErrorFormatter>();
             return services;
         }
     }

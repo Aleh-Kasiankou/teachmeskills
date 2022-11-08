@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Entities;
 using API.Helpers;
 using API.Models;
 using API.Models.Attribute;
@@ -9,62 +9,63 @@ using API.Services.Validation;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Attribute = API.Entities.Attribute;
 
 namespace API.Services.Repositories
 {
-    public class AttributeRepository : IRepository<AttributeEntity>
+    public class AttributeRepository : IRepository<Attribute>
     {
-        private readonly DataBase _db;
-        private readonly IValidator<AttributeEntity> _validator;
+        private readonly AttributeDbContext _db;
+        private readonly IValidator<Attribute> _validator;
         private readonly IMapper _mapper;
 
-        public AttributeRepository(IOptions<ConnectionStrings> credentials, IValidator<AttributeEntity> validator,
+        public AttributeRepository(IOptions<ConnectionStrings> credentials, IValidator<Attribute> validator,
             IMapper mapper)
         {
             _validator = validator;
             _mapper = mapper;
-            _db = new DataBase(credentials);
+            _db = new AttributeDbContext(credentials);
         }
 
 
-        public List<AttributeEntity> GetAll()
+        public List<Attribute> GetAll()
         {
             var attributeEntityList = _db.Attribute.Include(a => a.PossibleValues).ToList();
 
             return attributeEntityList;
         }
 
-        public AttributeEntity GetById(int id)
+        public Attribute GetById(Guid id)
         {
             var attributeEntity = _db.Attribute.Include(a => a.PossibleValues).First(attr => attr.Id == id);
             return attributeEntity;
         }
 
-        public async Task<int> Create(BaseModel model)
+        public async Task<Guid> Create(BaseModel model)
         {
             var createRequestModel = (AttributeCreateRequest)model;
-            AttributeEntity attributeEntity = _mapper.Map<AttributeEntity>(createRequestModel);
-            _validator.Validate(attributeEntity);
+            Attribute attribute = _mapper.Map<Attribute>(createRequestModel);
+            _validator.Validate(attribute);
 
 
-            _db.Attribute.Add(attributeEntity);
+            _db.Attribute.Add(attribute);
             await _db.SaveChangesAsync();
-            return attributeEntity.Id;
+            return attribute.Id;
         }
 
-        public async Task UpdateById(int id, BaseModel model)
+        public async Task UpdateById(Guid id, BaseModel model)
         {
             var updateRequestModel = (AttributeUpdateRequest)model;
-            AttributeEntity attributeEntity = GetById(id);
+            Attribute attribute = GetById(id);
 
-            _mapper.Map(updateRequestModel, attributeEntity);
-            _validator.Validate(attributeEntity);
+            _mapper.Map(updateRequestModel, attribute);
+            _validator.Validate(attribute);
 
-            _db.Update(attributeEntity);
+            _db.Update(attribute);
             await _db.SaveChangesAsync();
         }
 
-        public async Task RemoveById(int id)
+        public async Task RemoveById(Guid id)
         {
             var entityToRemove = GetById(id);
             _db.Attribute.Remove(entityToRemove);

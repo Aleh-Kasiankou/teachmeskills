@@ -2,19 +2,19 @@
 
 namespace API.Services.Validation
 {
-    public class ValidationError : Exception
+    public class ValidationErrorException : Exception
     {
-        public ValidationError()
+        public ValidationErrorException()
         {
         }
 
-        public ValidationError(string message) : base(message)
+        public ValidationErrorException(string message) : base(message)
         {
             
         }
     }
     
-    public class WrongTypeParameterProvided : ValidationError
+    public class WrongTypeParameterProvided : ValidationErrorException
     {
         public WrongTypeParameterProvided(string message )
         {
