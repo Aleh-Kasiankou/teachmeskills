@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFLibraryAPI", "EFLibraryAPI\EFLibraryAPI.csproj", "{7C4DDC3A-EB74-4D10-B283-2C2F59EB2B20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFLibraryPersistence", "EFLibraryPersistence\EFLibraryPersistence.csproj", "{A54B78AF-877F-48D0-A4BE-ACE53AAB2685}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFLibraryServices", "EFLibraryServices\EFLibraryServices.csproj", "{EA44BF86-6C6A-40DC-B0D0-FFF6058A6FBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C4DDC3A-EB74-4D10-B283-2C2F59EB2B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C4DDC3A-EB74-4D10-B283-2C2F59EB2B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C4DDC3A-EB74-4D10-B283-2C2F59EB2B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C4DDC3A-EB74-4D10-B283-2C2F59EB2B20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A54B78AF-877F-48D0-A4BE-ACE53AAB2685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A54B78AF-877F-48D0-A4BE-ACE53AAB2685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A54B78AF-877F-48D0-A4BE-ACE53AAB2685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A54B78AF-877F-48D0-A4BE-ACE53AAB2685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA44BF86-6C6A-40DC-B0D0-FFF6058A6FBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA44BF86-6C6A-40DC-B0D0-FFF6058A6FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA44BF86-6C6A-40DC-B0D0-FFF6058A6FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA44BF86-6C6A-40DC-B0D0-FFF6058A6FBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
