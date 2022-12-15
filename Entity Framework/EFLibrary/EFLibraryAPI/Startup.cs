@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using EFLibraryServices.DbContextInjector;
+using EFLibraryServices.DbDataGenerator;
 
 namespace EFLibraryAPI
 {
@@ -22,6 +23,7 @@ namespace EFLibraryAPI
             services.AddControllers();
             services.AddSwaggerDocument();
             services.ConfigureDbContextDi(Configuration.GetConnectionString("Default"));
+            services.AddScoped<DbDataGenerator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,7 +44,9 @@ namespace EFLibraryAPI
 
             app.UseOpenApi();
 
-            app.UseSwaggerUi3();
+            app.UseSwaggerUi3(config => { config.DocExpansion = "list"; });
+            
+            
         }
     }
 }
