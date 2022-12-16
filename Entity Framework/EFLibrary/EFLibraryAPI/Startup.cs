@@ -1,3 +1,4 @@
+using EFLibraryServices.BookReturnHandler;
 using EFLibraryServices.BorrowedBookTracker;
 using EFLibraryServices.DbCleaner;
 using Microsoft.AspNetCore.Builder;
@@ -28,6 +29,7 @@ namespace EFLibraryAPI
             services.AddScoped<DbDataGenerator>();
             services.AddScoped<BorrowedBookTracker>();
             services.AddScoped<DbCleaner>();
+            services.AddScoped<BookReturnHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
