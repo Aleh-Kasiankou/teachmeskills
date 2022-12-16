@@ -45,12 +45,12 @@ namespace EFLibraryPersistence
             #region UserBookConfiguration
 
             modelBuilder.Entity<UserBook>()
-                .HasOne<User>()
+                .HasOne(x => x.User)
                 .WithMany(x => x.UserBooks).HasForeignKey(x => x.UserId)
                 .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
 
             modelBuilder.Entity<UserBook>()
-                .HasOne<Book>()
+                .HasOne(x => x.Book)
                 .WithMany(x => x.UserBooks).HasForeignKey(x => x.BookId)
                 .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
 
