@@ -4,13 +4,12 @@ using System.Linq;
 using EFLibraryPersistence;
 using EFLibraryPersistence.Models;
 
-namespace EFLibraryServices.DbDataGenerator
+namespace EFLibraryServices.DbSampleDataGenerator
 {
-    public class DbDataGenerator
+    public class DbSampleDataGenerator
     {
         private EfLibraryDbContext _dbContext;
-
-        public DbDataGenerator(EfLibraryDbContext dbContext)
+        public DbSampleDataGenerator(EfLibraryDbContext dbContext)
         {
             _dbContext = dbContext;
         }

@@ -17,7 +17,8 @@ namespace EFLibraryAPI.Controllers
             _dbCleaner = dbCleaner;
         }
 
-        [HttpDelete("without_books")]
+        [HttpDelete("without_books")] 
+        // Couldn't figure out the proper URL template
         public IEnumerable<string> DeleteUsersWithoutBooks()
         {
             return _dbCleaner.DeleteUsersWithoutBooks();

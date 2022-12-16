@@ -7,25 +7,25 @@ using Microsoft.AspNetCore.Mvc;
 namespace EFLibraryAPI.Controllers
 {
     [ApiController]
-    [Route("books")]
-    public class BooksController : ControllerBase
+    [Route("borrowed_books")]
+    public class BorrowedBooksController : ControllerBase
     {
         private readonly BorrowedBookTracker _borrowedBookTracker;
         private readonly BookReturnHandler _bookReturnHandler;
         
-        public BooksController(BorrowedBookTracker borrowedBookTracker, BookReturnHandler bookReturnHandler)
+        public BorrowedBooksController(BorrowedBookTracker borrowedBookTracker, BookReturnHandler bookReturnHandler)
         {
             _borrowedBookTracker = borrowedBookTracker;
             _bookReturnHandler = bookReturnHandler;
         }
         
-        [HttpGet("borrowed")]
+        [HttpGet]
         public IEnumerable<BorrowedBook> Get()
         {
             return _borrowedBookTracker.GetListOfBorrowedBooks();
         }
         
-        [HttpDelete("borrowed")]
+        [HttpDelete]
         public IActionResult ReturnBook([FromBody] BookReturnRequest bookReturnRequest)
         {
             try

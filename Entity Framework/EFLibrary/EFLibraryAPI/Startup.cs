@@ -1,13 +1,11 @@
-using EFLibraryServices.BookReturnHandler;
-using EFLibraryServices.BorrowedBookTracker;
-using EFLibraryServices.DbCleaner;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using EFLibraryServices.DbContextInjector;
-using EFLibraryServices.DbDataGenerator;
+using EFLibraryServices.ServiceInjector;
+using EFLibraryServices.ServiceInjector;
+
 
 namespace EFLibraryAPI
 {
@@ -24,12 +22,12 @@ namespace EFLibraryAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerDocument();
-            services.ConfigureDbContextDi(Configuration.GetConnectionString("Default"));
-            services.AddScoped<DbDataGenerator>();
-            services.AddScoped<BorrowedBookTracker>();
-            services.AddScoped<DbCleaner>();
-            services.AddScoped<BookReturnHandler>();
+            services.AddSwaggerDocument(ctx =>
+            {
+                ctx.Title = "LibraryAPI";
+            });
+            services.InjectEfLibraryDbContext(Configuration.GetConnectionString("Default"));
+            services.InjectEfLibraryServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
