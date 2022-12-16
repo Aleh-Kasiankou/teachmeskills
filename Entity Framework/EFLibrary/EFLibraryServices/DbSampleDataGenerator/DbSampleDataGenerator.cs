@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using EFLibraryPersistence;
 using EFLibraryPersistence.Models;
 
@@ -14,15 +15,16 @@ namespace EFLibraryServices.DbSampleDataGenerator
             _dbContext = dbContext;
         }
 
-        public void GenerateData()
+        public async Task GenerateData()
         {
-            GenerateAuthors();
-            GenerateBooks();
-            GenerateUsers();
-            GenerateUserBooks();
+            var generateAuthors = GenerateAuthors();
+            var generateBooks = GenerateBooks();
+            var generateUsers = GenerateUsers();
+            var generateUserBooks = GenerateUserBooks();
+            await Task.WhenAll(generateAuthors, generateBooks, generateUsers, generateUserBooks);
         }
 
-        private void GenerateAuthors()
+        private async Task GenerateAuthors()
         {
             if (!_dbContext.Authors.Any())
             {
@@ -72,11 +74,11 @@ namespace EFLibraryServices.DbSampleDataGenerator
                     }
                 });
 
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
             }
         }
 
-        private void GenerateUsers()
+        private async Task GenerateUsers()
         {
             if (!_dbContext.Users.Any())
             {
@@ -156,11 +158,11 @@ namespace EFLibraryServices.DbSampleDataGenerator
                     },
                 });
 
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
             }
         }
 
-        private void GenerateBooks()
+        private async Task GenerateBooks()
         {
             if (!_dbContext.Books.Any())
             {
@@ -240,11 +242,11 @@ namespace EFLibraryServices.DbSampleDataGenerator
                     }
                 });
 
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
             }
         }
 
-        private void GenerateUserBooks()
+        private async Task GenerateUserBooks()
         {
             var userBookData = new List<UserBook>()
             {
@@ -280,7 +282,7 @@ namespace EFLibraryServices.DbSampleDataGenerator
             {
                 _dbContext.UserBooks.AddRange(userBookData);
 
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
             }
         }
     }

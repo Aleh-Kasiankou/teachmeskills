@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using EFLibraryPersistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFLibraryServices.BookReturnHandler
 {
@@ -13,15 +15,15 @@ namespace EFLibraryServices.BookReturnHandler
             _dbContext = dbContext;
         }
 
-        public void ReturnBook(BookReturnRequest bookReturnRequest)
+        public async Task ReturnBook(BookReturnRequest bookReturnRequest)
         {
-            var userBookToRemove = _dbContext.UserBooks.FirstOrDefault(ub =>
+            var userBookToRemove = _dbContext.UserBooks.FirstOrDefaultAsync(ub =>
                 ub.User.Email == bookReturnRequest.UserEmail && ub.Book.Name == bookReturnRequest.BookName);
 
-            if (userBookToRemove != null)
+            if (await userBookToRemove != null)
             {
-                _dbContext.UserBooks.Remove(userBookToRemove);
-                _dbContext.SaveChanges();
+                _dbContext.UserBooks.Remove(await userBookToRemove);
+                await _dbContext.SaveChangesAsync();
                 return;
             }
 

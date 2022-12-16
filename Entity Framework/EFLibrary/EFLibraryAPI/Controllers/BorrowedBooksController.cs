@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using EFLibraryServices.BookReturnHandler;
 using EFLibraryServices.BorrowedBookTracker;
 using Microsoft.AspNetCore.Mvc;
@@ -20,17 +21,17 @@ namespace EFLibraryAPI.Controllers
         }
         
         [HttpGet]
-        public IEnumerable<BorrowedBook> Get()
+        public async Task<IEnumerable<BorrowedBook>> Get()
         {
-            return _borrowedBookTracker.GetListOfBorrowedBooks();
+            return await _borrowedBookTracker.GetListOfBorrowedBooks();
         }
         
         [HttpDelete]
-        public IActionResult ReturnBook([FromBody] BookReturnRequest bookReturnRequest)
+        public async Task<IActionResult> ReturnBook([FromBody] BookReturnRequest bookReturnRequest)
         {
             try
             {
-                _bookReturnHandler.ReturnBook(bookReturnRequest);
+                await _bookReturnHandler.ReturnBook(bookReturnRequest);
                 return NoContent();
             }
             catch (ArgumentException e)

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using EFLibraryPersistence;
 using EFLibraryPersistence.Models;
 using Microsoft.EntityFrameworkCore;
@@ -15,16 +16,16 @@ namespace EFLibraryServices.BorrowedBookTracker
             _dbContext = dbContext;
         }
 
-        public IEnumerable<BorrowedBook> GetListOfBorrowedBooks()
+        public async Task<IEnumerable<BorrowedBook>> GetListOfBorrowedBooks()
         {
             var userBooks = _dbContext.UserBooks
                 .Include(ub => ub.User)
                 .Include(ub => ub.Book)
-                .ThenInclude(b => b.Author).ToList();
+                .ThenInclude(b => b.Author).ToListAsync();
 
             var borrowedBooks = new List<BorrowedBook>();
 
-            foreach (var userBook in userBooks)
+            foreach (var userBook in await userBooks)
             {
                 var borrowedBook = MapUserBookToBorrowedBook(userBook);
                 borrowedBooks.Add(borrowedBook);

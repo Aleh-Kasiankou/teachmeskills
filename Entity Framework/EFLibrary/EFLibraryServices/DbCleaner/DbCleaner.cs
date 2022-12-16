@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using EFLibraryPersistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFLibraryServices.DbCleaner
 {
@@ -12,17 +14,17 @@ namespace EFLibraryServices.DbCleaner
         {
             _dbContext = dbContext;
         }
-        public IEnumerable<string> DeleteUsersWithoutBooks()
+        public async Task<IEnumerable<string>> DeleteUsersWithoutBooks()
         {
             var usersToRemove = _dbContext.Users.
                 Where(u => !_dbContext.UserBooks.
                     Select(ub => ub.User).
-                    Any(x => x == u)).ToArray();
+                    Any(x => x == u)).ToArrayAsync();
             
-            _dbContext.Users.RemoveRange(usersToRemove);
-            _dbContext.SaveChanges();
+            _dbContext.Users.RemoveRange(await usersToRemove);
+            await _dbContext.SaveChangesAsync();
 
-            return usersToRemove.Select(u => u.FirstName + " " + u.LastName).ToArray();
+            return (await usersToRemove).Select(u => u.FirstName + " " + u.LastName).ToArray();
 
         }
     }

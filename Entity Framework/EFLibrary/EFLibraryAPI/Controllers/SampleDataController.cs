@@ -1,4 +1,5 @@
-﻿using EFLibraryPersistence;
+﻿using System.Threading.Tasks;
+using EFLibraryPersistence;
 using EFLibraryServices.DbSampleDataGenerator;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,18 +17,17 @@ namespace EFLibraryAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult GenerateData()
+        public async Task<IActionResult> GenerateData() 
         {
             try
             {
-                _dbSampleDataGenerator.GenerateData();   
+                await _dbSampleDataGenerator.GenerateData();
+                return Ok();
             }
             catch
             {
                 return Problem(statusCode:500);
             }
-
-            return Ok();
         }
     }
 }
