@@ -83,68 +83,78 @@ namespace EFLibraryServices.DbDataGenerator
             {
                 _dbContext.Users.AddRange(new List<User>()
                 {
-                    User.CreateUser(
-                        "Max",
-                        "Verstappen",
-                        new DateTime(1997, 09, 30),
-                        "Hasselt, Belgium",
-                        "max@verstappen.com"),
-                    User.CreateUser(
-                        "Lewis",
-                        "Hamilton",
-                        new DateTime(1985, 07, 01),
-                        "Stevenage, UK",
-                        "lewis@hamilton.com"
-                    ),
-                    User.CreateUser(
-                        "Sergio",
-                        "Pérez",
-                        new DateTime(1990, 01, 26),
-                        "Guadalajara, Mexico",
-                        "sergio@perez.com"),
-                    User.CreateUser(
-                        "Lando",
-                        "Norris",
-                        new DateTime(1999, 11, 13),
-                        "Bristol, UK",
-                        "lando@norris.com"
-                    ),
-                    User.CreateUser(
-                        "Charles",
-                        "Leclerc",
-                        new DateTime(1997, 10, 16),
-                        "Monte-Carlo, Monaco",
-                        "charles@leclerc.com"
-                    ),
-                    User.CreateUser(
-                        "Carlos",
-                        "Sainz",
-                        new DateTime(1994, 09, 01),
-                        "Madrid, Spain",
-                        "carlos@sainzjr.com"),
-
-                    User.CreateUser(
-                        "George",
-                        "Russell",
-                        new DateTime(1998, 02, 15),
-                        "King's Lynn, UK",
-                        "george@russell.com"
-                    ),
-                    User.CreateUser(
-                        "Fernando",
-                        "Alonso",
-                        new DateTime(1981, 07, 29),
-                        "Oviedo, Spain",
-                        "fernando@alonso.com"
-                    ),
-
-                    User.CreateUser(
-                        "Daniel",
-                        "Ricciardo",
-                        new DateTime(1989, 07, 01),
-                        "Perth, Australia",
-                        "dan@ricciardo.com"
-                    ),
+                    new User()
+                    {
+                        FirstName = "Max",
+                        LastName = "Verstappen",
+                        BirthDate = new DateTime(1997, 09, 30),
+                        Address = "Hasselt, Belgium",
+                        Email = "max@verstappen.com"
+                    },
+                    new User()
+                    {
+                        FirstName = "Lewis",
+                        LastName = "Hamilton",
+                        BirthDate = new DateTime(1985, 07, 01),
+                        Address = "Stevenage, UK",
+                        Email = "lewis@hamilton.com"
+                    },
+                    new User()
+                    {
+                        FirstName = "Sergio",
+                        LastName = "Pérez",
+                        BirthDate = new DateTime(1990, 01, 26),
+                        Address = "Guadalajara, Mexico",
+                        Email = "sergio@perez.com"
+                    },
+                    new User()
+                    {
+                        FirstName = "Lando",
+                        LastName = "Norris",
+                        BirthDate = new DateTime(1999, 11, 13),
+                        Address = "Bristol, UK",
+                        Email = "lando@norris.com"
+                    },
+                    new User()
+                    {
+                        FirstName = "Charles",
+                        LastName = "Leclerc",
+                        BirthDate = new DateTime(1997, 10, 16),
+                        Address = "Monte-Carlo, Monaco",
+                        Email = "charles@leclerc.com"
+                    },
+                    new User()
+                    {
+                        FirstName = "Carlos",
+                        LastName = "Sainz",
+                        BirthDate = new DateTime(1994, 09, 01),
+                        Address = "Madrid, Spain",
+                        Email = "carlos@sainzjr.com"
+                    },
+                    new User()
+                    {
+                        FirstName = "George",
+                        LastName = "Russell",
+                        BirthDate = new DateTime(1998, 02, 15),
+                        Address = "King's Lynn, UK",
+                        Email = "george@russell.com"
+                    },
+                    new User()
+                    {
+                        FirstName = "Fernando",
+                        LastName = "Alonso",
+                        BirthDate = new DateTime(1981, 07, 29),
+                        Address = "Oviedo, Spain",
+                        Email = "fernando@alonso.com"
+                    },
+                    new User()
+                    {
+                        FirstName = "Daniel",
+                        LastName = "Ricciardo",
+                        BirthDate = new DateTime(1989, 07, 01),
+                        Address = "Perth, Australia",
+                        Email = "dan@ricciardo.com"
+                    },
                 });
 
                 _dbContext.SaveChanges();
@@ -265,8 +275,8 @@ namespace EFLibraryServices.DbDataGenerator
                     BookId = _dbContext.Books.FirstOrDefault(b => b.Name.Contains("Prejudice")).BookId
                 }
             };
-
-
+            
+            
             if (!_dbContext.UserBooks.Any())
             {
                 _dbContext.UserBooks.AddRange(userBookData);
