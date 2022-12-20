@@ -1,0 +1,29 @@
+﻿@model IEnumerable<HelpDesk.Persistence.Models.SupportRequest>
+
+@{
+    ViewData["Title"] = "Support";
+}
+
+<h2>Support Board</h2>
+<table class="table table-dark table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Department</th>
+        <th scope="col">Agent</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var request in Model)
+    {
+        <tr>
+            <th scope="row">@request.SupportRequestId;</th>
+            <td>@request.Subject</td>
+            <td>@request.SupportDepartment.Name</td>
+            <td>@request.SupportSpecialist.Name</td>
+        </tr>
+    }
+
+    </tbody>
+</table>
