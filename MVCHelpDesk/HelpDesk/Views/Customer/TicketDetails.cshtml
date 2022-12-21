@@ -1,0 +1,53 @@
+﻿@using HelpDesk.Persistence.Models.Enums
+@model HelpDesk.Persistence.Models.SupportRequest
+
+@{
+    ViewData["Title"] = $"#{Model.SupportRequestId} | Customer";
+}
+
+@{
+    var isClosed = Model.RequestStatus == SupportRequestStatus.Closed;
+}
+<h2 class="ticket-form-title">Ticket #@Model.SupportRequestId</h2>
+
+<form class="mb-3 ticket-details-form"
+      id="ticket-details-form"
+      method="post"
+      asp-controller="Customer"
+      asp-action="TicketDetails"
+      onsubmit="return verifyTicketIsOpen()">
+    
+    <input class="form-check-input disabled" type="hidden" value="@Model.SupportRequestId" name="supportRequestId" readonly/>
+    <label class="mb-3">Subject:</label>
+    <input class="form-check-input" type="text" value="@Model.Subject" name="subject"/>
+    <label class="mb-3">Status:</label>
+    <input class="form-check-input disabled" id="ticket-status" type="text" value="@Model.RequestStatus.ToString()" name="requestStatus" readonly/>
+    <label class="mb-3">Description:</label>
+    <textarea  class="form-check-input" type="text" rows="5" name="description">@Model.Description</textarea>
+    <div class="form-control-bar">
+        <button class="btn btn-primary bg-danger" type="button" onclick="closeTicket()">Close Ticket</button>
+        <button class="btn btn-primary" type="submit">Save Changes</button>
+    </div>
+</form>
+
+<script>
+    const closeTicket = () => {
+        if (verifyTicketIsOpen()) 
+        {
+            document.getElementById("ticket-status").value = "Closed";
+            document.getElementById("ticket-details-form").submit();
+        }
+        
+        
+    }
+    
+    const verifyTicketIsOpen = () => {
+        let status = document.getElementById("ticket-status").value;
+                if (status === "Closed") 
+                {
+                    alert("The ticket is closed. Please create a new one or contact our support team via email: support@support.com");
+                    return false;
+                }
+                return true;
+    }
+</script>

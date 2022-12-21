@@ -1,5 +1,10 @@
-﻿using HelpDesk.Persistence;
+﻿using System;
+using System.Linq;
+using HelpDesk.Persistence;
+using HelpDesk.Services.TicketUpdateHandler;
+using HelpDesk.Services.TicketUpdateHandler.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace HelpDesk.Controllers
@@ -7,10 +12,12 @@ namespace HelpDesk.Controllers
     public class SupportController : Controller
     {
         private readonly HelpDeskDbContext _dbContext;
+        private readonly ITicketUpdateHandler _ticketUpdateHandler;
 
-        public SupportController(HelpDeskDbContext dbContext)
+        public SupportController(HelpDeskDbContext dbContext, ITicketUpdateHandler ticketUpdateHandler)
         {
             _dbContext = dbContext;
+            _ticketUpdateHandler = ticketUpdateHandler;
         }
 
         // GET
@@ -19,6 +26,44 @@ namespace HelpDesk.Controllers
             return View(_dbContext.SupportRequests
                 .Include(x => x.SupportDepartment)
                 .Include(x => x.SupportSpecialist));
+        }
+
+        public IActionResult TicketDetails(Guid id)
+        {
+            
+            var ticket = _dbContext.SupportRequests
+                .Include(x => x.SupportDepartment)
+                .ThenInclude(x => x.SupportSpecialists)
+                .Include(x => x.SupportSpecialist)
+                .FirstOrDefault(x => x.SupportRequestId == id);
+            
+            if (ticket != null)
+            {
+                ViewBag.SupportDepartments = _dbContext.SupportDepartments.Select(x => new SelectListItem
+                {
+                    Value = x.SupportDepartmentId.ToString(),
+                    Text = x.Name,
+                    Selected = x.SupportDepartmentId == ticket.SupportDepartmentId 
+                    // the line above is simpy ignored, so I added Order By clause
+                }).OrderByDescending(x => x.Selected).ToArray();
+                
+                ViewBag.SupportSpecialists = ticket.SupportDepartment.SupportSpecialists.Select(x => new SelectListItem
+                {
+                    Value = x.SupportSpecialistId.ToString(),
+                    Text = x.Name
+                }).ToArray();
+                
+                return View(ticket);
+            }
+            
+            return NotFound();
+        }
+        
+        [HttpPost]
+        public IActionResult TicketDetails([FromForm] SupportTicketUpdateRequest fieldsToUpdate)
+        {
+            _ticketUpdateHandler.UpdateTicketFields(fieldsToUpdate);
+            return RedirectToRoute(TicketDetails(fieldsToUpdate.SupportRequestId));
         }
     }
 }

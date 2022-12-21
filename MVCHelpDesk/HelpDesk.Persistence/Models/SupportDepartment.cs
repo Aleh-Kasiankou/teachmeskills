@@ -10,5 +10,10 @@ namespace HelpDesk.Persistence.Models
         
         public virtual IEnumerable<SupportSpecialist> SupportSpecialists { get; set; }
         public virtual IEnumerable<SupportRequest> SupportRequests { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

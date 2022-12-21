@@ -5,7 +5,7 @@
 }
 
 <h2>Support Board</h2>
-<table class="table table-dark table-hover">
+<table class="table table-hover">
     <thead>
     <tr>
         <th scope="col">Id</th>
@@ -18,12 +18,18 @@
     @foreach (var request in Model)
     {
         <tr>
-            <th scope="row">@request.SupportRequestId;</th>
-            <td>@request.Subject</td>
-            <td>@request.SupportDepartment.Name</td>
-            <td>@request.SupportSpecialist.Name</td>
+            <th scope="row" onclick="tableRowClickHandler('@request.SupportRequestId')">@request.SupportRequestId</th>
+            <td onclick="tableRowClickHandler('@request.SupportRequestId')">@request.Subject</td>
+            <td onclick="tableRowClickHandler('@request.SupportRequestId')">@request.SupportDepartment.Name</td>
+            <td onclick="tableRowClickHandler('@request.SupportRequestId')">@request.SupportSpecialist.Name</td>
         </tr>
     }
 
     </tbody>
 </table>
+
+<script>
+const tableRowClickHandler = (id) => {
+    window.location = "@Url.Action("TicketDetails")" + "/" + id;    
+}
+</script>

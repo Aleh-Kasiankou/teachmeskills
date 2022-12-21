@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HelpDesk.Persistence;
+using HelpDesk.Services.TicketUpdateHandler;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +30,8 @@ namespace HelpDesk
             services.AddControllersWithViews();
             services.AddDbContext<HelpDeskDbContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("default")));
+
+            services.AddScoped<ITicketUpdateHandler, TicketUpdateHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +57,14 @@ namespace HelpDesk
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    "Customer Ticket Details",
+                    "{controller=Customer}/{action=TicketDetails}/{id:guid}");
+
+                endpoints.MapControllerRoute(
+                    "Support Ticket Details",
+                    "{controller=Support}/{action=TicketDetails}/{id:guid}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

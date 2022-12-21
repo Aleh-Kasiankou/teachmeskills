@@ -1,0 +1,38 @@
+﻿@using HelpDesk.Persistence.Models.Enums
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model HelpDesk.Persistence.Models.SupportRequest
+
+@{
+    ViewData["Title"] = $"#{Model.SupportRequestId} | Support";
+}
+
+@{
+    var isClosed = Model.RequestStatus == SupportRequestStatus.Closed;
+}
+<h2 class="ticket-form-title">Ticket #@Model.SupportRequestId</h2>
+
+<form class="mb-3 ticket-details-form"
+      id="ticket-details-form"
+      method="post"
+      asp-controller="Support"
+      asp-action="TicketDetails">
+
+    <input class="form-check-input disabled" type="hidden" value="@Model.SupportRequestId" name="supportRequestId" readonly/>
+    <label class="mb-3">Assignee:</label>
+    @Html.DropDownListFor(x => x.SupportSpecialist,
+        new List<SelectListItem>(@ViewBag.SupportSpecialists))
+    <label class="mb-3">Status:</label>
+    @Html.DropDownListFor(x => x.RequestStatus,
+        new SelectList(Enum.GetValues(typeof(SupportRequestStatus))))
+    <label class="mb-3">Department:</label>
+    @Html.DropDownListFor(x => x.SupportDepartment,
+        new List<SelectListItem>(ViewBag.SupportDepartments))
+    <label class="mb-3">Subject:</label>
+    <input class="form-check-input" type="text" value="@Model.Subject" name="subject" disabled/>
+    <label class="mb-3">Description:</label>
+    <textarea  class="form-check-input" type="text" rows="5" name="description" disabled>@Model.Description</textarea>
+    <div class="form-control-bar">
+        <button class="btn btn-primary" type="submit">Save Changes</button>
+    </div>
+</form>

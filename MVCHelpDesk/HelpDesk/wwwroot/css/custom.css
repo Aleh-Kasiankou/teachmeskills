@@ -1,0 +1,68 @@
+﻿nav {
+    margin-bottom: 6rem;
+}
+
+.main-content {
+    width: 60%;
+    min-height: 60vh;
+    margin: 0 auto;
+
+}
+
+.ticket-details-form {
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+
+    margin: 0 auto;
+    padding: 5vh 3vw;
+    width: 70%;
+
+    justify-items: center;
+
+    grid-row-gap: 17px;
+    border-radius: 15px;
+
+    box-shadow: 0 0 3px 0 rgb(33, 37, 41);
+}
+
+.ticket-details-form label {
+    font-size: 20px;
+}
+
+.ticket-details-form input, .ticket-details-form textarea, .ticket-details-form select {
+    width: 90%;
+    min-height: fit-content;
+    font-size: 26px;
+    padding: 15px 10px;
+    border-radius: 15px;
+}
+
+.ticket-details-form textarea {
+    min-height: 20vh;
+}
+
+.ticket-details-form select{
+    padding: 0;
+    font-size: 18px;
+    font-weight: 500;
+    text-align-last:center;
+}
+
+
+.form-control-bar {
+    grid-column: 1/-1;
+    width: 80%;
+
+    display: flex;
+    align-content: center;
+    gap: 2vw;
+}
+
+.ticket-details-form button {
+    width: 100%;
+}
+
+.ticket-form-title{
+    margin: 0 auto 5vh auto;
+    width: fit-content;
+}
