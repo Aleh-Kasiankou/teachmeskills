@@ -22,6 +22,7 @@
     <tr>
         <th scope="col">Id</th>
         <th scope="col">Subject</th>
+        <th scope="col">Status</th>
         <th scope="col">Department</th>
         <th scope="col">Agent</th>
     </tr>
@@ -32,6 +33,7 @@
         <tr>
             <th scope="row" onclick="tableRowClickHandler('@request.SupportRequestId')">@request.SupportRequestId</th>
             <td onclick="tableRowClickHandler('@request.SupportRequestId')">@request.Subject</td>
+            <td onclick="tableRowClickHandler('@request.SupportRequestId')">@request.RequestStatus</td>
             <td onclick="tableRowClickHandler('@request.SupportRequestId')">@request.SupportDepartment.Name</td>
             <td onclick="tableRowClickHandler('@request.SupportRequestId')">@request.SupportSpecialist.Name</td>
         </tr>

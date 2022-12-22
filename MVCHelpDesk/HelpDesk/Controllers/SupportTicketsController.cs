@@ -31,7 +31,8 @@ namespace HelpDesk.Controllers
         {
             return View(_dbContext.SupportRequests
                 .Include(x => x.SupportDepartment)
-                .Include(x => x.SupportSpecialist));
+                .Include(x => x.SupportSpecialist)
+                .OrderBy(x => x.RequestStatus));
         }
 
         public IActionResult TicketDetails(Guid id)

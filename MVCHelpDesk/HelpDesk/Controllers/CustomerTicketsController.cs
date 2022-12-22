@@ -6,6 +6,7 @@ using HelpDesk.Services.TicketCreateHandler.DTO;
 using HelpDesk.Services.TicketUpdateHandler;
 using HelpDesk.Services.TicketUpdateHandler.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HelpDesk.Controllers
 {
@@ -26,7 +27,8 @@ namespace HelpDesk.Controllers
         // GET
         public IActionResult Index()
         {
-            return View(_dbContext.SupportRequests);
+            return View(_dbContext.SupportRequests
+                .OrderBy(x => x.RequestStatus));
         }
 
         [HttpGet]
