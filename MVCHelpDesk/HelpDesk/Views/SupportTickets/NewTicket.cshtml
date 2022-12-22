@@ -1,0 +1,36 @@
+﻿@using HelpDesk.Persistence.Models.Enums
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model HelpDesk.Services.TicketCreateHandler.DTO.SupportTicketCreateRequest
+
+@{
+    ViewData["Title"] = "New Ticket | Support";
+}
+
+<h2 class="ticket-form-title">New Ticket</h2>
+
+<form class="mb-3 ticket-details-form"
+      id="ticket-details-form"
+      method="post"
+      asp-controller="SupportTickets"
+      asp-action="NewTicket">
+
+    <label class="mb-3">Status:</label>
+    @Html.DropDownListFor(x => x.RequestStatus,
+        new SelectList(Enum.GetValues(typeof(SupportRequestStatus))))
+    
+    <label class="mb-3">Department:</label>
+    @Html.DropDownListFor(x => x.SupportDepartmentId,
+        new List<SelectListItem>(ViewBag.SupportDepartments))
+    
+    <label class="mb-3">Subject:</label>
+    <input class="form-check-input" type="text" value="" name="Subject"/>
+    
+    <label class="mb-3">Description:</label>
+    <textarea  class="form-check-input" type="text" rows="5" name="Description"></textarea>
+    
+    <div class="form-control-bar">
+        <button class="btn btn-primary" type="submit">Create Ticket</button>
+    </div>
+</form>

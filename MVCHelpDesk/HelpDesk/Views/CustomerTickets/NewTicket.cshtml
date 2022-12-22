@@ -1,0 +1,24 @@
+﻿@using HelpDesk.Persistence.Models.Enums
+
+
+@{
+    ViewBag.Title = "New Ticket | Customer";
+}
+
+<h2 class="ticket-form-title">New Ticket</h2>
+
+<form class="mb-3 ticket-add-form"
+      method="post"
+      asp-controller="CustomerTickets"
+      asp-action="NewTicket">
+
+<label class="mb-3">Subject:</label>
+    <input class="form-check-input" type="text" value="" name="Subject"/>
+    <label class="mb-3">Status:</label>
+    <input class="form-check-input disabled" id="ticket-status" type="text" value="@SupportRequestStatus.New.ToString()" name="RequestStatus" disabled/>
+    <label class="mb-3">Description:</label>
+    <textarea  class="form-check-input" type="text" rows="5" name="Description"></textarea>
+    <div class="form-control-bar">
+        <button class="btn btn-primary" type="submit">Send</button>
+    </div>
+</form>
