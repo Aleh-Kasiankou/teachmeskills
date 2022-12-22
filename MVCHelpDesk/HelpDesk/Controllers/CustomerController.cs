@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using HelpDesk.Persistence;
+using HelpDesk.Services.TicketCreateHandler;
+using HelpDesk.Services.TicketCreateHandler.DTO;
 using HelpDesk.Services.TicketUpdateHandler;
 using HelpDesk.Services.TicketUpdateHandler.DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -10,12 +12,14 @@ namespace HelpDesk.Controllers
     public class CustomerController : Controller
     {
         private readonly HelpDeskDbContext _dbContext;
+        private readonly ITicketCreateHandler _ticketCreateHandler;
         private readonly ITicketUpdateHandler _ticketUpdateHandler;
 
-        public CustomerController(HelpDeskDbContext dbContext, ITicketUpdateHandler ticketUpdateHandler)
+        public CustomerController(HelpDeskDbContext dbContext, ITicketUpdateHandler ticketUpdateHandler, ITicketCreateHandler ticketCreateHandler)
         {
             _dbContext = dbContext;
             _ticketUpdateHandler = ticketUpdateHandler;
+            _ticketCreateHandler = ticketCreateHandler;
         }
 
         // GET
@@ -43,6 +47,18 @@ namespace HelpDesk.Controllers
         {
             _ticketUpdateHandler.UpdateTicketFields(fieldsToUpdate);
             return RedirectToRoute(TicketDetails(fieldsToUpdate.SupportRequestId));
+        }
+
+        public IActionResult NewTicket()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult NewTicket([FromForm] CustomerTicketCreateRequest newTicket)
+        {
+            _ticketCreateHandler.CreateTicket(newTicket);
+            return RedirectToAction("Index");
         }
     }
 }

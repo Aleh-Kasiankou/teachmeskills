@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HelpDesk.Persistence;
+using HelpDesk.Services.TicketAutoAssigner;
+using HelpDesk.Services.TicketCreateHandler;
 using HelpDesk.Services.TicketUpdateHandler;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +34,8 @@ namespace HelpDesk
                 opt.UseSqlServer(Configuration.GetConnectionString("default")));
 
             services.AddScoped<ITicketUpdateHandler, TicketUpdateHandler>();
+            services.AddScoped<ITicketCreateHandler, TicketCreateHandler>();
+            services.AddScoped<ITicketAutoAssigner, TicketAutoAssigner>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
