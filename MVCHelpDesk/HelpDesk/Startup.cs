@@ -63,11 +63,11 @@ namespace HelpDesk
             {
                 endpoints.MapControllerRoute(
                     "Customer Ticket Details",
-                    "{controller=Customer}/{action=TicketDetails}/{id:guid}");
+                    "{controller=CustomerTickets}/{action=TicketDetails}/{id:guid}");
 
                 endpoints.MapControllerRoute(
                     "Support Ticket Details",
-                    "{controller=Support}/{action=TicketDetails}/{id:guid}");
+                    "{controller=SupportTickets}/{action=TicketDetails}/{id:guid}");
 
                 endpoints.MapControllerRoute(
                     name: "default",

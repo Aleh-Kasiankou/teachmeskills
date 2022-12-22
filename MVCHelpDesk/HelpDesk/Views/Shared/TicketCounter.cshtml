@@ -1,0 +1,24 @@
+﻿@using HelpDesk.Persistence.Models.Enums
+@model IEnumerable<HelpDesk.Persistence.Models.SupportRequest>
+
+@{
+    var onHoldTicketsCount = Model.Count(x =>
+        x.RequestStatus == SupportRequestStatus.AwaitingCredentials
+        || x.RequestStatus == SupportRequestStatus.AwaitingCustomerReply);
+    
+    var closedTicketsCount = Model.Count(x =>
+        x.RequestStatus == SupportRequestStatus.Closed);
+
+    var openTicketsCount = Model.Count() - closedTicketsCount - onHoldTicketsCount;
+}
+<div class="ticket-counter">
+    <div class="ticket-counter-open">
+        Open: @openTicketsCount
+    </div>
+    <div class="ticket-counter-hold">
+        On Hold: @onHoldTicketsCount
+    </div>
+    <div class="ticket-counter-closed">
+        Closed: @closedTicketsCount
+    </div>
+</div>

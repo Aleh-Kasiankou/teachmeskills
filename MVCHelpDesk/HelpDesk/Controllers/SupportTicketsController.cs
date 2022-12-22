@@ -11,14 +11,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HelpDesk.Controllers
 {
-    public class SupportController : Controller
+    public class SupportTicketsController : Controller
     {
         private readonly HelpDeskDbContext _dbContext;
         private readonly ITicketCreateHandler _ticketCreateHandler;
         private readonly ITicketUpdateHandler _ticketUpdateHandler;
 
 
-        public SupportController(HelpDeskDbContext dbContext, ITicketUpdateHandler ticketUpdateHandler,
+        public SupportTicketsController(HelpDeskDbContext dbContext, ITicketUpdateHandler ticketUpdateHandler,
             ITicketCreateHandler ticketCreateHandler)
         {
             _dbContext = dbContext;

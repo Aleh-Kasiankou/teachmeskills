@@ -79,3 +79,9 @@
     margin: 0 auto 5vh auto;
     width: fit-content;
 }
+
+.ticket-counter{
+    display: flex;
+    gap: 2vw;
+    margin-bottom: 5vh;
+}

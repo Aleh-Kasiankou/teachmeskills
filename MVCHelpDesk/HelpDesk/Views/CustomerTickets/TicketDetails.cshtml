@@ -6,14 +6,13 @@
 }
 
 @{
-    var isClosed = Model.RequestStatus == SupportRequestStatus.Closed;
 }
 <h2 class="ticket-form-title">Ticket #@Model.SupportRequestId</h2>
 
 <form class="mb-3 ticket-details-form"
       id="ticket-details-form"
       method="post"
-      asp-controller="Customer"
+      asp-controller="CustomerTickets"
       asp-action="TicketDetails"
       onsubmit="return verifyTicketIsOpen()">
     

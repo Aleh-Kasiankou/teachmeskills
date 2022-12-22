@@ -9,13 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HelpDesk.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomerTicketsController : Controller
     {
         private readonly HelpDeskDbContext _dbContext;
         private readonly ITicketCreateHandler _ticketCreateHandler;
         private readonly ITicketUpdateHandler _ticketUpdateHandler;
 
-        public CustomerController(HelpDeskDbContext dbContext, ITicketUpdateHandler ticketUpdateHandler, ITicketCreateHandler ticketCreateHandler)
+        public CustomerTicketsController(HelpDeskDbContext dbContext, ITicketUpdateHandler ticketUpdateHandler,
+            ITicketCreateHandler ticketCreateHandler)
         {
             _dbContext = dbContext;
             _ticketUpdateHandler = ticketUpdateHandler;
@@ -53,12 +54,17 @@ namespace HelpDesk.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public IActionResult NewTicket([FromForm] CustomerTicketCreateRequest newTicket)
         {
             _ticketCreateHandler.CreateTicket(newTicket);
             return RedirectToAction("Index");
+        }
+
+        public IActionResult TicketCounter()
+        {
+            return PartialView();
         }
     }
 }

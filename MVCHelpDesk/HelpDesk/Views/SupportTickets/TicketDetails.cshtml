@@ -15,7 +15,7 @@
 <form class="mb-3 ticket-details-form"
       id="ticket-details-form"
       method="post"
-      asp-controller="Support"
+      asp-controller="SupportTickets"
       asp-action="TicketDetails">
 
     <input class="form-check-input disabled" type="hidden" value="@Model.SupportRequestId" name="supportRequestId" readonly/>
@@ -29,9 +29,9 @@
     @Html.DropDownListFor(x => x.SupportDepartment,
         new List<SelectListItem>(ViewBag.SupportDepartments))
     <label class="mb-3">Subject:</label>
-    <input class="form-check-input" type="text" value="@Model.Subject" name="subject" disabled/>
+    <input class="form-check-input" type="text" value="@Model.Subject" name="Subject" disabled/>
     <label class="mb-3">Description:</label>
-    <textarea  class="form-check-input" type="text" rows="5" name="description" disabled>@Model.Description</textarea>
+    <textarea  class="form-check-input" type="text" rows="5" name="Description" disabled>@Model.Description</textarea>
     <div class="form-control-bar">
         <button class="btn btn-primary" type="submit">Save Changes</button>
     </div>
